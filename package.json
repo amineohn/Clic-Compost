@@ -1,0 +1,51 @@
+{
+  "name": "ionic-capacitor-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "mobile": "next build && next export && ionic capacitor build",
+    "sync": "npx cap sync",
+    "ionic:build": "next build && next export",
+    "ionic:serve": "next dev"
+  },
+  "dependencies": {
+    "@capacitor/android": "3.3.1",
+    "@capacitor/app": "1.0.6",
+    "@capacitor/core": "3.3.1",
+    "@capacitor/geolocation": "^1.1.3",
+    "@capacitor/haptics": "1.1.3",
+    "@capacitor/ios": "3.3.1",
+    "@capacitor/keyboard": "1.1.3",
+    "@capacitor/push-notifications": "^1.0.7",
+    "@capacitor/splash-screen": "^1.1.6",
+    "@capacitor/status-bar": "1.0.6",
+    "axios": "^0.24.0",
+    "firebase": "^9.4.1",
+    "next": "^12.0.4",
+    "next-superjson": "^0.0.2",
+    "next-themes": "^0.0.15",
+    "react": "^18.0.0-alpha-6c3dcc7a4-20211027",
+    "react-device-detect": "^2.1.2",
+    "react-dom": "^18.0.0-alpha-6c3dcc7a4-20211027",
+    "react-fade-in": "^2.0.1",
+    "superjson": "^1.8.0",
+    "swr": "^1.0.1",
+    "unfetch": "^4.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "3.3.1",
+    "@types/node": "16.11.7",
+    "@types/react": "17.0.35",
+    "@types/react-dom": "^17.0.11",
+    "autoprefixer": "^10.4.0",
+    "eslint": "8.2.0",
+    "eslint-config-next": "12.0.4",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "typescript": "4.4.4"
+  }
+}
