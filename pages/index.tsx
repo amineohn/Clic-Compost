@@ -21,8 +21,8 @@ const Home: NextPage = () => {
                 <div className="flex justify-center items-center font-bold text-gray-900 dark:text-gray-100">
                   Auth
                 </div>
-                <div className="grid grid-cols-2 gap-2 justify-center">
-                  <div className="inline-flex items-end justify-start space-x-2">
+                <div className="grid grid-cols-1 gap-2 justify-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-1 md:grid-cols-1 space-y-2">
                     <input
                       className="p-2 rounded-lg placeholder-black text-black transition"
                       placeholder="email"
