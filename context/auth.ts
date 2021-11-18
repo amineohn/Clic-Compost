@@ -20,6 +20,10 @@ export default async function authentification() {
     appId: "1:1020295512270:web:707f016bc4c0a310afd09f",
     measurementId: "G-R7P9BDSQJD",
   };
+  const clear = () => {
+    setAuthUser(null);
+    setLoading(true);
+  };
   await initializeApp(firebaseConfig);
 
   const signInWithEmailAndPassword = async (email: string, password: string) =>
@@ -30,7 +34,7 @@ export default async function authentification() {
     password: string
   ) => await Auth.createUserWithEmailAndPassword(auth, email, password);
 
-  const signOut = async () => await Auth.signOut(auth).then();
+  const signOut = async () => await Auth.signOut(auth).then(clear);
 
   const authStateChanged = async (authState: any) => {
     if (!authState) {
