@@ -1,16 +1,37 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeProvider } from "next-themes";
-import Navigation from "../components/Navigation";
+import { NextPage } from "next";
+import { hydrate } from "react-dom";
+import dynamic from "next/dynamic";
 import { authUserContext } from "../components/AuthUserProvider";
+const Navigation = dynamic(() => import("../components/Navigation"), {
+  ssr: false,
+});
+function MyApp({
+  Component,
+  pageProps,
+}: {
+  Component: NextPage;
+  pageProps: any;
+}) {
+  useEffect(() => {
+    if (process.browser) {
+      document.getElementById("__next");
+    }
+  });
 
-export const useAuth = () => useContext(authUserContext);
-export default function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ThemeProvider defaultTheme="dark" attribute="class">
-      <Navigation />
-      <Component {...pageProps} />
-    </ThemeProvider>
-  );
+  if (typeof window !== "undefined") {
+    return hydrate(
+      <>
+        <ThemeProvider defaultTheme="dark" attribute="class">
+          <Navigation />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </>,
+      document.getElementById("__next") as Element
+    );
+  }
 }
+export const useAuth = () => useContext(authUserContext);
+export default MyApp;
