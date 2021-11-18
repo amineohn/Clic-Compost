@@ -39,30 +39,6 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex-col justify-center items-center">
-            <div className="mb-8"></div>
-            <div className="space-y-2">
-              <div className="justify-center w-full metric-card max-w-72 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 md:bg-opacity-100 rounded-2xl p-4">
-                <div className="flex justify-center items-center text-lg font-bold text-gray-900 dark:text-gray-100">
-                  feature
-                </div>
-                <div className="grid grid-cols-2 gap-2 justify-center items-center">
-                  <div>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Corporis, excepturi, ratione eius nemo eaque reiciendis vel
-                    corrupti quos debitis facilis sequi dolor nihil aut ab
-                    deleniti porro dolores inventore exercitationem.
-                  </div>
-                  <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Velit maxime adipisci obcaecati animi atque expedita rerum
-                    libero hic soluta. Pariatur aperiam et dolores ex, explicabo
-                    non quod recusandae quibusdam! Natus!
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </FadeIn>
     </>
