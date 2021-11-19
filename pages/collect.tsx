@@ -10,9 +10,7 @@ const Collect: NextPage = () => {
         <FadeIn className={`absolute z-10 inset-0 overflow-y-auto`}>
           <div
             className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ${
-              showModal
-                ? "transition-height duration-500 ease-in-out"
-                : "transition-height duration-500 ease-in-out"
+              showModal ? "fade-in" : "fade-in"
             }`}
           >
             <div className="fixed inset-0 bg-black" aria-hidden="true" />

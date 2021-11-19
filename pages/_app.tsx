@@ -6,6 +6,8 @@ import { authUserContext } from "../components/AuthUserProvider";
 import dynamic from "next/dynamic";
 import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
+import { SplashScreen } from "@capacitor/splash-screen";
+import { Toast } from "@capacitor/toast";
 
 const Navigation = dynamic(() => import("../components/Navigation"), {
   ssr: false,
@@ -18,6 +20,11 @@ export default function MyApp({
   pageProps: any;
 }) {
   if (Capacitor.isNativePlatform()) {
+    Toast.show({
+      text: "this app is under developpement.",
+    });
+
+    SplashScreen.hide();
     StatusBar.setOverlaysWebView({ overlay: true });
     StatusBar.setStyle({
       style: Style.Dark,

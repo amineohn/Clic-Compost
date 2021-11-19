@@ -10,8 +10,8 @@ const Tickets: NextPage = () => {
           <div
             className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ${
               showModal
-                ? "transition-height duration-500 ease-in-out"
-                : "transition-height duration-500 ease-in-out"
+                ? "transform transition ease-out duration-500"
+                : "transform transition ease-out duration-500"
             }`}
           >
             <div className="fixed inset-0 bg-black" aria-hidden="true" />
@@ -33,19 +33,26 @@ const Tickets: NextPage = () => {
                     ></h3>
                     <div className="mt-2 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 m-auto gap-2">
                       <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
-                        placeholder="Numéro de carte"
+                        type="tel"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        autoComplete="cc-number"
+                        maxLength={19}
+                        placeholder="xxxx xxxx xxxx xxxx"
+                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs"
+                        required
                       />
                       <input
                         type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
+                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs"
                         placeholder="Expiration"
+                        required
                       />
                       <input
                         type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
+                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs"
                         placeholder="Cryptogramme visuel"
+                        required
                       />
                     </div>
                   </div>
@@ -68,7 +75,7 @@ const Tickets: NextPage = () => {
       <FadeIn className="flex flex-col justify-center px-8 my-30">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
           <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
+            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-blue-400 dark:to-blue-600">
               Tickets
             </h1>
             <div className="mb-8"></div>
@@ -98,7 +105,7 @@ const Tickets: NextPage = () => {
             </div>
           </div>
           <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
+            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-blue-400 dark:to-blue-600">
               Factures
             </h1>
             <div className="mb-8"></div>
