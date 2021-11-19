@@ -11,27 +11,23 @@ const Home: NextPage = () => {
             <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-blue-400 dark:to-blue-600">
               Clic-Compost
             </h1>
-            <div className="mb-8">
-              <p className="mb-4 bg-clip-text bg-gradient-to-tl from-gray-700 via-gray-900 to-black dark:bg-gradient-to-tl dark:from-gray-50 dark:via-gray-100 dark:to-white">
-                Auth Clic-Compost
-              </p>
-            </div>
+            <div className="mb-8"></div>
             <div className="space-y-2">
               <div className="justify-center w-full metric-card max-w-72 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 md:bg-opacity-100 rounded-2xl p-4">
                 <div className="flex justify-center items-center font-bold text-gray-900 dark:text-gray-100">
-                  Auth
+                  Login
                 </div>
                 <div className="grid grid-cols-1 gap-2 justify-center">
                   <div className="grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-1 md:grid-cols-1 space-y-2">
                     <input
-                      className="p-2 rounded-lg placeholder-black text-black transition"
+                      className="p-2 rounded-lg placeholder-black text-black dark:bg-white transition"
                       placeholder="email"
                     />
                     <input
-                      className="p-2 rounded-lg placeholder-black text-black transition"
+                      className="p-2 rounded-lg placeholder-black text-black dark:bg-white transition"
                       placeholder="password"
                     />
-                    <button className="p-2 rounded-lg bg-blue-500 hover:bg-blue-600 transition text-white">
+                    <button className="p-2 rounded-lg bg-blue-400 hover:bg-blue-500 transition text-white">
                       Send
                     </button>
                   </div>

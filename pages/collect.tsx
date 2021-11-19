@@ -167,21 +167,12 @@ const Collect: NextPage = () => {
                 </div>
               </div>
               <div className="flex justify-center">
-                {showModal ? (
-                  <button
-                    className="bg-green-400 p-2 rounded-lg text-white"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Fermer
-                  </button>
-                ) : (
-                  <button
-                    className="bg-green-400 p-2 rounded-lg text-white"
-                    onClick={() => setShowModal(true)}
-                  >
-                    Ajouter
-                  </button>
-                )}
+                <button
+                  className="bg-blue-400 p-2 rounded-lg text-white"
+                  onClick={() => setShowModal(true)}
+                >
+                  Ajouter
+                </button>
               </div>
             </div>
           </div>
@@ -206,21 +197,12 @@ const Collect: NextPage = () => {
                 </div>
               </div>
               <div className="flex justify-center">
-                {showModal ? (
-                  <button
-                    className="bg-green-400 p-2 rounded-lg text-white"
-                    onClick={() => setShowCollectModal(false)}
-                  >
-                    Fermer
-                  </button>
-                ) : (
-                  <button
-                    className="bg-green-400 p-2 rounded-lg text-white"
-                    onClick={() => setShowCollectModal(true)}
-                  >
-                    Ajouter
-                  </button>
-                )}
+                <button
+                  className="bg-blue-400 p-2 rounded-lg text-white"
+                  onClick={() => setShowCollectModal(true)}
+                >
+                  Ajouter
+                </button>
               </div>
             </div>
           </div>
