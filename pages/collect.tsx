@@ -1,13 +1,23 @@
+import { Transition } from "@headlessui/react";
 import type { NextPage } from "next";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import FadeIn from "react-fade-in";
 const Collect: NextPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCollectModal, setShowCollectModal] = useState(false);
   return (
     <>
-      {showModal ? (
-        <FadeIn className={`absolute z-10 inset-0 overflow-y-auto`}>
+      <Transition
+        as={Fragment}
+        show={showModal}
+        enter="transform transition duration-[400ms]"
+        enterFrom="opacity-0 scale-50"
+        enterTo="opacity-100 scale-100"
+        leave="transform duration-200 transition ease-in-out"
+        leaveFrom="opacity-100 scale-100 "
+        leaveTo="opacity-0 scale-95 "
+      >
+        <div className={`absolute z-10 inset-0 overflow-y-auto`}>
           <div
             className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ${
               showModal ? "fade-in" : "fade-in"
@@ -61,10 +71,19 @@ const Collect: NextPage = () => {
               </div>
             </div>
           </div>
-        </FadeIn>
-      ) : null}
-      {showCollectModal ? (
-        <FadeIn className={`absolute z-10 inset-0 overflow-y-auto`}>
+        </div>
+      </Transition>
+      <Transition
+        as={Fragment}
+        show={showCollectModal}
+        enter="transform transition duration-[400ms]"
+        enterFrom="opacity-0 scale-50"
+        enterTo="opacity-100 scale-100"
+        leave="transform duration-200 transition ease-in-out"
+        leaveFrom="opacity-100 scale-100 "
+        leaveTo="opacity-0 scale-95 "
+      >
+        <div className={`absolute z-10 inset-0 overflow-y-auto`}>
           <div
             className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ${
               showModal
@@ -120,8 +139,8 @@ const Collect: NextPage = () => {
               </div>
             </div>
           </div>
-        </FadeIn>
-      ) : null}
+        </div>
+      </Transition>
       <FadeIn className="flex flex-col justify-center px-8 my-30">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
           <div className="flex-col justify-center items-center">

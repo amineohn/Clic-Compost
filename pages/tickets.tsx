@@ -1,18 +1,25 @@
 import type { NextPage } from "next";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
+import { Transition } from "@headlessui/react";
+
 import FadeIn from "react-fade-in";
 const Tickets: NextPage = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      {showModal ? (
-        <FadeIn className={`absolute z-10 inset-0 overflow-y-auto`}>
+      <Transition
+        as={Fragment}
+        show={showModal}
+        enter="transform transition duration-[400ms]"
+        enterFrom="opacity-0 scale-50"
+        enterTo="opacity-100 scale-100"
+        leave="transform duration-200 transition ease-in-out"
+        leaveFrom="opacity-100 scale-100 "
+        leaveTo="opacity-0 scale-95 "
+      >
+        <div className={`absolute z-10 inset-0 overflow-y-auto`}>
           <div
-            className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ${
-              showModal
-                ? "transform transition ease-out duration-500"
-                : "transform transition ease-out duration-500"
-            }`}
+            className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0`}
           >
             <div className="fixed inset-0 bg-black" aria-hidden="true" />
 
@@ -69,8 +76,8 @@ const Tickets: NextPage = () => {
               </div>
             </div>
           </div>
-        </FadeIn>
-      ) : null}
+        </div>
+      </Transition>
 
       <FadeIn className="flex flex-col justify-center px-8 my-30">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">

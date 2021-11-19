@@ -2,12 +2,14 @@ import "../styles/globals.css";
 import React, { useContext } from "react";
 import { ThemeProvider } from "next-themes";
 import { NextPage } from "next";
-import { authUserContext } from "../components/AuthUserProvider";
 import dynamic from "next/dynamic";
 import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import { Toast } from "@capacitor/toast";
+import { configuration } from "../configuration";
+
+import { authUserContext } from "../components/AuthUserProvider";
 
 const Navigation = dynamic(() => import("../components/Navigation"), {
   ssr: false,
@@ -21,7 +23,7 @@ export default function MyApp({
 }) {
   if (Capacitor.isNativePlatform()) {
     Toast.show({
-      text: "this app is under developpement.",
+      text: configuration.toast.text,
     });
 
     SplashScreen.hide();
