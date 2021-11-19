@@ -19,12 +19,8 @@ const ToggleTheme = () => {
         switch (theme) {
           case "dark":
             return <span className="text-xl">&#127762;</span>;
-          case "system":
-            return <span className="text-xl">&#127763;</span>;
-          case "light":
-            return <span className="text-xl">&#127765;</span>;
           default:
-            return "light";
+            return "dark";
         }
       })()}
     </button>

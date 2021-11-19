@@ -25,18 +25,24 @@ export default function MyApp({
     Toast.show({
       text: configuration.toast.text,
     });
-
+    if (window.navigator.userAgent.includes("AndroidDarkMode")) {
+      //test purpose
+      StatusBar.setStyle({
+        style: Style.Light,
+      });
+    }
     SplashScreen.hide();
     StatusBar.setOverlaysWebView({ overlay: true });
     StatusBar.setStyle({
-      style: Style.Dark,
+      style: Style.Default,
     });
-  } else {
   }
   return (
-    <ThemeProvider defaultTheme="light" attribute="class">
-      <Navigation />
-      <Component {...pageProps} />
+    <ThemeProvider defaultTheme="dark" attribute="class">
+      <div className="flex flex-col h-screen justify-between">
+        <div className="my-28" /> <Component {...pageProps} />
+        <Navigation />
+      </div>
     </ThemeProvider>
   );
 }
