@@ -24,7 +24,7 @@ const ToggleTheme = () => {
           case "light":
             return <span className="text-xl">&#127765;</span>;
           default:
-            return "system";
+            return "light";
         }
       })()}
     </button>

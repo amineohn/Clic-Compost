@@ -4,16 +4,26 @@ import { ThemeProvider } from "next-themes";
 import { NextPage } from "next";
 import { authUserContext } from "../components/AuthUserProvider";
 import dynamic from "next/dynamic";
+import { StatusBar, Style } from "@capacitor/status-bar";
+import { Capacitor } from "@capacitor/core";
+
 const Navigation = dynamic(() => import("../components/Navigation"), {
   ssr: false,
 });
-function MyApp({
+export default function MyApp({
   Component,
   pageProps,
 }: {
   Component: NextPage;
   pageProps: any;
 }) {
+  if (Capacitor.isNativePlatform()) {
+    StatusBar.setOverlaysWebView({ overlay: true });
+    StatusBar.setStyle({
+      style: Style.Dark,
+    });
+  } else {
+  }
   return (
     <ThemeProvider defaultTheme="light" attribute="class">
       <Navigation />
@@ -22,4 +32,3 @@ function MyApp({
   );
 }
 export const useAuth = () => useContext(authUserContext);
-export default MyApp;
