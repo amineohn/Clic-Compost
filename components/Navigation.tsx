@@ -4,8 +4,8 @@ import Link from "next/link";
 const Navigation = () => {
   return (
     <>
-      <nav className=" bottom-0 w-full flex flex-wrap items-center justify-between px-2 py-3 bg-gray-900 mb-3">
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+      <footer className="sticky bottom-0 w-full flex flex-wrap items-center justify-center px-2 py-3 bg-black mb-3 m-auto">
+        <div className="px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="flex flex-grow justify-center items-center">
             <ul className="flex flex-row list-none lg:ml-auto justify-center items-center">
               <li className="nav-item"></li>
@@ -66,7 +66,7 @@ const Navigation = () => {
             </ul>
           </div>
         </div>
-      </nav>
+      </footer>
     </>
   );
 };

@@ -8,7 +8,7 @@ const Home: NextPage = () => {
       <FadeIn className="flex flex-col justify-center px-8 my-30">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
           <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
+            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
               Clic-Compost
             </h1>
             <div className="mb-8"></div>
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
                       className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg transition"
                       placeholder="password"
                     />
-                    <button className="p-2 rounded-lg bg-blue-400 hover:bg-blue-500 transition text-white">
+                    <button className="p-2 rounded-lg bg-greenDDTV hover:bg-green-800 transition text-white">
                       Send
                     </button>
                   </div>

@@ -40,7 +40,8 @@ export default function MyApp({
   return (
     <ThemeProvider defaultTheme="dark" attribute="class">
       <div className="flex flex-col h-screen justify-between">
-        <div className="my-28" /> <Component {...pageProps} />
+        <div className="my-28" /> 
+        <Component {...pageProps} />
         <Navigation />
       </div>
     </ThemeProvider>

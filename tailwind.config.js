@@ -30,6 +30,8 @@ module.exports = {
         trueGray: colors.trueGray,
         coolGray: colors.coolGray,
         blueGray: colors.blueGray,
+        orangeDDTV: "#e94e1a",
+        greenDDTV: "#263b29",
       },
     },
   },

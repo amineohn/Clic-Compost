@@ -23,13 +23,13 @@ const Collect: NextPage = () => {
               showModal ? "fade-in" : "fade-in"
             }`}
           >
-            <div className="fixed inset-0 bg-black" aria-hidden="true" />
+            <div className="fixed inset-0" aria-hidden="true" />
 
             <span className="inline-block align-middle items-center place-items-center justify-center h-screen">
               &#8203;
             </span>
 
-            <div className="animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="flex flex-col">
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center ">
@@ -64,7 +64,7 @@ const Collect: NextPage = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-blue-400 hover:bg-blue-500 dark:border-orangeDDTV px-4 py-2 dark:bg-orangeDDTV dark:hover:bg-blue-500 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-greenDDTV hover:bg-green-800 px-4 py-2 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Ok
                 </button>
@@ -91,13 +91,13 @@ const Collect: NextPage = () => {
                 : "transition-height duration-500 ease-in-out"
             }`}
           >
-            <div className="fixed inset-0 bg-black" aria-hidden="true" />
+            <div className="fixed inset-0" aria-hidden="true" />
 
             <span className="inline-block align-middle items-center place-items-center justify-center h-screen">
               &#8203;
             </span>
 
-            <div className="animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="flex flex-col">
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center ">
@@ -132,7 +132,7 @@ const Collect: NextPage = () => {
                 <button
                   type="button"
                   onClick={() => setShowCollectModal(false)}
-                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-blue-400 hover:bg-blue-500 dark:border-orangeDDTV px-4 py-2 dark:bg-orangeDDTV dark:hover:bg-blue-500 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-greenDDTV hover:bg-green-800 px-4 py-2 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Ok
                 </button>
@@ -144,7 +144,7 @@ const Collect: NextPage = () => {
       <FadeIn className="flex flex-col justify-center px-8 my-30">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
           <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
+            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
               Adresses
             </h1>
             <div className="mb-8"></div>
@@ -165,7 +165,7 @@ const Collect: NextPage = () => {
               </div>
               <div className="flex justify-center">
                 <button
-                  className="bg-blue-400 p-2 rounded-lg text-white"
+                  className="bg-greenDDTV hover:bg-green-800 p-2 rounded-lg text-white"
                   onClick={() => setShowModal(true)}
                 >
                   Ajouter
@@ -174,7 +174,7 @@ const Collect: NextPage = () => {
             </div>
           </div>
           <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
+            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
               Collectes
             </h1>
             <div className="mb-8"></div>
@@ -195,7 +195,7 @@ const Collect: NextPage = () => {
               </div>
               <div className="flex justify-center">
                 <button
-                  className="bg-blue-400 p-2 rounded-lg text-white"
+                  className="bg-greenDDTV hover:bg-green-800 p-2 rounded-lg text-white"
                   onClick={() => setShowCollectModal(true)}
                 >
                   Ajouter
