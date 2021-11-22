@@ -2,13 +2,15 @@ import type { NextPage } from "next";
 import React from "react";
 import FadeIn from "react-fade-in";
 import useSWR from "swr";
+import Loading from "../components/Loading";
 import fetcher from "../libs/fetcher";
 import { Example } from "../libs/types";
 const Home: NextPage = () => {
-  const { data } = useSWR<Example>("/api/example", fetcher);
+  const { data, error } = useSWR<Example>("/api/example", fetcher);
+  if (error) return <div>failed to load</div>;
   return (
     <>
-      <FadeIn className="flex flex-col justify-center px-8 my-30">
+      <FadeIn className="flex flex-col justify-center px-8">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
           <div className="flex-col justify-center items-center">
             <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
@@ -23,11 +25,11 @@ const Home: NextPage = () => {
                 <div className="grid grid-cols-1 gap-2 justify-center">
                   <div className="grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-1 md:grid-cols-1 space-y-2">
                     <input
-                      className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg transition"
+                      className="bg-green-700  text-gray-700 dark:bg-gray-800 bg-opacity-25 border-none placeholder-gray-700 dark:placeholder-white p-2 rounded-lg transition"
                       placeholder="email"
                     />
                     <input
-                      className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg transition"
+                      className="bg-green-700 text-gray-700  dark:bg-gray-800 bg-opacity-25 border-none placeholder-gray-700 dark:placeholder-white p-2 rounded-lg transition"
                       placeholder="password"
                     />
                     <button className="p-2 rounded-lg bg-greenDDTV hover:bg-green-800 transition text-white">
@@ -38,7 +40,9 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div>
-              <p className="text-white">test api: {data?.name}</p>
+              <p className="text-black dark:text-white">
+                test api: {data ? data?.name : <Loading />}
+              </p>
             </div>
           </div>
         </div>

@@ -8,6 +8,8 @@ import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import { Toast } from "@capacitor/toast";
 import { configuration } from "../configuration";
+// an error occured during hydration
+// @ts-ignore
 
 import { authUserContext } from "../components/AuthUserProvider";
 
@@ -30,6 +32,10 @@ export default function MyApp({
       StatusBar.setStyle({
         style: Style.Light,
       });
+    } else {
+      StatusBar.setStyle({
+        style: Style.Dark,
+      });
     }
     SplashScreen.hide();
     StatusBar.setOverlaysWebView({ overlay: true });
@@ -37,13 +43,17 @@ export default function MyApp({
       style: Style.Default,
     });
   }
+  const { authUser }: any = useContext(authUserContext);
+
   return (
-    <ThemeProvider defaultTheme="dark" attribute="class">
-      <div className="flex flex-col h-screen justify-between">
-        <div className="my-28" /> 
-        <Component {...pageProps} />
-        <Navigation />
-      </div>
+    <ThemeProvider defaultTheme="default" attribute="class">
+      <authUserContext.Provider value={authUser}>
+        <div className="flex flex-col h-screen justify-between">
+          <div className="my-28" />
+          <Component {...pageProps} />
+          <Navigation />
+        </div>
+      </authUserContext.Provider>
     </ThemeProvider>
   );
 }

@@ -18,22 +18,20 @@ const Collect: NextPage = () => {
         leaveTo="opacity-0 scale-95 "
       >
         <div className={`absolute z-10 inset-0 overflow-y-auto`}>
-          <div
-            className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ${
-              showModal ? "fade-in" : "fade-in"
-            }`}
-          >
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0" aria-hidden="true" />
 
             <span className="inline-block align-middle items-center place-items-center justify-center h-screen">
               &#8203;
             </span>
 
-            <div className="bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="bg-green-900 dark:bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="flex flex-col">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center ">
-                    <p className="font-bold text-xl"> Ajouter une adresse</p>
+                  <div className="mx-auto flex-shrink-0 flex items-center justify-center">
+                    <p className="font-bold text-xl text-white">
+                      Ajouter une adresse
+                    </p>
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3
@@ -83,25 +81,21 @@ const Collect: NextPage = () => {
         leaveFrom="opacity-100 scale-100 "
         leaveTo="opacity-0 scale-95 "
       >
-        <div className={`absolute z-10 inset-0 overflow-y-auto`}>
-          <div
-            className={`flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ${
-              showModal
-                ? "transition-height duration-500 ease-in-out"
-                : "transition-height duration-500 ease-in-out"
-            }`}
-          >
+        <div className="absolute z-10 inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0" aria-hidden="true" />
 
             <span className="inline-block align-middle items-center place-items-center justify-center h-screen">
               &#8203;
             </span>
 
-            <div className="bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="bg-green-900 dark:bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="flex flex-col">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center ">
-                    <p className="font-bold text-xl"> Ajouter une collecte</p>
+                  <div className="mx-auto flex-shrink-0 flex items-center justify-center">
+                    <p className="font-bold text-xl text-white">
+                      Ajouter une collecte
+                    </p>
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3
@@ -141,7 +135,7 @@ const Collect: NextPage = () => {
           </div>
         </div>
       </Transition>
-      <FadeIn className="flex flex-col justify-center px-8 my-30">
+      <FadeIn className="flex flex-col justify-center px-8">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
           <div className="flex-col justify-center items-center">
             <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">

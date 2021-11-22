@@ -5,7 +5,7 @@ const formatAuthUser = (user) => ({
   uid: user.uid,
   email: user.email,
 });
-
+// language=TypeScript
 export default async function authentification() {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -53,7 +53,6 @@ export default async function authentification() {
     const unsubscribe = Auth.onAuthStateChanged(auth, authStateChanged);
     return unsubscribe();
   }, []);
-
   return {
     authUser,
     loading,

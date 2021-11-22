@@ -22,7 +22,7 @@ const config: CapacitorConfig = {
     },
   },
   server: {
-    url: "https://clic-compost-ten.vercel.app/",
+    url: configuration.server.url,
   },
 };
 

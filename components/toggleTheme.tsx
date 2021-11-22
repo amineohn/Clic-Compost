@@ -5,7 +5,8 @@ const ToggleTheme = () => {
 
   const getNextTheme = (): string => {
     if (theme === "dark") return "light";
-    if (theme === "light") return "system";
+    if (theme === "light") return "dark";
+
     return "dark";
   };
 
@@ -19,6 +20,8 @@ const ToggleTheme = () => {
         switch (theme) {
           case "dark":
             return <span className="text-xl">&#127762;</span>;
+          case "light":
+            return <span className="text-xl">&#127765;</span>;
           default:
             return "dark";
         }
