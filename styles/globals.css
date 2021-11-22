@@ -7,7 +7,7 @@ body {
 }
 
 body {
-  @apply bg-white dark:bg-black;
+  @apply bg-white dark:bg-black min-h-screen;
 }
 
 a {
