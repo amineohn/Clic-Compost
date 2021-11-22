@@ -5,7 +5,7 @@ import ToggleTheme from "./toggleTheme";
 const Navigation = () => {
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap bg-greenDDTV p-6">
+      <nav className="sticky flex items-center justify-between flex-wrap bg-greenDDTV p-6">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <Link href="/">
             <a className="font-semibold text-xl tracking-tight">Clic Compost</a>

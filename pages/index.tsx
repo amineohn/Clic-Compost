@@ -1,49 +1,121 @@
 import type { NextPage } from "next";
-import React from "react";
+import React, { useState } from "react";
 import FadeIn from "react-fade-in";
-import useSWR from "swr";
-import Loading from "../components/Loading";
-import fetcher from "../libs/fetcher";
-import { Example } from "../libs/types";
 const Home: NextPage = () => {
-  const { data, error } = useSWR<Example>("/api/example", fetcher);
-  if (error) return <div>failed to load</div>;
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const validate = (formData) => {
+    let emailError = "";
+    let passwordError = "";
+    if (!formData.email) {
+      emailError = "Email is required";
+    }
+    if (!formData.password) {
+      passwordError = "Password is required";
+    }
+    if (emailError || passwordError) {
+      setErrors({ email: emailError, password: passwordError });
+      return false;
+    }
+    return true;
+  };
+  const handleChange = (e) => {
+    e.persist();
+    setFormData((formData) => ({
+      ...formData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
   return (
     <>
-      <FadeIn className="flex flex-col justify-center px-8">
-        <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
-          <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
-              Clic-Compost
-            </h1>
-            <div className="mb-8"></div>
-            <div className="space-y-2">
-              <div className="justify-center w-full metric-card max-w-72 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 md:bg-opacity-100 rounded-2xl p-4">
-                <div className="flex justify-center items-center font-bold text-gray-900 dark:text-gray-100">
-                  Login
-                </div>
-                <div className="grid grid-cols-1 gap-2 justify-center">
-                  <div className="grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-1 md:grid-cols-1 space-y-2">
-                    <input
-                      className="bg-green-700  text-gray-700 dark:bg-gray-800 bg-opacity-25 border-none placeholder-gray-700 dark:placeholder-white p-2 rounded-lg transition"
-                      placeholder="email"
-                    />
-                    <input
-                      className="bg-green-700 text-gray-700  dark:bg-gray-800 bg-opacity-25 border-none placeholder-gray-700 dark:placeholder-white p-2 rounded-lg transition"
-                      placeholder="password"
-                    />
-                    <button className="p-2 rounded-lg bg-greenDDTV hover:bg-green-800 transition text-white">
-                      Send
-                    </button>
-                  </div>
-                </div>
+      <FadeIn className="my-48">
+        <div className="container mx-auto px-4 py-16">
+          <div className="flex flex-col items-center">
+            <form
+              onSubmit={(e) => {
+                handleChange(e);
+                if (validate(formData)) {
+                  setIsSubmitting(true);
+                }
+                e.preventDefault();
+                setIsSubmitting(true);
+                setErrors({ email: "", password: "" });
+                const errors = validate(formData);
+                setIsSubmitting(false);
+                setErrors({
+                  email: formData.email,
+                  password: formData.password,
+                });
+              }}
+            >
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-xs italic">{errors.email}</p>
+                )}
               </div>
-            </div>
-            <div>
-              <p className="text-black dark:text-white">
-                test api: {data ? data?.name : <Loading />}
-              </p>
-            </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-xs italic">
+                    {errors.password}
+                  </p>
+                )}
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  {isSubmitting ? "Submitting" : "Submit"}
+                </button>
+                <a
+                  className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800"
+                  href="#"
+                >
+                  Forgot Password?
+                </a>
+              </div>
+            </form>
           </div>
         </div>
       </FadeIn>

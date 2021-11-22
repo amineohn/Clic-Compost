@@ -7,7 +7,7 @@ const ToggleTheme = () => {
     if (theme === "dark") return "light";
     if (theme === "light") return "dark";
 
-    return "dark";
+    return "light";
   };
 
   return (
@@ -23,7 +23,7 @@ const ToggleTheme = () => {
           case "light":
             return <span className="text-xl">&#127765;</span>;
           default:
-            return "dark";
+            return "light";
         }
       })()}
     </button>

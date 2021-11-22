@@ -1,6 +1,6 @@
 {
-  "name": "ionic-capacitor-template",
-  "version": "0.1.0",
+  "name": "clic-compost",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,6 +10,7 @@
     "mobile": "next build && next export && ionic capacitor build",
     "sync": "npx cap sync",
     "ionic:build": "next build && next export",
+    "live": "ionic cap run android -l --external",
     "ionic:serve": "next dev"
   },
   "dependencies": {

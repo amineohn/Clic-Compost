@@ -1,132 +1,180 @@
 import type { NextPage } from "next";
 import React, { Fragment, useState } from "react";
-import { Transition } from "@headlessui/react";
 import FadeIn from "react-fade-in";
 
 const Tickets: NextPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  // lanbda function to set the state of the ticket
+  // language=TypeScript, TailwindCSS, tickets.tsx
+
+  const [ticket, setTicket] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const ticketsList = [
+    {
+      name: "John Doe",
+      email: "test2",
+      phone: "test2",
+      timeCollect: "test2",
+      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
+      adress: "test2",
+    },
+    {
+      name: "John Doe",
+      email: "test2",
+      phone: "test2",
+      timeCollect: "test2",
+      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
+      adress: "test2",
+    },
+    {
+      name: "John Doe",
+      email: "test2",
+      phone: "test2",
+      timeCollect: "test2",
+      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
+      adress: "test2",
+    },
+    {
+      name: "John Doe",
+      email: "test2",
+      phone: "test2",
+      timeCollect: "test2",
+      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
+      adress: "test2",
+    },
+  ];
+  // login form to be displayed on the page with the ticket form and the tickets list of tickets
   return (
     <>
-      <Transition
-        as={Fragment}
-        show={showModal}
-        enter="transform transition duration-[400ms]"
-        enterFrom="opacity-0 scale-50"
-        enterTo="opacity-100 scale-100"
-        leave="transform duration-200 transition ease-in-out"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        <div className="absolute z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0" aria-hidden="true" />
-
-            <span className="inline-block align-middle items-center place-items-center justify-center h-screen">
-              &#8203;
-            </span>
-
-            <div className="bg-green-900 dark:bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="flex flex-col">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center">
-                    <p className="font-bold text-xl text-white">
-                      Moyen de paiement
-                    </p>
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3
-                      className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-50"
-                      id="modal-title"
-                    ></h3>
-                    <div className="mt-2 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 m-auto gap-2">
+      <FadeIn className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 my-36">
+        <div className="flex flex-col items-center justify-center">
+          <div className="w-full max-w-xl">
+            <div className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4">
+              <div className="mb-4">
+                <h1 className="text-2xl font-bold text-center">
+                  Saisie des données banquaire
+                </h1>
+              </div>
+              <div className="mb-4">
+                <form
+                  className="w-full max-w-lg"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    console.log(ticket);
+                  }}
+                >
+                  <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                      <label
+                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-first-name"
+                      >
+                        Numéro de carte
+                      </label>
                       <input
-                        type="tel"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        autoComplete="cc-number"
-                        maxLength={19}
-                        placeholder="xxxx xxxx xxxx xxxx"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs"
-                        required
-                      />
-                      <input
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-first-name"
                         type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs"
-                        placeholder="Expiration"
-                        required
+                        placeholder="XXXX XXXX XXXX XXXX"
+                        onChange={(e) =>
+                          setTicket({ ...ticket, name: e.target.value })
+                        }
                       />
+                    </div>
+                    <div className="w-full md:w-1/2 px-3">
+                      <label
+                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-last-name"
+                      >
+                        Expiration
+                      </label>
                       <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs"
-                        placeholder="Cryptogramme visuel"
-                        required
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-last-name"
+                        type="date"
+                        placeholder=""
+                        onChange={(e) =>
+                          setTicket({ ...ticket, email: e.target.value })
+                        }
                       />
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-greenDDTV hover:bg-green-800 px-4 py-2 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                  Ok
-                </button>
+                  <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full px-3">
+                      <label
+                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Cryptogramme visuel
+                      </label>
+                      <input
+                        className="appearance-none block w-1/3 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-password"
+                        type="text"
+                        placeholder=""
+                        onChange={(e) =>
+                          setTicket({ ...ticket, phone: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap -mx-3 mb-2">
+                    <div className="w-full px-3">
+                      <button
+                        className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+                        type="button"
+                        onClick={() => {
+                          console.log(ticket);
+                        }}
+                      >
+                        Envoyer
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
-      </Transition>
-
-      <FadeIn className="flex flex-col justify-center px-8">
-        <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
-          <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
-              Tickets
-            </h1>
-            <div className="mb-8"></div>
-            <div className="space-y-2">
-              <div className="justify-center w-full metric-card max-w-72 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 md:bg-opacity-100 rounded-2xl p-4">
-                <div className="flex justify-center items-center font-bold text-gray-900 dark:text-gray-100">
-                  Paiement
-                </div>
-                <div className="grid grid-cols-2 gap-2 justify-center">
-                  <div className="inline-flex items-end justify-start space-x-2">
-                    <div>
-                      <p>Numéro de carte</p>
-                      <p>Expiration</p>
-                      <p>Cryptogramme visuel</p>
-                    </div>
-                  </div>
-                </div>
+        <div className="flex flex-col items-center justify-center">
+          <div className="w-full max-w-2xl">
+            <div className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4">
+              <div className="mb-4">
+                <h1 className="text-2xl font-bold text-center">
+                  Liste des tickets
+                </h1>
               </div>
-              <div className="flex justify-center">
-                <button
-                  className="bg-greenDDTV p-2 rounded-lg text-white"
-                  onClick={() => setShowModal(true)}
-                >
-                  Moyen de paiement
-                </button>
+              <div className="mb-4 overflow-auto">
+                <table className="max-w-lg">
+                  <thead>
+                    <tr>
+                      <th className="px-4 py-2">Nom du site</th>
+                      <th className="px-4 py-2">Adresse</th>
+                      <th className="px-4 py-2">Téléphone</th>
+                      <th className="px-4 py-2">Email</th>
+                      <th className="px-4 py-2">Crénau de collecte</th>
+                      <th className="px-4 py-2">Fréquence</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ticketsList.map((ticket) => (
+                      <tr key={ticket.name}>
+                        <td className="border px-4 py-2">{ticket.name}</td>
+                        <td className="border px-4 py-2">{ticket.email}</td>
+                        <td className="border px-4 py-2">{ticket.phone}</td>
+                        <td className="border px-4 py-2">{ticket.adress}</td>
+                        <td className="border px-4 py-2">
+                          {ticket.timeCollect}
+                        </td>
+                        <td className="border px-4 py-2">{ticket.frequency}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            </div>
-          </div>
-          <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
-              Factures
-            </h1>
-            <div className="mb-8"></div>
-            <div className="space-y-2">
-              <div className="justify-center w-full metric-card max-w-72 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 md:bg-opacity-100 rounded-2xl p-4">
-                <div className="grid grid-cols-2 gap-2 justify-center">
-                  <div className="inline-flex items-end justify-start space-x-2">
-                    <div>
-                      <p>Aucune facture</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-center"></div>
             </div>
           </div>
         </div>

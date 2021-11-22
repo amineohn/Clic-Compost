@@ -1,199 +1,360 @@
-import { Transition } from "@headlessui/react";
 import type { NextPage } from "next";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 const Collect: NextPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCollectModal, setShowCollectModal] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [frequency, setFrequency] = useState("");
+  const [collectTime, setCollectTime] = useState("");
+  const [address, setAddress] = useState("");
+  function handleSubmit(e) {
+    e.preventDefault();
+    setShowCollectModal(true);
+  }
+  function handleChange(e) {
+    const { name, value } = e.target;
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "phone":
+        setPhone(value);
+
+        break;
+      case "frequency":
+        setFrequency(value);
+        break;
+      case "collectTime":
+        setCollectTime(value);
+        break;
+      case "address":
+        setAddress(value);
+        break;
+      default:
+        break;
+    }
+  }
+  const collects = [
+    {
+      id: 1,
+      name: "hellow you",
+      price: "3000",
+      image: "https://picsum.photos/200/300",
+      address: "test anyway",
+      description: "test2",
+      isCollect: false,
+      phone: "test3",
+      schedule: "test5",
+      frequency: "hello",
+    },
+    {
+      id: 2,
+      name: "hellow you",
+      price: "3000",
+      image: "https://picsum.photos/200/300",
+      address: "test anyway",
+      description: "test2",
+      isCollect: false,
+      phone: "test3",
+      schedule: "test5",
+      frequency: "hello",
+    },
+    {
+      id: 3,
+      name: "hellow you",
+      price: "3000",
+      image: "https://picsum.photos/200/300",
+      address: "test anyway",
+      description: "test2",
+      isCollect: false,
+
+      phone: "test3",
+      schedule: "test5",
+      frequency: "hello",
+    },
+    {
+      id: 4,
+      name: "hellow you",
+      price: "3000",
+      image: "https://picsum.photos/200/300",
+      address: "test anyway",
+      description: "test2",
+      isCollect: false,
+      phone: "test3",
+      schedule: "test5",
+      frequency: "hello",
+    },
+    {
+      id: 5,
+      name: "hellow you",
+      price: "3000",
+      image: "https://picsum.photos/200/300",
+      address: "test anyway",
+      description: "test2",
+      isCollect: false,
+      phone: "test3",
+      schedule: "test5",
+      frequency: "hello",
+    },
+    {
+      id: 6,
+      name: "hellow you",
+      price: "3000",
+      image: "https://picsum.photos/200/300",
+      address: "test anyway",
+      description: "test2",
+      isCollect: false,
+      phone: "test3",
+      schedule: "test5",
+      frequency: "hello",
+    },
+    {
+      id: 7,
+      name: "hellow you",
+      price: "3000",
+      image: "https://picsum.photos/200/300",
+      address: "test anyway",
+      description: "test2",
+      isCollect: false,
+      phone: "test3",
+      schedule: "test5",
+      frequency: "hello",
+    },
+  ];
   return (
     <>
-      <Transition
-        as={Fragment}
-        show={showModal}
-        enter="transform transition duration-[400ms]"
-        enterFrom="opacity-0 scale-50"
-        enterTo="opacity-100 scale-100"
-        leave="transform duration-200 transition ease-in-out"
-        leaveFrom="opacity-100 scale-100 "
-        leaveTo="opacity-0 scale-95 "
-      >
-        <div className={`absolute z-10 inset-0 overflow-y-auto`}>
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0" aria-hidden="true" />
-
-            <span className="inline-block align-middle items-center place-items-center justify-center h-screen">
-              &#8203;
-            </span>
-
-            <div className="bg-green-900 dark:bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="flex flex-col">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center">
-                    <p className="font-bold text-xl text-white">
-                      Ajouter une adresse
-                    </p>
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3
-                      className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-50"
-                      id="modal-title"
-                    ></h3>
-                    <div className="mt-2 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 m-auto gap-2">
-                      <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
-                        placeholder="Nom du site"
-                      />
-                      <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
-                        placeholder="Adresse"
-                      />
-                      <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
-                        placeholder="Téléphone"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-greenDDTV hover:bg-green-800 px-4 py-2 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+      <FadeIn className="grid grid-cols-1 lg:grid-cols-2 justify-center my-28">
+        <div className="flex justify-center">
+          <div className="w-full max-w-sm">
+            <form
+              className="bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4"
+              onSubmit={handleSubmit}
+            >
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="username"
                 >
-                  Ok
-                </button>
+                  Nom du site
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="username"
+                  type="text"
+                  placeholder="Nom du site"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
-            </div>
-          </div>
-        </div>
-      </Transition>
-      <Transition
-        as={Fragment}
-        show={showCollectModal}
-        enter="transform transition duration-[400ms]"
-        enterFrom="opacity-0 scale-50"
-        enterTo="opacity-100 scale-100"
-        leave="transform duration-200 transition ease-in-out"
-        leaveFrom="opacity-100 scale-100 "
-        leaveTo="opacity-0 scale-95 "
-      >
-        <div className="absolute z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0" aria-hidden="true" />
-
-            <span className="inline-block align-middle items-center place-items-center justify-center h-screen">
-              &#8203;
-            </span>
-
-            <div className="bg-green-900 dark:bg-black animate-wiggle inline-block align-middle rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="flex flex-col">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center">
-                    <p className="font-bold text-xl text-white">
-                      Ajouter une collecte
-                    </p>
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3
-                      className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-50"
-                      id="modal-title"
-                    ></h3>
-                    <div className="mt-2 grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-2 m-auto gap-2">
-                      <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
-                        placeholder="Adresse à collecter"
-                      />
-                      <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
-                        placeholder="Créneau de collecte"
-                      />
-                      <input
-                        type="text"
-                        className="bg-gray-100 dark:bg-gray-800 bg-opacity-25 border-none placeholder-white p-2 rounded-lg max-w-xs	"
-                        placeholder="Fréquence"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  onClick={() => setShowCollectModal(false)}
-                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-greenDDTV hover:bg-green-800 px-4 py-2 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="password"
                 >
-                  Ok
-                </button>
+                  Adresse
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="text"
+                  placeholder="Adresse"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
               </div>
-            </div>
-          </div>
-        </div>
-      </Transition>
-      <FadeIn className="flex flex-col justify-center px-8">
-        <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
-          <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
-              Adresses
-            </h1>
-            <div className="mb-8"></div>
-            <div className="space-y-2">
-              <div className="justify-center w-full metric-card max-w-72 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 md:bg-opacity-100 rounded-2xl p-4">
-                <div className="flex justify-center items-center font-bold text-gray-900 dark:text-gray-100">
-                  Adresses
-                </div>
-                <div className="grid grid-cols-2 gap-2 justify-center">
-                  <div className="inline-flex items-end justify-start space-x-2">
-                    <div>
-                      <p>DDTV</p>
-                      <p>Adresse</p>
-                      <p>Téléphone</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Téléphone
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="text"
+                  placeholder="Téléphone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
               </div>
-              <div className="flex justify-center">
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Email
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Créneau de collecte
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="text"
+                  placeholder="Créneau de collecte"
+                  value={collectTime}
+                  onChange={(e) => setCollectTime(e.target.value)}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Fréquence
+                </label>
+                <input
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="text"
+                  placeholder="Fréquence"
+                  value={frequency}
+                  onChange={(e) => setFrequency(e.target.value)}
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
                 <button
-                  className="bg-greenDDTV hover:bg-green-800 p-2 rounded-lg text-white"
-                  onClick={() => setShowModal(true)}
+                  className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+                  type="button"
+                  onClick={() => {
+                    setShowModal(false);
+                  }}
+                >
+                  Annuler
+                </button>
+                <button
+                  className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+                  type="button"
+                  onClick={() => {
+                    setShowModal(false);
+                    //addSite();
+                  }}
                 >
                   Ajouter
                 </button>
               </div>
-            </div>
+            </form>
           </div>
-          <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
-              Collectes
-            </h1>
-            <div className="mb-8"></div>
-            <div className="space-y-2">
-              <div className="justify-center w-full metric-card max-w-72 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 md:bg-opacity-100 rounded-2xl p-4">
-                <div className="flex justify-center items-center font-bold text-gray-900 dark:text-gray-100">
-                  Collectes
-                </div>
-                <div className="grid grid-cols-2 gap-2 justify-center">
-                  <div className="inline-flex items-end justify-start space-x-2">
-                    <div>
-                      <p>Adresse à collecter rue bordeaux bla bla</p>
-                      <p>Créneau du lundi matin</p>
-                      <p>fréquence: ponctuel</p>
-                    </div>
+        </div>
+
+        <div className="flex items-center justify-center">
+          <div className="w-full max-w-3xl">
+            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+              <div className="flex flex-col">
+                <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:-mb-8 sm:-mt-6 sm:flex sm:justify-start">
+                  <div className="align-middle inline-block min-w-full shadow sm:rounded-lg border-b border-gray-200 dark:border-gray-800">
+                    <table className="min-w-full">
+                      <thead>
+                        <tr>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Nom du site
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Adresse
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Téléphone
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Créneau
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Fréquence
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {collects.map((collect) => (
+                          <tr key={collect.id}>
+                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                              <div className="flex items-center">
+                                <div className="flex-shrink-0 h-10 w-10">
+                                  <img
+                                    className="h-10 w-10 rounded-full"
+                                    src={collect.image}
+                                    alt=""
+                                  />
+                                </div>
+                                <div className="ml-4">
+                                  <div className="text-sm leading-5 font-medium text-gray-900">
+                                    {collect.name}
+                                  </div>
+                                  <div className="text-sm leading-5 text-gray-500">
+                                    {collect.address}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                              <div className="text-sm leading-5 text-gray-900">
+                                {collect.address}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                              <div className="text-sm leading-5 text-gray-900">
+                                {collect.phone}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                              <div className="text-sm leading-5 text-gray-900">
+                                {collect.schedule}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                              <div className="text-sm leading-5 text-gray-900">
+                                {collect.frequency}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                              <div className="text-sm leading-5 text-gray-900">
+                                <button
+                                  onClick={() => setShowCollectModal(true)}
+                                  className="transition duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:scale-105"
+                                >
+                                  <svg
+                                    className="h-5 w-5 text-green-500"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-              </div>
-              <div className="flex justify-center">
-                <button
-                  className="bg-greenDDTV hover:bg-green-800 p-2 rounded-lg text-white"
-                  onClick={() => setShowCollectModal(true)}
-                >
-                  Ajouter
-                </button>
               </div>
             </div>
           </div>

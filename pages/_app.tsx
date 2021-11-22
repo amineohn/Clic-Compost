@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import React, { useContext } from "react";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { StatusBar, Style } from "@capacitor/status-bar";
@@ -23,16 +23,36 @@ export default function MyApp({
   Component: NextPage;
   pageProps: any;
 }) {
+  const { authUser }: any = useContext(authUserContext);
+
+  return (
+    <ThemeProvider defaultTheme="default" attribute="class">
+      <authUserContext.Provider value={authUser}>
+        <div className="flex flex-col h-screen justify-between">
+          <Component {...pageProps} />
+          <Navigation />
+        </div>
+      </authUserContext.Provider>
+    </ThemeProvider>
+  );
+}
+export const useAuth = () => useContext(authUserContext);
+export const useCapacitor = async () => {
   if (Capacitor.isNativePlatform()) {
     Toast.show({
       text: configuration.toast.text,
     });
-    if (window.navigator.userAgent.includes("AndroidDarkMode")) {
+    const { theme } = useTheme();
+    // language=TypeScript
+    if ((await StatusBar.getInfo()).style !== "DARK" && theme === "dark") {
       //test purpose
       StatusBar.setStyle({
         style: Style.Light,
       });
-    } else {
+    } else if (
+      (await StatusBar.getInfo()).style !== "LIGHT" &&
+      theme === "light"
+    ) {
       StatusBar.setStyle({
         style: Style.Dark,
       });
@@ -43,18 +63,4 @@ export default function MyApp({
       style: Style.Default,
     });
   }
-  const { authUser }: any = useContext(authUserContext);
-
-  return (
-    <ThemeProvider defaultTheme="default" attribute="class">
-      <authUserContext.Provider value={authUser}>
-        <div className="flex flex-col h-screen justify-between">
-          <div className="my-28" />
-          <Component {...pageProps} />
-          <Navigation />
-        </div>
-      </authUserContext.Provider>
-    </ThemeProvider>
-  );
-}
-export const useAuth = () => useContext(authUserContext);
+};
