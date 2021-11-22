@@ -21,6 +21,9 @@ const config: CapacitorConfig = {
       backgroundColor: "#ffffffff",
     },
   },
+  server: {
+    url: "https://clic-compost-ten.vercel.app/",
+  },
 };
 
 export default config;
