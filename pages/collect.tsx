@@ -144,7 +144,7 @@ const Collect: NextPage = () => {
       <FadeIn className="flex flex-col justify-center px-8 my-30">
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto mb-16 dark:text-white">
           <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
+            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
               Adresses
             </h1>
             <div className="mb-8"></div>
@@ -174,7 +174,7 @@ const Collect: NextPage = () => {
             </div>
           </div>
           <div className="flex-col justify-center items-center">
-            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
+            <h1 className="pb-2 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-coolGray-900 to-warmGray-600 dark:bg-gradient-to-bl dark:from-gray-50 dark:to-gray-200">
               Collectes
             </h1>
             <div className="mb-8"></div>
