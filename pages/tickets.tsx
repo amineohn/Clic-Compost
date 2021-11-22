@@ -69,7 +69,7 @@ const Tickets: NextPage = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-greenDDTV hover:bg-green-800 dark:border-orangeDDTV px-4 py-2 dark:bg-orangeDDTV dark:hover:bg-blue-500 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="transition mt-3 w-full inline-flex justify-center rounded-md bg-greenDDTV hover:bg-green-800 px-4 py-2 dark:hover:bg-blue-500 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Ok
                 </button>
