@@ -1,13 +1,11 @@
 import "../styles/globals.css";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeProvider, useTheme } from "next-themes";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
-import { Toast } from "@capacitor/toast";
-import { configuration } from "../configuration";
 // an error occured during hydration
 // @ts-ignore
 
@@ -24,6 +22,30 @@ export default function MyApp({
   pageProps: any;
 }) {
   const { authUser }: any = useContext(authUserContext);
+  const { theme } = useTheme();
+  useEffect(() => {
+    if (Capacitor.isPluginAvailable("StatusBar")) {
+      StatusBar.setStyle({ style: Style.Dark });
+    }
+    if (Capacitor.isPluginAvailable("SplashScreen")) {
+      SplashScreen.hide();
+    }
+    if (Capacitor.isNativePlatform()) {
+      SplashScreen.hide();
+      //StatusBar.setOverlaysWebView({ overlay: true });
+      if (theme === "dark") {
+        StatusBar.setStyle({
+          style: Style.Dark,
+        });
+        StatusBar.setBackgroundColor({ color: "#fff" });
+      } else {
+        StatusBar.setStyle({
+          style: Style.Light,
+        });
+        StatusBar.setBackgroundColor({ color: "#000" });
+      }
+    }
+  }, []);
 
   return (
     <ThemeProvider defaultTheme="light" attribute="class">
@@ -37,30 +59,3 @@ export default function MyApp({
   );
 }
 export const useAuth = () => useContext(authUserContext);
-export const useCapacitor = async () => {
-  if (Capacitor.isNativePlatform()) {
-    Toast.show({
-      text: configuration.toast.text,
-    });
-    const { theme } = useTheme();
-    // language=TypeScript
-    if ((await StatusBar.getInfo()).style !== "DARK" && theme === "dark") {
-      //test purpose
-      StatusBar.setStyle({
-        style: Style.Light,
-      });
-    } else if (
-      (await StatusBar.getInfo()).style !== "LIGHT" &&
-      theme === "light"
-    ) {
-      StatusBar.setStyle({
-        style: Style.Dark,
-      });
-    }
-    SplashScreen.hide();
-    StatusBar.setOverlaysWebView({ overlay: true });
-    StatusBar.setStyle({
-      style: Style.Default,
-    });
-  }
-};

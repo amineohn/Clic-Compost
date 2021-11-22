@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import React, { useState } from "react";
 import FadeIn from "react-fade-in";
+import { getAuth, signInWithCustomToken } from "firebase/auth";
+
 const Home: NextPage = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -26,6 +28,29 @@ const Home: NextPage = () => {
     }
     return true;
   };
+  const auth = getAuth();
+  let token = auth.currentUser?.getIdToken() as any;
+  signInWithCustomToken(auth, token)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(user);
+      user.getIdToken(true).then((idToken) => {
+        if (idToken) {
+          token = idToken;
+        }
+      });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode === "auth/argument-error") {
+        console.log("Invalid token");
+      }
+      if (errorMessage) {
+        console.log(errorMessage);
+      }
+    });
   const handleChange = (e) => {
     e.persist();
     setFormData((formData) => ({
