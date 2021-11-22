@@ -33,6 +33,10 @@ const Home: NextPage = () => {
   signInWithCustomToken(auth, token)
     .then((userCredential) => {
       // Signed in
+      if (userCredential.user) {
+        console.log(userCredential.user);
+      }
+
       const user = userCredential.user;
       console.log(user);
       user.getIdToken(true).then((idToken) => {
