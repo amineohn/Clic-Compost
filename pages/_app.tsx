@@ -26,7 +26,7 @@ export default function MyApp({
   const { authUser }: any = useContext(authUserContext);
 
   return (
-    <ThemeProvider defaultTheme="default" attribute="class">
+    <ThemeProvider defaultTheme="light" attribute="class">
       <authUserContext.Provider value={authUser}>
         <div className="flex flex-col h-screen justify-between">
           <Component {...pageProps} />
