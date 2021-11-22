@@ -4,7 +4,7 @@ import Link from "next/link";
 const Navigation = () => {
   return (
     <>
-      <footer className="sticky bottom-0 w-full flex flex-wrap items-center justify-center px-2 py-3 bg-black mb-3 m-auto">
+      <footer className="bottom-0 w-full flex flex-wrap items-center justify-center px-2 py-3 bg-black mb-3 m-auto">
         <div className="px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="flex flex-grow justify-center items-center">
             <ul className="flex flex-row list-none lg:ml-auto justify-center items-center">

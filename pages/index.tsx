@@ -1,8 +1,11 @@
 import type { NextPage } from "next";
 import React from "react";
 import FadeIn from "react-fade-in";
-
+import useSWR from "swr";
+import fetcher from "../libs/fetcher";
+import { Example } from "../libs/types";
 const Home: NextPage = () => {
+  const { data } = useSWR<Example>("/api/example", fetcher);
   return (
     <>
       <FadeIn className="flex flex-col justify-center px-8 my-30">
@@ -33,6 +36,9 @@ const Home: NextPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div>
+              <p className="text-white">test api: {data?.name}</p>
             </div>
           </div>
         </div>
