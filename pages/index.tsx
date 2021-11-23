@@ -26,7 +26,28 @@ const Home: NextPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      // todo: make this connect user to firebase
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      if (user) {
+        await fb
+          .firestore()
+          .collection("users")
+          .doc(email as string)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              if (doc.data()?.password === password) {
+                signInWithEmailAndPassword(auth, email, password);
+              } else {
+                setError("Wrong password");
+              }
+            } else {
+              setError("User not found");
+            }
+          });
+
+        setLoading(false);
+      }
     } catch (error: any) {
       const errorCode = error.code;
       let errorMessage = error.message;
@@ -76,40 +97,6 @@ const Home: NextPage = () => {
       setError(errorMessage);
     }
     setLoading(false);
-
-    try {
-      const auth = await getAuth();
-      const user = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      ).catch((error) => {
-        console.log(error);
-      });
-      if (user) {
-        await fb
-          .firestore()
-          .collection("users")
-          .doc(email as string)
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              if (doc.data()?.password === password) {
-                signInWithEmailAndPassword(auth, email, password);
-              } else {
-                setError("Wrong password");
-              }
-            } else {
-              setError("User not found");
-            }
-          });
-
-        setLoading(false);
-      }
-    } catch (error: any | string) {
-      setError(error.message);
-      setLoading(false);
-    }
   };
 
   return (
