@@ -4,15 +4,17 @@ import FadeIn from "react-fade-in";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import fb from "firebase/compat/app";
 import Loading from "../components/Loading";
+import { useRouter } from "next/router";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
   const auth = getAuth();
   useEffect(() => {
-    if (auth.currentUser) {
-      window.location.href = "/yes";
+    if (auth && auth.currentUser) {
+      router.push("/collect");
     }
   });
   const setEmailChange = (e: FormEvent<HTMLInputElement>) => {
@@ -125,77 +127,60 @@ const Home: NextPage = () => {
   }
   return (
     <>
-      {loading ? (
-        <>
-          <div className="flex justify-center items-center h-screen">
-            <div className="w-full max-w-xs">
-              <div className="rounded px-8 pt-6 pb-8 mb-4">
-                <div className="mb-4">
-                  <h1 className="text-center text-2xl font-bold">
-                    <Loading />
-                  </h1>
-                </div>
+      <FadeIn className="my-60">
+        <div className="container mx-auto px-4 py-16">
+          <div className="flex flex-col items-center">
+            <form method="POST">
+              {error && <div className="text-red-500 font-medium">{error}</div>}
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  onChange={setEmailChange}
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                />
               </div>
-            </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  onChange={setPasswordChange}
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                  type="submit"
+                  onClick={(e: any) => handleSubmit(e)}
+                >
+                  Submit
+                </button>
+                <a
+                  className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800"
+                  href="#"
+                >
+                  Forgot Password?
+                </a>
+              </div>
+            </form>
           </div>
-        </>
-      ) : (
-        <>
-          <FadeIn className="my-60">
-            <div className="container mx-auto px-4 py-16">
-              <div className="flex flex-col items-center">
-                <form>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      htmlFor="email"
-                    >
-                      Email
-                    </label>
-                    <input
-                      onChange={setEmailChange}
-                      className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="email"
-                      type="email"
-                      placeholder="Email"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      htmlFor="password"
-                    >
-                      Password
-                    </label>
-                    <input
-                      onChange={setPasswordChange}
-                      className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                      id="password"
-                      type="password"
-                      placeholder="Password"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <button
-                      className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-                      type="submit"
-                      onClick={(e: any) => handleSubmit(e)}
-                    >
-                      Submit
-                    </button>
-                    <a
-                      className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800"
-                      href="#"
-                    >
-                      Forgot Password?
-                    </a>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </FadeIn>
-        </>
-      )}
+        </div>
+      </FadeIn>
     </>
   );
 };
