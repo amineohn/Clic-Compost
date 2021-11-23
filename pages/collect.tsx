@@ -1,7 +1,16 @@
 import type { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
+import { getAuth } from "@firebase/auth";
+import { useRouter } from "next/router";
 const Collect: NextPage = () => {
+  const auth = getAuth();
+  const router = useRouter();
+  useEffect(() => {
+    if (!auth || !auth.currentUser) {
+      router.push("/");
+    }
+  });
   const [showModal, setShowModal] = useState(false);
   const [showCollectModal, setShowCollectModal] = useState(false);
   const [phone, setPhone] = useState("");

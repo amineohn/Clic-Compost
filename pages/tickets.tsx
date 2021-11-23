@@ -1,11 +1,19 @@
+import { getAuth } from "firebase/auth";
 import type { NextPage } from "next";
-import React, { Fragment, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 
 const Tickets: NextPage = () => {
   // lanbda function to set the state of the ticket
   // language=TypeScript, TailwindCSS, tickets.tsx
-
+  const auth = getAuth();
+  const router = useRouter();
+  useEffect(() => {
+    if (!auth || !auth.currentUser) {
+      router.push("/");
+    }
+  });
   const [ticket, setTicket] = useState({
     name: "",
     email: "",
