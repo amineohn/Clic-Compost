@@ -60,41 +60,43 @@ const Home: NextPage = () => {
       switch (errorCode) {
         case "auth/invalid-custom-token":
           errorMessage =
-            "The custom token format is incorrect. Please check the documentation.";
+            "Le format de jeton personnalisé est incorrect. Veuillez vérifier la documentation.";
           break;
         case "auth/custom-token-mismatch":
           errorMessage =
-            "The custom token corresponds to a different audience.";
+            "Le jeton personnalisé correspond à une audience différente.";
           break;
         case "auth/invalid-credential":
           errorMessage =
-            "The supplied auth credential is malformed or has expired.";
+            "Les informations d'authentification fournies sont mal formées ou ont expiré.";
           break;
         case "auth/operation-not-allowed":
-          errorMessage = "Password sign-in is disabled for this project.";
+          errorMessage =
+            "La connexion par mot de passe est désactivée pour ce projet.";
 
           break;
         case "auth/user-disabled":
           errorMessage =
-            "The user account has been disabled by an administrator.";
+            "Le compte utilisateur a été désactivé par un administrateur.";
           break;
         case "auth/user-token-expired":
           errorMessage =
-            "The user's credential is no longer valid. The user must sign in again.";
+            "Les informations d'identification de l'utilisateur ne sont plus valides. L'utilisateur doit se reconnecter.";
           break;
         case "auth/web-storage-unsupported":
-          errorMessage = "The user's browser does not support web storage.";
+          errorMessage =
+            "Le navigateur de l'utilisateur ne prend pas en charge le stockage Web.";
           break;
         case "auth/invalid-email":
-          errorMessage = "The email address is badly formatted.";
+          errorMessage = "L'adresse e-mail n'est pas valide.";
           break;
         case "auth/user-not-found":
           errorMessage =
-            "There is no user record corresponding to this identifier.";
+            "Il n'y a pas d'enregistrement utilisateur correspondant à cet identifiant.";
           break;
         case "auth/wrong-password":
           errorMessage =
-            "The password is invalid or the user does not have a password.";
+            "Le mot de passe est invalide ou l'utilisateur n'a pas de mot de passe.";
           break;
 
         default:
@@ -121,14 +123,14 @@ const Home: NextPage = () => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="email"
                 >
-                  Email
+                  Mail
                 </label>
                 <input
                   onChange={setEmailChange}
                   className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
                   type="email"
-                  placeholder="Email"
+                  placeholder="Mail"
                 />
               </div>
               <div className="mb-4">
@@ -136,14 +138,14 @@ const Home: NextPage = () => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="password"
                 >
-                  Password
+                  Mot de passe
                 </label>
                 <input
                   onChange={setPasswordChange}
                   className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="password"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Mot de passe"
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -157,7 +159,7 @@ const Home: NextPage = () => {
                 >
                   {loading ? (
                     <>
-                      <div className="flex space-x-1 ">
+                      <div className="flex space-x-1">
                         <svg
                           className="animate-spin h-5 w-5 text-gray-100 mt-0.5"
                           xmlns="http://www.w3.org/2000/svg"
@@ -182,14 +184,14 @@ const Home: NextPage = () => {
                       </div>
                     </>
                   ) : (
-                    "Submit"
+                    "Connexion"
                   )}
                 </button>
                 <a
-                  className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800"
+                  className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800 ml-2"
                   href="#"
                 >
-                  Forgot Password?
+                  Mot de passe oublié?
                 </a>
               </div>
             </form>
