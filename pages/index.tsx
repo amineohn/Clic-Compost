@@ -1,7 +1,11 @@
 import type { NextPage } from "next";
 import React, { FormEvent, useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import fb from "firebase/compat/app";
 import { useRouter } from "next/router";
 const Home: NextPage = () => {
@@ -26,6 +30,9 @@ const Home: NextPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      // todo: connect with google auth for sign in
+      const provider = new GoogleAuthProvider();
+
       // todo: make this connect user to firebase
       const user = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
@@ -45,7 +52,6 @@ const Home: NextPage = () => {
               setError("User not found");
             }
           });
-
         setLoading(false);
       }
     } catch (error: any) {
