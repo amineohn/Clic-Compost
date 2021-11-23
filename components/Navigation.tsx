@@ -16,31 +16,34 @@ const Navigation = () => {
 
         <div className="flex items-center w-auto">
           <div className="text-sm lg:flex-grow">
-            {auth.currentUser ? (
-              <Link href="/">
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
-                  Home
+            {!auth.currentUser ? (
+              <>
+                <Link href="/">
+                  <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
+                    Connexion
+                  </a>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/collect">
+                  <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
+                    Collecte
+                  </a>
+                </Link>
+                <Link href="/tickets">
+                  <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
+                    Tickets
+                  </a>
+                </Link>
+                <a
+                  className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4 cursor-pointer"
+                  onClick={() => getAuth().signOut()}
+                >
+                  Déconnexion
                 </a>
-              </Link>
-            ) : null}
-            <Link href="/collect">
-              <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
-                Collecte
-              </a>
-            </Link>
-            <Link href="/tickets">
-              <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
-                Tickets
-              </a>
-            </Link>
-            {auth.currentUser ? (
-              <a
-                className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4 cursor-pointer"
-                onClick={() => getAuth().signOut()}
-              >
-                Déconnexion
-              </a>
-            ) : null}
+              </>
+            )}
           </div>
           <ToggleTheme />
         </div>
