@@ -9,7 +9,6 @@ const ToggleTheme = () => {
 
     return "light";
   };
-
   return (
     <button
       type="button"
@@ -19,9 +18,9 @@ const ToggleTheme = () => {
       {(() => {
         switch (theme) {
           case "dark":
-            return <span className="text-xl">&#127762;</span>;
+            return <span className="text-xl animate-pulse">&#127762;</span>;
           case "light":
-            return <span className="text-xl">&#127765;</span>;
+            return <span className="text-xl animate-pulse">&#127765;</span>;
           default:
             return "light";
         }

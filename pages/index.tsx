@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
-
 const Home: NextPage = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -12,7 +11,6 @@ const Home: NextPage = () => {
     email: "",
     password: "",
   });
-
   const validate = (formData) => {
     let emailError = "";
     let passwordError = "";
@@ -30,6 +28,22 @@ const Home: NextPage = () => {
   };
   const auth = getAuth();
   let token = auth.currentUser?.getIdToken() as any;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate(formData)) {
+      signInWithCustomToken(auth, token).then(() => {
+        console.log("signed in");
+      });
+    }
+  };
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log("signed in");
+    } else {
+      console.log("signed out");
+    }
+  });
+
   signInWithCustomToken(auth, token)
     .then((userCredential) => {
       // Signed in
@@ -44,6 +58,8 @@ const Home: NextPage = () => {
           token = idToken;
         }
       });
+
+      //signInWithCustomToken(auth, token); // we need to test it?
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -55,6 +71,9 @@ const Home: NextPage = () => {
         console.log(errorMessage);
       }
     });
+  // firebase has been initialized in the client side code
+  // so we can use it here
+
   const handleChange = (e) => {
     e.persist();
     setFormData((formData) => ({
