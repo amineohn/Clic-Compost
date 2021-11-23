@@ -16,11 +16,13 @@ const Navigation = () => {
 
         <div className="flex items-center w-auto">
           <div className="text-sm lg:flex-grow">
-            <Link href="/">
-              <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
-                Home
-              </a>
-            </Link>
+            {auth.currentUser ? (
+              <Link href="/">
+                <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
+                  Home
+                </a>
+              </Link>
+            ) : null}
             <Link href="/collect">
               <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
                 Collecte
@@ -38,9 +40,7 @@ const Navigation = () => {
               >
                 Déconnexion
               </a>
-            ) : (
-              ""
-            )}
+            ) : null}
           </div>
           <ToggleTheme />
         </div>
