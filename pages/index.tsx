@@ -107,52 +107,7 @@ const Home: NextPage = () => {
         setLoading(false);
       }
     } catch (error: any | string) {
-      const errorCode = error.code;
-      let errorMessage = error.message;
-      setError(errorMessage);
-      switch (errorCode) {
-        case "auth/invalid-custom-token":
-          errorMessage =
-            "The custom token format is incorrect. Please check the documentation.";
-          break;
-        case "auth/custom-token-mismatch":
-          errorMessage =
-            "The custom token corresponds to a different audience.";
-          break;
-        case "auth/invalid-credential":
-          errorMessage =
-            "The supplied auth credential is malformed or has expired.";
-          break;
-        case "auth/operation-not-allowed":
-          errorMessage = "Password sign-in is disabled for this project.";
-          break;
-        case "auth/user-disabled":
-          errorMessage =
-            "The user account has been disabled by an administrator.";
-          break;
-        case "auth/user-token-expired":
-          errorMessage =
-            "The user's credential is no longer valid. The user must sign in again.";
-          break;
-        case "auth/web-storage-unsupported":
-          errorMessage = "The user's browser does not support web storage.";
-          break;
-        case "auth/invalid-email":
-          errorMessage = "The email address is badly formatted.";
-          break;
-        case "auth/user-not-found":
-          errorMessage =
-            "There is no user record corresponding to this identifier.";
-          break;
-        case "auth/wrong-password":
-          errorMessage =
-            "The password is invalid or the user does not have a password.";
-          break;
-
-        default:
-          console.log(errorMessage);
-      }
-
+      setError(error.message);
       setLoading(false);
     }
   };
