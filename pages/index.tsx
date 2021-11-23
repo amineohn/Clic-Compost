@@ -8,13 +8,13 @@ const Home: NextPage = () => {
     return value === "";
   };
   const [formData, setFormData] = useState({
-    email: isEmpty(getAuth().currentUser?.email as any)
+    email: isEmpty(getAuth().currentUser?.email as string)
       ? ""
       : getAuth().currentUser?.email,
     password: isEmpty(getAuth().currentUser as any) ? "" : "",
   });
   const [errors, setErrors] = useState({
-    email: isEmpty(getAuth().currentUser?.email as any)
+    email: isEmpty(getAuth().currentUser?.email as string)
       ? ""
       : getAuth().currentUser?.email,
     password: isEmpty(getAuth().currentUser as any) ? "" : "",
