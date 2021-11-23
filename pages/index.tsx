@@ -2,14 +2,22 @@ import type { NextPage } from "next";
 import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
+import fb from "firebase/compat/app";
 const Home: NextPage = () => {
+  const isEmpty = (value: string) => {
+    return value === "";
+  };
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: isEmpty(getAuth().currentUser?.email as any)
+      ? ""
+      : getAuth().currentUser?.email,
+    password: isEmpty(getAuth().currentUser as any) ? "" : "",
   });
   const [errors, setErrors] = useState({
-    email: "",
-    password: "",
+    email: isEmpty(getAuth().currentUser?.email as any)
+      ? ""
+      : getAuth().currentUser?.email,
+    password: isEmpty(getAuth().currentUser as any) ? "" : "",
   });
   const validate = (formData) => {
     let emailError = "";
@@ -20,13 +28,36 @@ const Home: NextPage = () => {
     if (!formData.password) {
       passwordError = "Password is required";
     }
+    if (formData.password.length < 6) {
+      passwordError = "Password must be at least 6 characters";
+    }
+    if (formData.email.length < 6) {
+      emailError = "Email must be at least 6 characters";
+    }
     if (emailError || passwordError) {
       setErrors({ email: emailError, password: passwordError });
       return false;
     }
+    fb.firestore()
+      .collection("users")
+      .doc(formData.email)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          if (doc.data()?.password === formData.password) {
+            signInWithCustomToken(auth, doc.data()?.token);
+          } else {
+            setErrors({ email: "", password: "Wrong password" });
+          }
+        } else {
+          setErrors({ email: "", password: "User not found" });
+        }
+      });
+
     return true;
   };
   const auth = getAuth();
+
   let token = auth.currentUser?.getIdToken() as any;
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,13 +67,11 @@ const Home: NextPage = () => {
       });
     }
   };
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      console.log("signed in");
-    } else {
-      console.log("signed out");
-    }
-  });
+  auth.onAuthStateChanged((user) =>
+    user
+      ? console.log("signed in \n email: \n" + user.email)
+      : console.log("signed out")
+  );
 
   signInWithCustomToken(auth, token)
     .then((userCredential) => {
@@ -64,9 +93,54 @@ const Home: NextPage = () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      if (errorCode === "auth/argument-error") {
-        console.log("Invalid token");
+      switch (errorCode) {
+        case "auth/invalid-custom-token":
+          console.log(
+            "The custom token format is incorrect. Please check the documentation."
+          );
+          break;
+        case "auth/custom-token-mismatch":
+          console.log("The custom token corresponds to a different audience.");
+          break;
+        case "auth/invalid-credential":
+          console.log(
+            "The supplied auth credential is malformed or has expired."
+          );
+          break;
+        case "auth/operation-not-allowed":
+          console.log("Password sign-in is disabled for this project.");
+          break;
+        case "auth/user-disabled":
+          console.log(
+            "The user account has been disabled by an administrator."
+          );
+          break;
+        case "auth/user-token-expired":
+          console.log(
+            "The user's credential is no longer valid. The user must sign in again."
+          );
+          break;
+        case "auth/web-storage-unsupported":
+          console.log("The user's browser does not support web storage.");
+          break;
+        case "auth/invalid-email":
+          console.log("The email address is badly formatted.");
+          break;
+        case "auth/user-not-found":
+          console.log(
+            "There is no user record corresponding to this identifier."
+          );
+          break;
+        case "auth/wrong-password":
+          console.log(
+            "The password is invalid or the user does not have a password."
+          );
+          break;
+
+        default:
+          console.log(errorMessage);
       }
+
       if (errorMessage) {
         console.log(errorMessage);
       }
@@ -117,7 +191,7 @@ const Home: NextPage = () => {
                   id="email"
                   type="email"
                   placeholder="Email"
-                  value={formData.email}
+                  value={formData.email as string}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
@@ -153,6 +227,7 @@ const Home: NextPage = () => {
                 <button
                   className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                   type="submit"
+                  onClick={(e) => handleSubmit(e)}
                 >
                   {isSubmitting ? "Submitting" : "Submit"}
                 </button>

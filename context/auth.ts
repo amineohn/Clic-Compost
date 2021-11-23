@@ -15,6 +15,20 @@ export default async function authentification() {
     setAuthUser(null);
     setLoading(true);
   };
+  async function signUp(email, password) {
+    await auth.createUserWithEmailAndPassword(email, password);
+    setLoading(false);
+  }
+  async function signIn(email, password) {
+    await auth.signInWithEmailAndPassword(email, password);
+    setLoading(false);
+  }
+  async function signOut() {
+    await auth.signOut();
+    setLoading(false);
+    clear();
+  }
+
   async function onAuthStateChanged(user) {
     if (user) {
       setAuthUser(formatAuthUser(user) as any);
@@ -27,18 +41,29 @@ export default async function authentification() {
     await setAuthUser(formatAuthUser(user) as any);
     await setLoading(false);
   }
+
+  const firebase = {
+    apiKey: "AIzaSyD_8go5RZ0kTpp19ZUkiVFGeTUC8fvYDWs",
+    authDomain: "clickncompost.firebaseapp.com",
+    projectId: "clickncompost",
+    storageBucket: "clickncompost.appspot.com",
+    messagingSenderId: "1020295512270",
+    appId: "1:1020295512270:web:707f016bc4c0a310afd09f",
+    measurementId: "G-R7P9BDSQJD",
+  };
+
   useEffect(() => {
-    auth.onAuthStateChanged(onAuthStateChanged);
-    if (fb?.apps?.length) {
+    if (!fb?.apps?.length || fb.apps.length === 0) {
       fb.initializeApp(firebase);
       fb.firestore();
+      fb.analytics();
     }
-    const unsubscribe = auth.onAuthStateChanged(onAuthStateChangedAsync);
+
+    auth.onAuthStateChanged(onAuthStateChanged);
     return () => {
       auth.onAuthStateChanged(() => {
         return null;
       });
-      unsubscribe();
     };
   }, []);
   return {
@@ -46,15 +71,8 @@ export default async function authentification() {
     loading,
     clear,
     onAuthStateChanged: onAuthStateChangedAsync,
+    signUp,
+    signIn,
+    signOut,
   };
 }
-export const firebase = {
-  apiKey: "AIzaSyAl5HVmCYHREKk_I3O3eoXFAGktH9DhBhE",
-  //apiKey: "AIzaSyD_8go5RZ0kTpp19ZUkiVFGeTUC8fvYDWs",
-  authDomain: "clickncompost.firebaseapp.com",
-  projectId: "clickncompost",
-  storageBucket: "clickncompost.appspot.com",
-  messagingSenderId: "1020295512270",
-  appId: "1:1020295512270:web:707f016bc4c0a310afd09f",
-  measurementId: "G-R7P9BDSQJD",
-};
