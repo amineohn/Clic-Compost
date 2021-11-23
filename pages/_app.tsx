@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
+import fb from "firebase/compat/app";
 // an error occured during hydration
 // @ts-ignore
 
@@ -14,6 +15,18 @@ import { authUserContext } from "../components/AuthUserProvider";
 const Navigation = dynamic(() => import("../components/Navigation"), {
   ssr: false,
 });
+const config = {
+  apiKey: "AIzaSyD_8go5RZ0kTpp19ZUkiVFGeTUC8fvYDWs",
+  authDomain: "clickncompost.firebaseapp.com",
+  projectId: "clickncompost",
+  storageBucket: "clickncompost.appspot.com",
+  messagingSenderId: "1020295512270",
+  appId: "1:1020295512270:web:707f016bc4c0a310afd09f",
+  measurementId: "G-R7P9BDSQJD",
+};
+
+fb.initializeApp(config);
+console.log("firebase connected");
 export default function MyApp({
   Component,
   pageProps,

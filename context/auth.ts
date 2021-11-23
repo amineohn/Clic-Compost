@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import fb from "firebase/compat/app";
-const formatAuthUser = (user) => ({
-  uid: user.uid,
-  email: user.email,
-});
 // language=TypeScript
 export default async function authentification() {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const auth = fb.auth();
+  const formatAuthUser = (user) => ({
+    uid: user.uid,
+    email: user.email,
+  });
 
   const clear = () => {
     setAuthUser(null);
@@ -42,27 +42,13 @@ export default async function authentification() {
     await setLoading(false);
   }
 
-  const firebase = {
-    apiKey: "AIzaSyD_8go5RZ0kTpp19ZUkiVFGeTUC8fvYDWs",
-    authDomain: "clickncompost.firebaseapp.com",
-    projectId: "clickncompost",
-    storageBucket: "clickncompost.appspot.com",
-    messagingSenderId: "1020295512270",
-    appId: "1:1020295512270:web:707f016bc4c0a310afd09f",
-    measurementId: "G-R7P9BDSQJD",
-  };
-
   useEffect(() => {
-    if (!fb?.apps?.length || fb.apps.length === 0) {
-      fb.initializeApp(firebase);
-      fb.firestore();
-      fb.analytics();
-    }
-
     auth.onAuthStateChanged(onAuthStateChanged);
     return () => {
       auth.onAuthStateChanged(() => {
-        return null;
+        clear(); //?? must be clear or onAuthStateChangedAsync? or onAuthStateChanged?
+        onAuthStateChanged(null);
+        onAuthStateChangedAsync(null);
       });
     };
   }, []);
