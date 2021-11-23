@@ -148,11 +148,42 @@ const Home: NextPage = () => {
               </div>
               <div className="flex items-center justify-between">
                 <button
-                  className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                  className={
+                    `bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline` +
+                    (loading ? " animate-pulse cursor-not-allowed" : "")
+                  }
                   type="submit"
                   onClick={(e: any) => handleSubmit(e)}
                 >
-                  Submit
+                  {loading ? (
+                    <>
+                      <div className="flex space-x-1 ">
+                        <svg
+                          className="animate-spin h-5 w-5 text-gray-100 mt-0.5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                        <span>Chargement</span>
+                      </div>
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
                 <a
                   className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800"
