@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const auth = getAuth();
+
   useEffect(() => {
     if (auth && auth.currentUser) {
       router.push("/collect");

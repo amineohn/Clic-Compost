@@ -2,9 +2,12 @@ import React from "react";
 import Link from "next/link";
 import ToggleTheme from "./toggleTheme";
 import { getAuth } from "firebase/auth";
+import { useRouter } from "next/router";
 // language=nextjs, tailwindcss, typescript
 const Navigation = () => {
   const auth = getAuth();
+  const router = useRouter();
+
   return (
     <>
       <nav className="sticky bottom-0 z-50 flex items-center justify-between flex-wrap bg-greenDDTV p-6">
@@ -38,7 +41,10 @@ const Navigation = () => {
                 </Link>
                 <a
                   className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4 cursor-pointer"
-                  onClick={() => getAuth().signOut()}
+                  onClick={() => {
+                    auth.signOut();
+                    router.push("/");
+                  }}
                 >
                   Déconnexion
                 </a>
