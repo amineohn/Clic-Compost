@@ -269,7 +269,7 @@ const Collect: NextPage = () => {
                 <button
                   className={`bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline ${
                     error &&
-                    "bg-red-500 hover:bg-red-600 font-medium !text-xs ml-0.5 py-3"
+                    "bg-red-500 hover:bg-red-600 font-medium !text-xs ml-0.5 py-3 "
                   }${success && "bg-green-500 hover:bg-green-600"}`}
                   type="submit"
                 >
