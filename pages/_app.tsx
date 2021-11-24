@@ -16,17 +16,18 @@ const Navigation = dynamic(() => import("../components/Navigation"), {
   ssr: false,
 });
 const config = {
-  apiKey: "AIzaSyD_8go5RZ0kTpp19ZUkiVFGeTUC8fvYDWs",
-  authDomain: "clickncompost.firebaseapp.com",
-  projectId: "clickncompost",
-  storageBucket: "clickncompost.appspot.com",
-  messagingSenderId: "1020295512270",
-  appId: "1:1020295512270:web:707f016bc4c0a310afd09f",
-  measurementId: "G-R7P9BDSQJD",
+  apiKey: "AIzaSyAeuEJ6aYJRE1JHzRJgabAAF95MzAGmPic",
+  authDomain: "clic-compostnew.firebaseapp.com",
+  projectId: "clic-compostnew",
+  storageBucket: "clic-compostnew.appspot.com",
+  messagingSenderId: "553724034700",
+  appId: "1:553724034700:web:0a0b6f732410eb6f6945a9",
+  measurementId: "G-BR78123BPV",
 };
 
 fb.initializeApp(config);
-console.log("firebase connected");
+
+console.log("firebase is connected");
 export default function MyApp({
   Component,
   pageProps,
@@ -61,14 +62,17 @@ export default function MyApp({
   }, []);
 
   return (
-    <ThemeProvider defaultTheme="light" attribute="class">
-      <authUserContext.Provider value={authUser}>
-        <div className="flex flex-col h-screen justify-between">
-          <Component {...pageProps} />
-          <Navigation />
-        </div>
-      </authUserContext.Provider>
-    </ThemeProvider>
+    <>
+      <ThemeProvider defaultTheme="light" attribute="class">
+        <authUserContext.Provider value={authUser}>
+          <div className="flex flex-col h-screen justify-between">
+            <Component {...pageProps} />
+            <Navigation />
+          </div>
+        </authUserContext.Provider>
+      </ThemeProvider>
+      <script src="https://cdn.jsdelivr.net/npm/datalist-css/dist/datalist-css.min.js" />
+    </>
   );
 }
 export const useAuth = () => useContext(authUserContext);

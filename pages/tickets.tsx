@@ -7,6 +7,8 @@ import FadeIn from "react-fade-in";
 const Tickets: NextPage = () => {
   // lanbda function to set the state of the ticket
   // language=TypeScript, TailwindCSS, tickets.tsx
+  const [error, setError] = useState<string | null>(null);
+
   const auth = getAuth();
   const router = useRouter();
   useEffect(() => {
@@ -14,11 +16,11 @@ const Tickets: NextPage = () => {
       router.push("/");
     }
   });
+
   const [ticket, setTicket] = useState({
     name: "",
-    email: "",
-    phone: "",
-    message: "",
+    expire: "",
+    crypt: "",
   });
   const ticketsList = [
     {
@@ -57,6 +59,7 @@ const Tickets: NextPage = () => {
   // login form to be displayed on the page with the ticket form and the tickets list of tickets
   return (
     <>
+      {error && <div>{error}</div>}
       <FadeIn className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 my-36">
         <div className="flex flex-col items-center justify-center">
           <div className="w-full max-w-xl">
@@ -105,7 +108,7 @@ const Tickets: NextPage = () => {
                         type="date"
                         placeholder=""
                         onChange={(e) =>
-                          setTicket({ ...ticket, email: e.target.value })
+                          setTicket({ ...ticket, expire: e.target.value })
                         }
                       />
                     </div>
@@ -124,7 +127,7 @@ const Tickets: NextPage = () => {
                         type="text"
                         placeholder=""
                         onChange={(e) =>
-                          setTicket({ ...ticket, phone: e.target.value })
+                          setTicket({ ...ticket, crypt: e.target.value })
                         }
                       />
                     </div>

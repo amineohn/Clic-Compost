@@ -20,77 +20,49 @@ h2,
 p {
   @apply antialiased;
 }
-.fade-in {
-  animation: fadeIn 0.5s;
-  -webkit-animation: fadeIn 0.5s;
-  -moz-animation: fadeIn 0.5s;
-  -o-animation: fadeIn 0.5s;
-  -ms-animation: fadeIn 0.5s;
+datalist {
+  position: absolute;
+  max-height: 20em;
+  transition: 1s linear all;
+  @apply sticky border-2 border-opacity-50 border-gray-100 rounded-lg z-50;
 }
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+datalist:focus {
+  transition: 1s linear all;
+  @apply hidden;
 }
-
-@-moz-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+datalist option {
+  font-size: 0.8em;
+  padding: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: 1s linear all;
 }
 
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-o-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-ms-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+datalist option:hover,
+datalist option:focus {
+  transition: 1s linear all;
+  @apply transition bg-gray-50 rounded-lg outline-none border-none;
 }
 * {
   box-sizing: border-box;
 }
 ::-webkit-scrollbar {
-  display: none;
+  @apply hidden;
 }
 ::-webkit-scrollbar-button {
-  display: none;
+  @apply hidden;
 }
 ::-webkit-scrollbar-track {
-  display: none;
+  @apply hidden;
 }
 ::-webkit-scrollbar-track-piece {
-  display: none;
+  @apply hidden;
 }
 ::-webkit-scrollbar-thumb {
-  display: none;
+  @apply hidden;
 }
 ::-webkit-scrollbar-corner {
-  display: none;
+  @apply hidden;
 }
 
 @tailwind base;

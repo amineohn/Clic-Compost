@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import { getAuth } from "@firebase/auth";
 import { useRouter } from "next/router";
+import fb from "firebase/compat/app";
+import "firebase/compat/firestore";
+import Loading from "../components/Loading";
 const Collect: NextPage = () => {
   const auth = getAuth();
   const router = useRouter();
@@ -11,131 +14,132 @@ const Collect: NextPage = () => {
       router.push("/");
     }
   });
-  const [showModal, setShowModal] = useState(false);
-  const [showCollectModal, setShowCollectModal] = useState(false);
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [frequency, setFrequency] = useState("");
   const [collectTime, setCollectTime] = useState("");
   const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [data, setData] = useState([{}]);
+  const clear = () => {
+    setPhone("");
+    setName("");
+    setEmail("");
+    setFrequency("");
+    setCollectTime("");
+    setAddress("");
+    setError("");
+    setLoading(false);
+    setSuccess(false);
+  };
+  const fire = fb.firestore();
+
   function handleSubmit(e) {
     e.preventDefault();
-    setShowCollectModal(true);
-  }
-  function handleChange(e) {
-    const { name, value } = e.target;
-    switch (name) {
-      case "name":
-        setName(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "phone":
-        setPhone(value);
+    setLoading(false);
+    setSuccess(false);
+    if (!phone || !name || !email || !frequency || !collectTime || !address) {
+      setError("Veuillez remplir tous les champs");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 150);
+      return;
+    }
+    if (!phone.match(/^[0-9]{10}$/)) {
+      setError("s'il vous plaît entrer un numéro de téléphone valide");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 150);
+      return;
+    }
+    if (
+      !email.match(
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+      )
+    ) {
+      setError("Veuillez entrer un email valide");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 150);
+      return;
+    }
+    if (!collectTime.match(/^[0-9]{1,2}:[0-9]{2}$/)) {
+      setError("Veuillez entrer une heure de collecte valide");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 150);
+      return;
+    }
+    if (!address.match(/^[a-zA-Z0-9\s,'-]{1,}$/)) {
+      setError("s'il-vous-plaît entrez une adresse valide");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 150);
+      return;
+    }
 
-        break;
-      case "frequency":
-        setFrequency(value);
-        break;
-      case "collectTime":
-        setCollectTime(value);
-        break;
-      case "address":
-        setAddress(value);
-        break;
-      default:
-        break;
+    setError("");
+    setSuccess(false);
+    const data = {
+      id: fb.firestore().collection("cliccompost").doc().id,
+      phone: phone,
+      name: name,
+      email: email,
+      frequency: frequency,
+      collectTime: collectTime,
+      address: address,
+    };
+    try {
+      fire
+        .collection("cliccompost")
+        .add(data)
+        .then((datas) => {
+          console.log(datas);
+        });
+      setLoading(false);
+      setSuccess(true);
+    } catch (error: any) {
+      setError(error.message);
+      setSuccess(false);
     }
   }
-  const collects = [
-    {
-      id: 1,
-      name: "hellow you",
-      price: "3000",
-      image: "https://picsum.photos/200/300",
-      address: "test anyway",
-      description: "test2",
-      isCollect: false,
-      phone: "test3",
-      schedule: "test5",
-      frequency: "hello",
-    },
-    {
-      id: 2,
-      name: "hellow you",
-      price: "3000",
-      image: "https://picsum.photos/200/300",
-      address: "test anyway",
-      description: "test2",
-      isCollect: false,
-      phone: "test3",
-      schedule: "test5",
-      frequency: "hello",
-    },
-    {
-      id: 3,
-      name: "hellow you",
-      price: "3000",
-      image: "https://picsum.photos/200/300",
-      address: "test anyway",
-      description: "test2",
-      isCollect: false,
+  useEffect(() => {
+    fb.firestore()
+      .collection("cliccompost")
+      .onSnapshot((snapshot) => {
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          const name = data.name;
+          const address = data.address;
+          const phone = data.phone;
+          const collectTime = data.collectTime;
+          const frequency = data.frequency;
+          const date = data.date;
+          setData((prev) => [
+            ...prev,
+            {
+              id,
+              name,
+              address,
+              phone,
+              collectTime,
+              frequency,
+              date,
+            },
+          ]);
+        });
+      });
+  }, []);
 
-      phone: "test3",
-      schedule: "test5",
-      frequency: "hello",
-    },
-    {
-      id: 4,
-      name: "hellow you",
-      price: "3000",
-      image: "https://picsum.photos/200/300",
-      address: "test anyway",
-      description: "test2",
-      isCollect: false,
-      phone: "test3",
-      schedule: "test5",
-      frequency: "hello",
-    },
-    {
-      id: 5,
-      name: "hellow you",
-      price: "3000",
-      image: "https://picsum.photos/200/300",
-      address: "test anyway",
-      description: "test2",
-      isCollect: false,
-      phone: "test3",
-      schedule: "test5",
-      frequency: "hello",
-    },
-    {
-      id: 6,
-      name: "hellow you",
-      price: "3000",
-      image: "https://picsum.photos/200/300",
-      address: "test anyway",
-      description: "test2",
-      isCollect: false,
-      phone: "test3",
-      schedule: "test5",
-      frequency: "hello",
-    },
-    {
-      id: 7,
-      name: "hellow you",
-      price: "3000",
-      image: "https://picsum.photos/200/300",
-      address: "test anyway",
-      description: "test2",
-      isCollect: false,
-      phone: "test3",
-      schedule: "test5",
-      frequency: "hello",
-    },
-  ];
   return (
     <>
       <FadeIn className="grid grid-cols-1 lg:grid-cols-2 justify-center my-28">
@@ -238,8 +242,18 @@ const Collect: NextPage = () => {
                   type="text"
                   placeholder="Fréquence"
                   value={frequency}
+                  list="frequency"
+                  autoComplete="off"
                   onChange={(e) => setFrequency(e.target.value)}
                 />
+                <datalist id="frequency">
+                  <option id="frequency">1</option>
+                  <option id="frequency">2</option>
+                  <option id="frequency">3</option>
+                  <option id="frequency">4</option>
+                  <option id="frequency">5</option>
+                  <option id="frequency">Tout les jours</option>
+                </datalist>
               </div>
 
               <div className="flex items-center justify-between">
@@ -247,20 +261,35 @@ const Collect: NextPage = () => {
                   className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
                   type="button"
                   onClick={() => {
-                    setShowModal(false);
+                    clear();
                   }}
                 >
-                  Annuler
+                  Effacer
                 </button>
                 <button
-                  className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
-                  type="button"
-                  onClick={() => {
-                    setShowModal(false);
-                    //addSite();
-                  }}
+                  className={`bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline ${
+                    error &&
+                    "bg-red-500 hover:bg-red-600 font-medium !text-xs ml-0.5 py-3"
+                  }${success && "bg-green-500 hover:bg-green-600"}`}
+                  type="submit"
                 >
-                  Ajouter
+                  {loading ? (
+                    <>
+                      <Loading message="Chargement" />
+                    </>
+                  ) : (
+                    <>
+                      {error ? (
+                        <FadeIn>{error}</FadeIn>
+                      ) : success ? (
+                        <FadeIn>
+                          <span>Collecte ajouter :)</span>
+                        </FadeIn>
+                      ) : (
+                        "Ajouter"
+                      )}
+                    </>
+                  )}
                 </button>
               </div>
             </form>
@@ -291,75 +320,71 @@ const Collect: NextPage = () => {
                           <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                             Fréquence
                           </th>
-                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            Actions
-                          </th>
                         </tr>
                       </thead>
                       <tbody>
-                        {collects.map((collect) => (
-                          <tr key={collect.id}>
-                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                              <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10">
-                                  <img
-                                    className="h-10 w-10 rounded-full"
-                                    src={collect.image}
-                                    alt=""
-                                  />
-                                </div>
-                                <div className="ml-4">
-                                  <div className="text-sm leading-5 font-medium text-gray-900">
-                                    {collect.name}
-                                  </div>
-                                  <div className="text-sm leading-5 text-gray-500">
-                                    {collect.address}
+                        {data ? (
+                          data.map((item: any) => (
+                            <tr key={item.id}>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                <div className="flex items-center">
+                                  <div className="ml-4">
+                                    <div className="text-sm leading-5 font-medium text-gray-900">
+                                      {item.name}
+                                    </div>
+                                    <div className="text-sm leading-5 text-gray-500">
+                                      {item.address}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                              <div className="text-sm leading-5 text-gray-900">
-                                {collect.address}
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                              <div className="text-sm leading-5 text-gray-900">
-                                {collect.phone}
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                              <div className="text-sm leading-5 text-gray-900">
-                                {collect.schedule}
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                              <div className="text-sm leading-5 text-gray-900">
-                                {collect.frequency}
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                              <div className="text-sm leading-5 text-gray-900">
-                                <button
-                                  onClick={() => setShowCollectModal(true)}
-                                  className="transition duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:scale-105"
-                                >
-                                  <svg
-                                    className="h-5 w-5 text-green-500"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                <div className="text-sm leading-5 text-gray-900">
+                                  {item.address}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                <div className="text-sm leading-5 text-gray-900">
+                                  {item.phone}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                <div className="text-sm leading-5 text-gray-900">
+                                  {item.collectTime}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                <div className="text-sm leading-5 text-gray-900">
+                                  {item.frequency}
+                                </div>
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <div className="flex space-x-1 justify-center p-4 m-auto">
+                            <svg
+                              className="animate-spin h-4 w-4 text-gray-900 mt-1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              />
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              />
+                            </svg>
+                            <span>Chargement des datas..</span>
+                          </div>
+                        )}
                       </tbody>
                     </table>
                   </div>

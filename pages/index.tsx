@@ -8,19 +8,21 @@ import {
 } from "firebase/auth";
 import fb from "firebase/compat/app";
 import { useRouter } from "next/router";
+import Loading from "../components/Loading";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
   const auth = getAuth();
+  // if user is logged in, success will be true and we will redirect to /dashboard  page automatically
 
-  useEffect(() => {
-    if (auth && auth.currentUser) {
-      router.push("/collect");
-    }
-  });
+  if (auth && auth.currentUser) {
+    router.push("/collect");
+  }
+
   const setEmailChange = (e: FormEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
   };
@@ -30,12 +32,14 @@ const Home: NextPage = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSuccess(false);
     try {
       // todo: connect with google auth for sign in
       const provider = new GoogleAuthProvider();
 
       // todo: make this connect user to firebase
       const user = await signInWithEmailAndPassword(auth, email, password);
+      setSuccess(true);
       if (user) {
         await fb
           .firestore()
@@ -53,6 +57,7 @@ const Home: NextPage = () => {
               setError("User not found");
             }
           });
+        setSuccess(true);
         setLoading(false);
       }
     } catch (error: any) {
@@ -119,6 +124,13 @@ const Home: NextPage = () => {
                   <div className="text-red-500 font-medium">{error}</div>
                 </FadeIn>
               )}
+              {success && (
+                <FadeIn>
+                  <div className="text-green-500 font-medium">
+                    You are logged in
+                  </div>
+                </FadeIn>
+              )}
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -153,36 +165,16 @@ const Home: NextPage = () => {
                 <button
                   className={
                     `bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline` +
-                    (loading ? " animate-pulse cursor-not-allowed" : "")
+                    (loading
+                      ? "transition duration-100 animate-pulse cursor-not-allowed"
+                      : "")
                   }
                   type="submit"
                   onClick={(e: any) => handleSubmit(e)}
                 >
                   {loading ? (
                     <>
-                      <div className="flex space-x-1">
-                        <svg
-                          className="animate-spin h-4 w-4 text-gray-100 mt-1"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          />
-                        </svg>
-                        <span>Chargement</span>
-                      </div>
+                      <Loading message="Chargement" />
                     </>
                   ) : (
                     "Connexion"
