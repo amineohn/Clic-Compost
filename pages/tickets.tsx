@@ -5,9 +5,8 @@ import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 
 const Tickets: NextPage = () => {
-  // lanbda function to set the state of the ticket
-  // language=TypeScript, TailwindCSS, tickets.tsx
-  const [error, setError] = useState<string | null>(null);
+  const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState(null);
 
   const auth = getAuth();
   const router = useRouter();

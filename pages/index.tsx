@@ -9,6 +9,7 @@ import {
 import fb from "firebase/compat/app";
 import { useRouter } from "next/router";
 import Loading from "../components/Loading";
+import Link from "next/link";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -180,12 +181,11 @@ const Home: NextPage = () => {
                     "Connexion"
                   )}
                 </button>
-                <a
-                  className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800 ml-2"
-                  href="#"
-                >
-                  Mot de passe oublié?
-                </a>
+                <Link href="/forgetpassword">
+                  <a className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800 ml-2">
+                    Mot de passe oublié?
+                  </a>
+                </Link>
               </div>
             </form>
           </div>
