@@ -220,6 +220,7 @@ const Collect: NextPage = () => {
                   type="text"
                   placeholder="Créneau de collecte"
                   value={collectTime}
+                  autoComplete="off"
                   onChange={(e) => setCollectTime(e.target.value)}
                 />
               </div>
