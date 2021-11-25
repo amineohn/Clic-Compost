@@ -26,6 +26,7 @@ const forgetPassword: NextPage = () => {
       setLoading(false);
       return;
     }
+
     if (success) {
       setLoading(false);
       return;

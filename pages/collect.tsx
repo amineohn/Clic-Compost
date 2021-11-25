@@ -5,6 +5,7 @@ import { getAuth } from "@firebase/auth";
 import { useRouter } from "next/router";
 import fb from "firebase/compat/app";
 import "firebase/compat/firestore";
+import "firebase/compat/auth";
 import Loading from "../components/Loading";
 const Collect: NextPage = () => {
   const auth = getAuth();
@@ -94,12 +95,7 @@ const Collect: NextPage = () => {
       address: address,
     };
     try {
-      fire
-        .collection("cliccompost")
-        .add(data)
-        .then((datas) => {
-          console.log(datas);
-        });
+      fire.collection("cliccompost").add(data);
       setLoading(false);
       setSuccess(true);
     } catch (error: any) {

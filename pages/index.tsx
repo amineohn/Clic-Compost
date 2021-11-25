@@ -27,7 +27,7 @@ const Home: NextPage = () => {
       router.push("/collect");
     }
   });
-  // authenticate user with google sign-in
+  // authenticate user with google
   const authenticateWithGoogle = async () => {
     try {
       setLoading(true);
@@ -51,6 +51,12 @@ const Home: NextPage = () => {
     setSuccess(false);
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
+      /* await fb.firestore().collection("users").doc(user.user.uid).set({
+        id: user.user.uid,
+        email: email,
+        password: password,
+      }); */
+      //setLoading(false);
       setSuccess(true);
       if (user) {
         await fb
@@ -118,13 +124,13 @@ const Home: NextPage = () => {
           break;
 
         default:
-          console.log(errorMessage);
+          errorMessage = "Une erreur inconnue s'est produite.";
+          break;
       }
       setError(errorMessage);
     }
     setLoading(false);
   };
-  // button to connect with google account tailwindcss
 
   return (
     <>
@@ -140,7 +146,7 @@ const Home: NextPage = () => {
               {success && (
                 <FadeIn>
                   <div className="text-green-500 font-medium">
-                    You are logged in
+                    Vous êtes connecté
                   </div>
                 </FadeIn>
               )}

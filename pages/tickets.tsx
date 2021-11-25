@@ -70,7 +70,6 @@ const Tickets: NextPage = () => {
                   className="w-full max-w-lg"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    console.log(ticket);
                   }}
                 >
                   <div className="flex flex-wrap -mx-3 mb-6">
@@ -133,9 +132,6 @@ const Tickets: NextPage = () => {
                       <button
                         className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
                         type="button"
-                        onClick={() => {
-                          console.log(ticket);
-                        }}
                       >
                         Envoyer
                       </button>

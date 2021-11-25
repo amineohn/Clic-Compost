@@ -7,8 +7,6 @@ import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import fb from "firebase/compat/app";
-// an error occured during hydration
-// @ts-ignore
 
 import { authUserContext } from "../components/AuthUserProvider";
 
@@ -26,8 +24,10 @@ const config = {
 };
 
 fb.initializeApp(config);
-
-console.log("firebase is connected");
+if (fb.apps.length) {
+  console.log("firebase is connected");
+}
+const isAvailable = Capacitor.isPluginAvailable("StatusBar");
 export default function MyApp({
   Component,
   pageProps,
@@ -37,30 +37,14 @@ export default function MyApp({
 }) {
   const { authUser }: any = useContext(authUserContext);
   const { theme } = useTheme();
-  useEffect(() => {
-    if (Capacitor.isPluginAvailable("StatusBar")) {
-      StatusBar.setStyle({ style: Style.Dark });
-    }
-    if (Capacitor.isPluginAvailable("SplashScreen")) {
-      SplashScreen.hide();
-    }
-    if (Capacitor.isNativePlatform()) {
-      SplashScreen.hide();
-      //StatusBar.setOverlaysWebView({ overlay: true });
-      if (theme === "dark") {
-        StatusBar.setStyle({
-          style: Style.Dark,
-        });
-        StatusBar.setBackgroundColor({ color: "#fff" });
-      } else {
-        StatusBar.setStyle({
-          style: Style.Light,
-        });
-        StatusBar.setBackgroundColor({ color: "#000" });
-      }
-    }
-  }, []);
 
+  if (Capacitor.isPluginAvailable("StatusBar")) {
+    if (!isAvailable) {
+      StatusBar.setOverlaysWebView({ overlay: true });
+      StatusBar.setStyle({ style: Style.Dark });
+      StatusBar.setBackgroundColor({ color: "#ffffff" });
+    }
+  }
   return (
     <>
       <ThemeProvider defaultTheme="light" attribute="class">
