@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import fb from "firebase/compat/app";
+import stripe from "stripe";
 import "firebase/compat/auth";
 const Tickets: NextPage = () => {
   const [processing, setProcessing] = useState(false);
@@ -13,6 +14,24 @@ const Tickets: NextPage = () => {
       router.push("/");
     }
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setProcessing(true);
+    setError(null);
+    try {
+      const { id } = await fb.firestore().collection("tickets").add({
+        user: fb.auth().currentUser?.uid,
+        amount: 100,
+      });
+      console.log(id);
+      setProcessing(false);
+    } catch (err: any) {
+      setProcessing(false);
+      setError(err.message);
+    }
+  };
+
   const auth = getAuth();
   const router = useRouter();
   useEffect(() => {});
@@ -22,40 +41,6 @@ const Tickets: NextPage = () => {
     expire: "",
     crypt: "",
   });
-  const ticketsList = [
-    {
-      name: "John Doe",
-      email: "test2",
-      phone: "test2",
-      timeCollect: "test2",
-      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
-      adress: "test2",
-    },
-    {
-      name: "John Doe",
-      email: "test2",
-      phone: "test2",
-      timeCollect: "test2",
-      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
-      adress: "test2",
-    },
-    {
-      name: "John Doe",
-      email: "test2",
-      phone: "test2",
-      timeCollect: "test2",
-      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
-      adress: "test2",
-    },
-    {
-      name: "John Doe",
-      email: "test2",
-      phone: "test2",
-      timeCollect: "test2",
-      frequency: ["daily" || "weekly" || "monthly"], // daily, weekly, monthly
-      adress: "test2",
-    },
-  ];
   // login form to be displayed on the page with the ticket form and the tickets list of tickets
   return (
     <>
@@ -70,12 +55,7 @@ const Tickets: NextPage = () => {
                 </h1>
               </div>
               <div className="mb-4">
-                <form
-                  className="w-full max-w-lg"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                  }}
-                >
+                <form className="w-full max-w-lg" onSubmit={handleSubmit}>
                   <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                       <label
@@ -85,7 +65,7 @@ const Tickets: NextPage = () => {
                         Numéro de carte
                       </label>
                       <input
-                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded transition py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-first-name"
                         type="text"
                         placeholder="XXXX XXXX XXXX XXXX"
@@ -102,7 +82,7 @@ const Tickets: NextPage = () => {
                         Expiration
                       </label>
                       <input
-                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded transition py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-last-name"
                         type="date"
                         placeholder=""
@@ -121,7 +101,7 @@ const Tickets: NextPage = () => {
                         Cryptogramme visuel
                       </label>
                       <input
-                        className="appearance-none block w-1/3 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        className="appearance-none block w-1/3 bg-gray-200 text-gray-700 border border-gray-200 rounded transition py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-password"
                         type="text"
                         placeholder=""
@@ -142,45 +122,6 @@ const Tickets: NextPage = () => {
                     </div>
                   </div>
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <div className="w-full max-w-2xl">
-            <div className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4">
-              <div className="mb-4">
-                <h1 className="text-2xl font-bold text-center">
-                  Liste des tickets
-                </h1>
-              </div>
-              <div className="mb-4 overflow-auto">
-                <table className="max-w-lg">
-                  <thead>
-                    <tr>
-                      <th className="px-4 py-2">Nom du site</th>
-                      <th className="px-4 py-2">Adresse</th>
-                      <th className="px-4 py-2">Téléphone</th>
-                      <th className="px-4 py-2">Email</th>
-                      <th className="px-4 py-2">Crénau de collecte</th>
-                      <th className="px-4 py-2">Fréquence</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {ticketsList.map((ticket) => (
-                      <tr key={ticket.name}>
-                        <td className="border px-4 py-2">{ticket.name}</td>
-                        <td className="border px-4 py-2">{ticket.email}</td>
-                        <td className="border px-4 py-2">{ticket.phone}</td>
-                        <td className="border px-4 py-2">{ticket.adress}</td>
-                        <td className="border px-4 py-2">
-                          {ticket.timeCollect}
-                        </td>
-                        <td className="border px-4 py-2">{ticket.frequency}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
