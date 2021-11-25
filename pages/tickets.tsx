@@ -3,18 +3,15 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
-
+import fb from "firebase/compat/app";
+import "firebase/compat/auth";
 const Tickets: NextPage = () => {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState(null);
 
   const auth = getAuth();
   const router = useRouter();
-  useEffect(() => {
-    if (!auth || !auth.currentUser) {
-      router.push("/");
-    }
-  });
+  useEffect(() => {});
 
   const [ticket, setTicket] = useState({
     name: "",

@@ -10,9 +10,6 @@ const Collect: NextPage = () => {
   const auth = getAuth();
   const router = useRouter();
 
-  if (!auth || !auth.currentUser) {
-    router.push("/");
-  }
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -137,6 +134,16 @@ const Collect: NextPage = () => {
           ]);
         });
       });
+    fb.auth().onAuthStateChanged((user) => {
+      if (user) {
+        //router.push("/");
+      } else {
+        router.push("/");
+      }
+    });
+    if (data.length === 0) {
+      setLoading(true);
+    }
   }, []);
 
   return (

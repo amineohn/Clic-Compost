@@ -21,10 +21,12 @@ const Home: NextPage = () => {
   const router = useRouter();
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  if (auth && auth.currentUser) {
-    router.push("/collect");
-  }
 
+  fb.auth().onAuthStateChanged((user) => {
+    if (user) {
+      router.push("/collect");
+    }
+  });
   // authenticate user with google sign-in
   const authenticateWithGoogle = async () => {
     try {
