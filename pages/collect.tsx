@@ -1,18 +1,12 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
-import { getAuth } from "@firebase/auth";
-import { useRouter } from "next/router";
 import fb from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import Loading from "../components/Loading";
 import { match } from "../utils/regex";
 const Collect: NextPage = () => {
-  const router = useRouter();
-  if (!fb.auth().currentUser) {
-    router.push("/");
-  }
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
