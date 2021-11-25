@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import {
   getAuth,
@@ -48,10 +48,6 @@ const Home: NextPage = () => {
     setLoading(true);
     setSuccess(false);
     try {
-      // todo: connect with google auth for sign in
-      const provider = new GoogleAuthProvider();
-
-      // todo: make this connect user to firebase
       const user = await signInWithEmailAndPassword(auth, email, password);
       setSuccess(true);
       if (user) {

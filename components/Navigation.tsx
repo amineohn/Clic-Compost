@@ -29,6 +29,9 @@ const Navigation = () => {
               </>
             ) : (
               <>
+                <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4 cursor-default">
+                  Bienvenue {auth.currentUser.displayName}
+                </a>
                 <Link href="/collect">
                   <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
                     Collecte
