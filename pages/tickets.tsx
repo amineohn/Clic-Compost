@@ -8,7 +8,11 @@ import "firebase/compat/auth";
 const Tickets: NextPage = () => {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState(null);
-
+  fb.auth().onAuthStateChanged((user) => {
+    if (!user) {
+      router.push("/");
+    }
+  });
   const auth = getAuth();
   const router = useRouter();
   useEffect(() => {});

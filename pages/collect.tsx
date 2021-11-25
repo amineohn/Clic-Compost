@@ -6,6 +6,7 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import Loading from "../components/Loading";
 import { match } from "../utils/regex";
+import router from "next/router";
 const Collect: NextPage = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -17,6 +18,13 @@ const Collect: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [data, setData] = useState([{}]);
+
+  fb.auth().onAuthStateChanged((user) => {
+    if (!user) {
+      router.push("/");
+    }
+  });
+
   const clear = () => {
     setPhone("");
     setName("");
