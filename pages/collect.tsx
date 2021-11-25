@@ -10,6 +10,9 @@ import Loading from "../components/Loading";
 import { match } from "../utils/regex";
 const Collect: NextPage = () => {
   const router = useRouter();
+  if (!fb.auth().currentUser) {
+    router.push("/");
+  }
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -124,13 +127,6 @@ const Collect: NextPage = () => {
           ]);
         });
       });
-    fb.auth().onAuthStateChanged((user) => {
-      if (user) {
-        //router.push("/");
-      } else {
-        router.push("/");
-      }
-    });
     if (data.length === 0) {
       setLoading(true);
     }
@@ -138,7 +134,7 @@ const Collect: NextPage = () => {
 
   return (
     <>
-      <FadeIn className="grid grid-cols-1 lg:grid-cols-2 justify-center my-28">
+      <FadeIn className="grid grid-cols-1 lg:grid-cols-2 justify-center my-2 lg:my-28">
         <div className="flex justify-center">
           <div className="w-full max-w-sm">
             <form
