@@ -85,7 +85,7 @@ const Collect: NextPage = () => {
     setError("");
     setSuccess(false);
     const data = {
-      id: fb.firestore().collection("cliccompost").doc().id,
+      id: fb.firestore().collection("clients").doc().id,
       phone: phone,
       name: name,
       email: email,
@@ -94,7 +94,7 @@ const Collect: NextPage = () => {
       address: address,
     };
     try {
-      fire.collection("cliccompost").add(data);
+      fire.collection("clients").add(data);
       setLoading(false);
       setSuccess(true);
     } catch (error: any) {
@@ -104,7 +104,7 @@ const Collect: NextPage = () => {
   }
   useEffect(() => {
     fb.firestore()
-      .collection("cliccompost")
+      .collection("clients")
       .onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
           const data = doc.data();
