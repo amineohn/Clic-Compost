@@ -29,8 +29,17 @@ const Navigation = () => {
               </>
             ) : (
               <>
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4 cursor-default">
-                  Bienvenue {auth.currentUser.displayName}
+                <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4 cursor-default space-y-0 lg:space-x-2">
+                  <a className="block mb-1 lg:inline-block lg:-mb-1.5 text-green-200 hover:text-white cursor-default">
+                    <img
+                      src={auth.currentUser.photoURL as string}
+                      className="rounded-full w-6 h-6 mr-2"
+                      alt={auth.currentUser.displayName as string}
+                    />
+                  </a>
+                  <span className="inline flex-shrink-0">
+                    Bienvenue {auth.currentUser.displayName}
+                  </span>
                 </a>
                 <Link href="/collect">
                   <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">

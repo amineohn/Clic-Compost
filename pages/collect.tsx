@@ -9,11 +9,10 @@ import Loading from "../components/Loading";
 const Collect: NextPage = () => {
   const auth = getAuth();
   const router = useRouter();
-  useEffect(() => {
-    if (!auth || !auth.currentUser) {
-      router.push("/");
-    }
-  });
+
+  if (!auth || !auth.currentUser) {
+    router.push("/");
+  }
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
