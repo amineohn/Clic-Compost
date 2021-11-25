@@ -7,10 +7,9 @@ import fb from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import Loading from "../components/Loading";
+import { match } from "../utils/regex";
 const Collect: NextPage = () => {
-  const auth = getAuth();
   const router = useRouter();
-
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,7 +32,6 @@ const Collect: NextPage = () => {
     setSuccess(false);
   };
   const fire = fb.firestore();
-
   function handleSubmit(e) {
     e.preventDefault();
     setLoading(false);
@@ -46,19 +44,15 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!phone.match(/^[0-9]{10}$/)) {
-      setError("s'il vous plaît entrer un numéro de téléphone valide");
+    if (!phone.match(match.phone)) {
+      setError("Veuillez entrer un numéro de téléphone valide");
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
       }, 150);
       return;
     }
-    if (
-      !email.match(
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-      )
-    ) {
+    if (!email.match(match.email)) {
       setError("Veuillez entrer un email valide");
       setLoading(true);
       setTimeout(() => {
@@ -66,7 +60,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!collectTime.match(/^[0-9]{1,2}:[0-9]{2}$/)) {
+    if (!collectTime.match(match.collectTime)) {
       setError("Veuillez entrer une heure de collecte valide");
       setLoading(true);
       setTimeout(() => {
@@ -74,7 +68,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!address.match(/^[a-zA-Z0-9\s,'-]{1,}$/)) {
+    if (!address.match(match.address)) {
       setError("s'il-vous-plaît entrez une adresse valide");
       setLoading(true);
       setTimeout(() => {
