@@ -12,13 +12,20 @@ const Navigation = dynamic(() => import("../components/Navigation"), {
   ssr: false,
 });
 const config = {
-  apiKey: process.env.API_KEY,
+  apiKey: "AIzaSyAeuEJ6aYJRE1JHzRJgabAAF95MzAGmPic",
+  authDomain: "clic-compostnew.firebaseapp.com",
+  projectId: "clic-compostnew",
+  storageBucket: "clic-compostnew.appspot.com",
+  messagingSenderId: "553724034700",
+  appId: "1:553724034700:web:0a0b6f732410eb6f6945a9",
+  measurementId: "G-BR78123BPV",
+  /*apiKey: process.env.API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
   projectId: process.env.PROJECT_ID,
   storageBucket: process.env.STORAGE_BUCKET,
   messagingSenderId: process.env.MESSAGING_SENDERID,
   appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENTID,
+  measurementId: process.env.MEASUREMENT_ID,*/
 };
 
 fb.initializeApp(config);
