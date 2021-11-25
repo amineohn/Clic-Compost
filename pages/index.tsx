@@ -11,7 +11,6 @@ import "firebase/compat/auth";
 import { useRouter } from "next/router";
 import Loading from "../components/Loading";
 import Link from "next/link";
-
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -134,7 +133,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <FadeIn className="my-60">
+      <FadeIn className="lg:my-60 my-30">
         <div className="container mx-auto px-4 py-16">
           <div className="flex flex-col items-center">
             <form method="POST">
@@ -199,7 +198,7 @@ const Home: NextPage = () => {
                     "Connexion"
                   )}
                 </button>
-                <Link href="/forgetpassword">
+                <Link href="/account/password">
                   <a className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800 ml-2">
                     Mot de passe oublié?
                   </a>

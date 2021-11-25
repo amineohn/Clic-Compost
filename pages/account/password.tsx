@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import fb from "firebase/compat/app";
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
 import "firebase/compat/auth";
 
 const forgetPassword: NextPage = () => {
