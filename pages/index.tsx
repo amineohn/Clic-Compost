@@ -198,7 +198,7 @@ const Home: NextPage = () => {
                     "Connexion"
                   )}
                 </button>
-                <Link href="/account/password">
+                <Link href="/reset/password">
                   <a className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800 ml-2">
                     Mot de passe oublié?
                   </a>

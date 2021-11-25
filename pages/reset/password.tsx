@@ -40,7 +40,6 @@ const forgetPassword: NextPage = () => {
       setError(error.message);
     }
   };
-
   return (
     <>
       <FadeIn className="flex flex-col items-center justify-center h-screen">
