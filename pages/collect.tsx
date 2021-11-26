@@ -6,7 +6,6 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import Loading from "../components/Loading";
 import { match } from "../utils/regex";
-import router from "next/router";
 import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
