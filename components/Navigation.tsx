@@ -3,14 +3,22 @@ import Link from "next/link";
 import ToggleTheme from "./toggleTheme";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
-// language=nextjs, tailwindcss, typescript
+import { Transition } from "@headlessui/react";
 const Navigation = () => {
   const auth = getAuth();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      {isOpen && (
+      <Transition
+        show={isOpen}
+        enter="transition ease-out duration-200"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
+      >
         <nav className="sticky bottom-0 z-50 flex items-center justify-between flex-wrap bg-greenDDTV p-6">
           <div className="flex items-center flex-shrink-0 text-white mr-6">
             <Link href="/">
@@ -63,8 +71,7 @@ const Navigation = () => {
             <ToggleTheme />
           </div>
         </nav>
-      )}
-
+      </Transition>
       <div className="fixed z-50 top-0 inset-x-0 p-6 transition duration-500 ease-in-out transform lg:bg-transparent lg:bg-opacity-100 backdrop-blur-sm bg-opacity-20">
         <div className="absolute inset-0 flex">
           <div
