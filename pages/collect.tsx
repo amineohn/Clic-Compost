@@ -7,6 +7,9 @@ import "firebase/compat/auth";
 import Loading from "../components/Loading";
 import { match } from "../utils/regex";
 import router from "next/router";
+import { Elements } from "@stripe/react-stripe-js";
+import Checkout from "../components/checkout";
+import { loadStripe } from "@stripe/stripe-js";
 const Collect: NextPage = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -30,6 +33,7 @@ const Collect: NextPage = () => {
     setLoading(false);
     setSuccess(false);
   };
+  const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const fire = fb.firestore();
   function handleSubmit(e) {
     e.preventDefault();
@@ -378,6 +382,14 @@ const Collect: NextPage = () => {
                     </table>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="m-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
+              <div className="flex flex-col ">
+                <Elements stripe={stripePromise}>
+                  <Checkout />
+                </Elements>
               </div>
             </div>
           </div>

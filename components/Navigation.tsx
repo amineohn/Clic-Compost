@@ -48,16 +48,6 @@ const Navigation = () => {
                       Bienvenue {auth.currentUser.displayName}
                     </span>
                   </a>
-                  <Link href="/collect">
-                    <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
-                      Collecte
-                    </a>
-                  </Link>
-                  <Link href="/tickets">
-                    <a className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4">
-                      Tickets
-                    </a>
-                  </Link>
                   <a
                     className="block mt-4 lg:inline-block lg:mt-0 text-green-200 hover:text-white mr-4 cursor-pointer"
                     onClick={() => {
