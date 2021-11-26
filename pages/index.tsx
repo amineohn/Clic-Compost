@@ -133,7 +133,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <FadeIn className="lg:my-60 my-30">
+      <FadeIn className="lg:my-60 my-60">
         <div className="container mx-auto px-4 py-16">
           <div className="flex flex-col items-center">
             <form method="POST">
