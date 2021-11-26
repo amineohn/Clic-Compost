@@ -40,7 +40,7 @@ const Tickets: NextPage = () => {
   return (
     <>
       {error && <div>{error}</div>}
-      <FadeIn className="grid grid-cols-1 my-36">
+      <FadeIn className="grid grid-cols-1 my-60">
         <div className="flex flex-col items-center justify-center">
           <div className="w-full max-w-xl">
             <div className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4">
