@@ -9,11 +9,6 @@ import "firebase/compat/auth";
 const Tickets: NextPage = () => {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState(null);
-  fb.auth().onAuthStateChanged((user) => {
-    if (!user) {
-      router.push("/");
-    }
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +40,7 @@ const Tickets: NextPage = () => {
   return (
     <>
       {error && <div>{error}</div>}
-      <FadeIn className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 my-36">
+      <FadeIn className="grid grid-cols-1 my-36">
         <div className="flex flex-col items-center justify-center">
           <div className="w-full max-w-xl">
             <div className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4">
