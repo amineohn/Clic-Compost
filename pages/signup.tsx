@@ -4,7 +4,6 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import FadeIn from "react-fade-in";
 
-// form signup page for user signup with tailwindcss and react TypeScript
 const signup = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
