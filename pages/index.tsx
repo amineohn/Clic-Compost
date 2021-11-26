@@ -49,33 +49,52 @@ const Home: NextPage = () => {
     setLoading(true);
     setSuccess(false);
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      /* await fb.firestore().collection("users").doc(user.user.uid).set({
-        id: user.user.uid,
-        email: email,
-        password: password,
-      }); */
-      //setLoading(false);
-      setSuccess(true);
-      if (user) {
-        await fb
-          .firestore()
-          .collection("users")
-          .doc(email as string)
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              if (doc.data()?.password === password) {
-                signInWithEmailAndPassword(auth, email, password);
-              } else {
-                setError("Wrong password");
-              }
+      await fb
+        .firestore()
+        .collection("users")
+        .doc(email)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            if (doc.data()?.password === password) {
+              setSuccess(true);
+              setLoading(false);
+              setError("");
+              return;
+            }
+          }
+        });
+    } catch (err) {
+      console.error(err);
+      setError("Une erreur est survenue");
+      //return;
+    }
+
+    try {
+      await fb
+        .firestore()
+        .collection("users")
+        .where("email", "==", email)
+        .get()
+        .then((doc) => {
+          doc.forEach((doc) => {
+            if (doc.data().password === password) {
+              setSuccess(true);
+              setLoading(false);
+              setError("");
+              router.push("/collect");
             } else {
-              setError("User not found");
+              setError("Mot de passe incorrect");
+              setLoading(false);
             }
           });
-        setSuccess(true);
+        });
+      if (!success) {
+        setError("Email incorrect");
         setLoading(false);
+      }
+      if (success) {
+        setSuccess(false);
       }
     } catch (error: any) {
       const errorCode = error.code;
@@ -179,7 +198,7 @@ const Home: NextPage = () => {
                   placeholder="Mot de passe"
                 />
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between space-x-2">
                 <button
                   className={
                     `bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline` +
@@ -198,15 +217,28 @@ const Home: NextPage = () => {
                     "Connexion"
                   )}
                 </button>
-                <Link href="/reset/password">
-                  <a className="inline-block align-baseline font-bold text-sm text-greenDDTV hover:text-green-800 ml-2">
-                    Mot de passe oublié?
-                  </a>
-                </Link>
+                <button
+                  className={
+                    `bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline` +
+                    (loading
+                      ? "transition duration-100 animate-pulse cursor-not-allowed"
+                      : "")
+                  }
+                  type="button"
+                  onClick={() => router.push("/signup")}
+                >
+                  {loading ? (
+                    <>
+                      <Loading message="Chargement" />
+                    </>
+                  ) : (
+                    "Inscription"
+                  )}
+                </button>
               </div>
             </form>
 
-            <div className="mt-5 flex">
+            <div className="mt-2 flex flex-col space-y-2">
               <button
                 className="flex bg-greenDDTV hover:bg-green-800 text-white font-normal py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                 onClick={() => authenticateWithGoogle()}
@@ -225,6 +257,11 @@ const Home: NextPage = () => {
                 </svg>
                 Connexion avec Google
               </button>
+              <Link href="/reset/password">
+                <a className="inline-block align-baseline text-center font-bold text-sm text-greenDDTV hover:text-green-800 ml-2">
+                  Mot de passe oublié?
+                </a>
+              </Link>
             </div>
           </div>
         </div>
