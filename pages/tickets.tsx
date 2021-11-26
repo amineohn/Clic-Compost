@@ -36,7 +36,6 @@ const Tickets: NextPage = () => {
     expire: "",
     crypt: "",
   });
-  // login form to be displayed on the page with the ticket form and the tickets list of tickets
   return (
     <>
       {error && <div>{error}</div>}

@@ -19,12 +19,6 @@ const Collect: NextPage = () => {
   const [success, setSuccess] = useState(false);
   const [data, setData] = useState([{}]);
 
-  fb.auth().onAuthStateChanged((user) => {
-    if (!user) {
-      router.push("/");
-    }
-  });
-
   const clear = () => {
     setPhone("");
     setName("");
