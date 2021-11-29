@@ -3,8 +3,6 @@ import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import { GoogleAuthProvider } from "firebase/auth";
 import fb from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
 import { useRouter } from "next/router";
 import Loading from "../components/loading";
 import Link from "next/link";
@@ -19,12 +17,12 @@ const Home: NextPage = () => {
   const router = useRouter();
   const provider = new GoogleAuthProvider();
 
-  fb.auth().onAuthStateChanged((user) => {
+  const fire = new Firebase();
+  fire.getAuth().onAuthStateChanged((user) => {
     if (user) {
       router.push("/collect");
     }
   });
-  const fire = new Firebase();
   // authenticate user with google
   const authenticateWithGoogle = async () => {
     try {
@@ -62,14 +60,10 @@ const Home: NextPage = () => {
       await fire.signIn(email, password);
       setLoading(false);
       setSuccess(true);
-      fire
-        .getFireStore()
-        .collection("users")
-        .doc(fire.getAuth().currentUser?.uid)
-        .set({
-          name: fire.getAuth()?.currentUser?.displayName,
-          email: fire.getAuth()?.currentUser?.email,
-        });
+      fire.getCollection("users").doc(fire.getAuth().currentUser?.uid).set({
+        name: fire.getAuth()?.currentUser?.displayName,
+        email: fire.getAuth()?.currentUser?.email,
+      });
 
       router.push("/collect");
     } catch (error: any) {

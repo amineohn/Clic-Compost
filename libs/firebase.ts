@@ -19,14 +19,12 @@ export class Firebase {
   constructor() {
     firebase.initializeApp(this.getSettings());
   }
+
   Init() {
     return firebase.initializeApp(this.getSettings());
   }
   getUser() {
     return firebase.auth().currentUser;
-  }
-  clear([{ state, commit }]) {
-    state(commit);
   }
   getStorage() {
     return firebase.storage();
@@ -48,6 +46,9 @@ export class Firebase {
   }
   getFunctions() {
     return firebase.functions();
+  }
+  getCollection(collection: string) {
+    return firebase.firestore().collection(collection);
   }
   async signIn(email, password) {
     const auth = this.getAuth();

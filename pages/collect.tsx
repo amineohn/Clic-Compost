@@ -79,7 +79,7 @@ const Collect: NextPage = () => {
     setError("");
     setSuccess(false);
     const data = {
-      id: fire.getFireStore().collection("clients").doc().id,
+      id: fire.getCollection("clients").doc().id,
       phone: phone,
       name: name,
       email: email,
@@ -88,7 +88,7 @@ const Collect: NextPage = () => {
       address: address,
     };
     try {
-      fire.getFireStore().collection("clients").add(data);
+      fire.getCollection("clients").add(data);
       setLoading(false);
       setSuccess(true);
     } catch (error: any) {
@@ -97,33 +97,30 @@ const Collect: NextPage = () => {
     }
   }
   useEffect(() => {
-    fire
-      .getFireStore()
-      .collection("clients")
-      .onSnapshot((snapshot) => {
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          const id = doc.id;
-          const name = data.name;
-          const address = data.address;
-          const phone = data.phone;
-          const collectTime = data.collectTime;
-          const frequency = data.frequency;
-          const date = data.date;
-          setData((prev) => [
-            ...prev,
-            {
-              id,
-              name,
-              address,
-              phone,
-              collectTime,
-              frequency,
-              date,
-            },
-          ]);
-        });
+    fire.getCollection("clients").onSnapshot((snapshot) => {
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const id = doc.id;
+        const name = data.name;
+        const address = data.address;
+        const phone = data.phone;
+        const collectTime = data.collectTime;
+        const frequency = data.frequency;
+        const date = data.date;
+        setData((prev) => [
+          ...prev,
+          {
+            id,
+            name,
+            address,
+            phone,
+            collectTime,
+            frequency,
+            date,
+          },
+        ]);
       });
+    });
     if (data.length === 0) {
       setLoading(true);
     }
@@ -251,12 +248,7 @@ const Collect: NextPage = () => {
                   className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
                   type="button"
                   onClick={() => {
-                    fire.clear([
-                      {
-                        state: phone,
-                        commit: "",
-                      },
-                    ]);
+                    clear();
                   }}
                 >
                   Effacer

@@ -37,7 +37,7 @@ const signup = () => {
       return;
     }
     try {
-      await fire.getFireStore().collection("users").add({
+      await fire.getCollection("users").add({
         name,
         email,
         password,
