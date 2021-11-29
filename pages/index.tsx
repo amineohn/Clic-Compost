@@ -13,7 +13,6 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  //const provider = new GoogleAuthProvider();
 
   const fire = new Firebase();
   fire.getAuth().onAuthStateChanged((user) => {

@@ -65,6 +65,7 @@ export class Firebase {
   }
   async signWithGoogle() {
     const auth = this.getAuth();
-    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    const provider = new firebase.auth.GoogleAuthProvider();
+    await auth.signInWithPopup(provider);
   }
 }
