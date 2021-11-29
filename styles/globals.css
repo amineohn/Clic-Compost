@@ -8,7 +8,7 @@ body {
 }
 
 body {
-  @apply bg-white dark:bg-black lg:min-h-full min-h-screen;
+  @apply bg-white dark:bg-black transition-all;
 }
 
 a {

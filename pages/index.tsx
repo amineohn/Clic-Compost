@@ -8,9 +8,11 @@ import {
 } from "firebase/auth";
 import fb from "firebase/compat/app";
 import "firebase/compat/auth";
+import "firebase/compat/firestore";
 import { useRouter } from "next/router";
-import Loading from "../components/Loading";
+import Loading from "../components/loading";
 import Link from "next/link";
+import { Transition } from "@headlessui/react";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,55 +50,30 @@ const Home: NextPage = () => {
     e.preventDefault();
     setLoading(true);
     setSuccess(false);
-    try {
-      await fb
-        .firestore()
-        .collection("users")
-        .doc(email)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            if (doc.data()?.password === password) {
-              setSuccess(true);
-              setLoading(false);
-              setError("");
-              return;
-            }
-          }
-        });
-    } catch (err) {
-      console.error(err);
-      setError("Une erreur est survenue");
-      //return;
+    if (email.length === 0 || password.length === 0) {
+      setLoading(false);
+      setError("Veuillez saisir tous les champs");
+      return;
+    }
+
+    if (password.length < 6) {
+      setLoading(false);
+      setError("Le mot de passe doit être au moins de 6 caractères");
+      return;
     }
 
     try {
-      await fb
-        .firestore()
-        .collection("users")
-        .where("email", "==", email)
-        .get()
-        .then((doc) => {
-          doc.forEach((doc) => {
-            if (doc.data().password === password) {
-              setSuccess(true);
-              setLoading(false);
-              setError("");
-              router.push("/collect");
-            } else {
-              setError("Mot de passe incorrect");
-              setLoading(false);
-            }
-          });
-        });
-      if (!success) {
-        setError("Email incorrect");
-        setLoading(false);
-      }
-      if (success) {
-        setSuccess(false);
-      }
+      await signInWithEmailAndPassword(auth, email, password);
+      setLoading(false);
+      setSuccess(true);
+      fb.firestore().collection("users").doc(fb.auth()?.currentUser?.uid).set({
+        name: fb.auth()?.currentUser?.displayName,
+        email: fb.auth()?.currentUser?.email,
+      });
+
+      router.push("/collect");
     } catch (error: any) {
+      setLoading(false);
       const errorCode = error.code;
       let errorMessage = error.message;
       switch (errorCode) {
@@ -153,21 +130,58 @@ const Home: NextPage = () => {
   return (
     <>
       <FadeIn className="lg:my-60 my-60">
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-16 max-w-xs transition-all duration-100">
           <div className="flex flex-col items-center">
-            <form method="POST">
+            <form method="POST" onSubmit={handleSubmit}>
               {error && (
-                <FadeIn>
-                  <div className="text-red-500 font-medium">{error}</div>
-                </FadeIn>
-              )}
-              {success && (
-                <FadeIn>
-                  <div className="text-green-500 font-medium">
-                    Vous êtes connecté
+                <FadeIn className="bg-red-100 border border-red-100 text-red-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
+                  <div className="inline-flex space-x-2">
+                    <div className="">
+                      <svg
+                        className="fill-current cursor-pointer text-red-500 hover:text-red-600 transition w-4 h-4 flex justify-items-end"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        onClick={() => setError("")}
+                      >
+                        <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                      </svg>
+                    </div>
+                    <div className="flex">
+                      <p className="text-red-500 text-xs italic">{error}</p>
+                    </div>
                   </div>
                 </FadeIn>
               )}
+
+              <Transition
+                show={success}
+                enter="transition-opacity duration-75"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="transition-opacity duration-150"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
+              >
+                <div className="bg-green-100 border border-green-100 text-green-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
+                  <div className="inline-flex space-x-2">
+                    <div className="">
+                      <svg
+                        className="fill-current cursor-pointer text-green-500 hover:text-green-600 transition w-4 h-4 flex justify-items-end"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        onClick={() => setSuccess(false)}
+                      >
+                        <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                      </svg>
+                    </div>
+                    <div className="flex">
+                      <p className="text-green-500 text-xs italic">
+                        Vous êtes connecté
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Transition>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"

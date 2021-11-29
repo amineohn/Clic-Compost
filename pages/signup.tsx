@@ -3,6 +3,7 @@ import fb from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import FadeIn from "react-fade-in";
+import { Transition } from "@headlessui/react";
 
 const signup = () => {
   const [error, setError] = useState("");
@@ -57,6 +58,10 @@ const signup = () => {
         .get()
         .then((doc) => {
           if (doc.size > 0) {
+            setInterval(() => {
+              setError("");
+            }, 3500);
+
             setError("Cet email est déjà utilisé");
             return;
           }
@@ -69,6 +74,9 @@ const signup = () => {
       await fb.auth().currentUser?.updateProfile({
         displayName: name,
       });
+      setInterval(() => {
+        setError("");
+      }, 3500);
       setError("Inscription réussie");
     } catch (error: any) {
       setError(error.message);
@@ -76,9 +84,15 @@ const signup = () => {
     setSuccess(true);
 
     if (!name || !email || !password) {
+      setInterval(() => {
+        setError("");
+      }, 3500);
       setError("Veuillez saisir tous les champs");
     }
     if (!email.includes("@") || !email.includes(".") || email.length < 5) {
+      setInterval(() => {
+        setError("");
+      }, 3500);
       setError("Veuillez entrer un email valide");
     }
     if (success) {
@@ -87,24 +101,54 @@ const signup = () => {
     if (error) {
       setError("");
     }
+    if (password.length < 6) {
+      setInterval(() => {
+        setError("");
+      }, 3500);
+      setError("Le mot de passe doit être au moins de 6 caractères");
+      return;
+    }
   };
+  // svg close button grid item
 
   return (
-    <FadeIn className="flex flex-col items-center justify-center h-screen">
+    <FadeIn className="lg:my-60 my-60 flex flex-col items-center justify-center">
       <div className="w-full max-w-xs">
         <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
           {error && (
             <FadeIn className="bg-red-100 border border-red-100 text-red-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
-              <p className="text-red-500 text-xs italic">{error}</p>
+              <div className="inline-flex space-x-2">
+                <div className="">
+                  <svg
+                    className="fill-current cursor-pointer text-red-500 hover:text-red-600 transition w-4 h-4 flex justify-items-end"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    onClick={() => setError("")}
+                  >
+                    <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                  </svg>
+                </div>
+                <div className="flex">
+                  <p className="text-red-500 text-xs italic">{error}</p>
+                </div>
+              </div>
             </FadeIn>
           )}
-          {success && (
-            <FadeIn className="bg-green-100 border border-green-100 text-green-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
+          <Transition
+            show={success}
+            enter="transition-opacity duration-75"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="transition-opacity duration-150"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+          >
+            <div className="bg-green-100 border border-green-100 text-green-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
               <p className="text-green-500 text-xs italic">
                 Inscription réussie
               </p>
-            </FadeIn>
-          )}
+            </div>
+          </Transition>
 
           <div className="mb-4">
             <label

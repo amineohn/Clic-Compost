@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import fb from "firebase/compat/app";
-import Loading from "../../components/Loading";
+import Loading from "../../components/loading";
 import "firebase/compat/auth";
 
 const forgetPassword: NextPage = () => {
@@ -42,24 +42,48 @@ const forgetPassword: NextPage = () => {
   };
   return (
     <>
-      <FadeIn className="flex flex-col items-center justify-center h-screen">
+      <FadeIn className="my-72 lg:my-80 flex flex-col items-center justify-center">
         <div className="w-full max-w-xs space-y-2">
           {error && (
             <FadeIn className="bg-red-100 border border-red-100 text-red-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
-              <strong className="font-bold">Erreur</strong>
-              <span className="block sm:inline">{error}</span>
-              <span className="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+              <div className="inline-flex space-x-2">
+                <div className="">
+                  <svg
+                    className="fill-current cursor-pointer text-red-500 hover:text-red-600 transition w-4 h-4 flex justify-items-end"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    onClick={() => setError("")}
+                  >
+                    <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                  </svg>
+                </div>
+                <div className="flex">
+                  <p className="text-red-500 text-xs italic">{error}</p>
+                </div>
+              </div>
             </FadeIn>
           )}
 
           {success && (
-            <FadeIn className="bg-green-100 border border-green-100 text-green-700 px-4 py-3 rounded-lg relative space-y-2">
-              <strong className="font-bold">Success!</strong>
-              <span className="block sm:inline">
-                Nous vous avons envoyé un e-mail pour réinitialiser votre mot de
-                passe.
-              </span>
-              <span className="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+            <FadeIn className="bg-green-100 border border-green-100 text-green-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
+              <div className="inline-flex space-x-2">
+                <div className="">
+                  <svg
+                    className="fill-current cursor-pointer text-green-500 hover:text-green-600 transition w-4 h-4 flex justify-items-end"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    onClick={() => setSuccess(false)}
+                  >
+                    <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                  </svg>
+                </div>
+                <div className="flex">
+                  <p className="text-green-500 text-xs italic">
+                    Nous vous avons envoyé un e-mail pour réinitialiser votre
+                    mot de passe.
+                  </p>
+                </div>
+              </div>
             </FadeIn>
           )}
 

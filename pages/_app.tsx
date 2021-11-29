@@ -8,7 +8,7 @@ import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import fb from "firebase/compat/app";
 
-const Navigation = dynamic(() => import("../components/Navigation"), {
+const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
 });
 const config = {
@@ -57,7 +57,7 @@ export default function MyApp({
   return (
     <>
       <ThemeProvider defaultTheme="light" attribute="class">
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen overflow-y-hidden justify-between z-auto">
           <Component {...pageProps} />
           <Navigation />
         </div>

@@ -1,6 +1,6 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
-import Loading from "./Loading";
+import Loading from "./loading";
 
 const Checkout = () => {
   const stripe = useStripe();

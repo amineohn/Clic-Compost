@@ -4,7 +4,7 @@ import FadeIn from "react-fade-in";
 import fb from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import Loading from "../components/Loading";
+import Loading from "../components/loading";
 import { match } from "../utils/regex";
 import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../components/checkout";
