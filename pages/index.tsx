@@ -1,11 +1,7 @@
 import type { NextPage } from "next";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-} from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 import fb from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -13,6 +9,7 @@ import { useRouter } from "next/router";
 import Loading from "../components/loading";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
+import { Firebase } from "../libs/firebase";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +17,6 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
   fb.auth().onAuthStateChanged((user) => {
@@ -28,6 +24,7 @@ const Home: NextPage = () => {
       router.push("/collect");
     }
   });
+  const fire = new Firebase();
   // authenticate user with google
   const authenticateWithGoogle = async () => {
     try {
@@ -62,13 +59,17 @@ const Home: NextPage = () => {
     }
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await fire.signIn(email, password);
       setLoading(false);
       setSuccess(true);
-      fb.firestore().collection("users").doc(fb.auth()?.currentUser?.uid).set({
-        name: fb.auth()?.currentUser?.displayName,
-        email: fb.auth()?.currentUser?.email,
-      });
+      fire
+        .getFireStore()
+        .collection("users")
+        .doc(fire.getAuth().currentUser?.uid)
+        .set({
+          name: fire.getAuth()?.currentUser?.displayName,
+          email: fire.getAuth()?.currentUser?.email,
+        });
 
       router.push("/collect");
     } catch (error: any) {

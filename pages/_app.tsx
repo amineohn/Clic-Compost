@@ -8,31 +8,13 @@ import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import fb from "firebase/compat/app";
 import { useRouter } from "next/router";
-
+import { Firebase } from "../libs/firebase";
 const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
 });
-const config = {
-  apiKey: "AIzaSyAeuEJ6aYJRE1JHzRJgabAAF95MzAGmPic",
-  authDomain: "clic-compostnew.firebaseapp.com",
-  projectId: "clic-compostnew",
-  storageBucket: "clic-compostnew.appspot.com",
-  messagingSenderId: "553724034700",
-  appId: "1:553724034700:web:0a0b6f732410eb6f6945a9",
-  measurementId: "G-BR78123BPV",
-  /*apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDERID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID,*/
-};
+const fire = new Firebase();
 
-fb.initializeApp(config);
-if (fb.apps.length) {
-  console.log("firebase is connected");
-}
+fire.Init();
 const isAvailable = Capacitor.isPluginAvailable("StatusBar");
 const isAvailable2 = Capacitor.isPluginAvailable("SplashScreen");
 export default function MyApp({

@@ -4,6 +4,7 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import FadeIn from "react-fade-in";
 import { Transition } from "@headlessui/react";
+import { Firebase } from "../libs/firebase";
 
 const signup = () => {
   const [error, setError] = useState("");
@@ -13,7 +14,7 @@ const signup = () => {
     email: "",
     password: "",
   });
-
+  const fire = new Firebase();
   const { name, email, password } = formData;
 
   const onChange = (e) =>
@@ -36,7 +37,7 @@ const signup = () => {
       return;
     }
     try {
-      await fb.firestore().collection("users").add({
+      await fire.getFireStore().collection("users").add({
         name,
         email,
         password,
@@ -51,8 +52,8 @@ const signup = () => {
     }
 
     try {
-      await fb
-        .firestore()
+      await fire
+        .getFireStore()
         .collection("users")
         .where("email", "==", email)
         .get()
@@ -70,8 +71,8 @@ const signup = () => {
       console.log(error);
     }
     try {
-      await fb.auth().createUserWithEmailAndPassword(email, password);
-      await fb.auth().currentUser?.updateProfile({
+      await fire.signUp(email, password);
+      await fire.getAuth().currentUser?.updateProfile({
         displayName: name,
       });
       setInterval(() => {

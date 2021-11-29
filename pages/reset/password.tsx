@@ -1,16 +1,14 @@
 import type { NextPage } from "next";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
-import fb from "firebase/compat/app";
 import Loading from "../../components/loading";
-import "firebase/compat/auth";
-
+import { Firebase } from "../../libs/firebase";
 const forgetPassword: NextPage = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-
+  const fire = new Firebase();
   const forgetPassword = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -33,7 +31,7 @@ const forgetPassword: NextPage = () => {
       return;
     }
     try {
-      await fb.auth().sendPasswordResetEmail(email);
+      await fire.resetPassword(email);
       setLoading(false);
       setSuccess(true);
     } catch (error: any) {

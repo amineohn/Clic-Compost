@@ -1,14 +1,12 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
-import fb from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
 import Loading from "../components/loading";
 import { match } from "../utils/regex";
 import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
+import { Firebase } from "../libs/firebase";
 const Collect: NextPage = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -32,7 +30,7 @@ const Collect: NextPage = () => {
     setSuccess(false);
   };
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
-  const fire = fb.firestore();
+  const fire = new Firebase();
   function handleSubmit(e) {
     e.preventDefault();
     setLoading(false);
@@ -81,7 +79,7 @@ const Collect: NextPage = () => {
     setError("");
     setSuccess(false);
     const data = {
-      id: fb.firestore().collection("clients").doc().id,
+      id: fire.getFireStore().collection("clients").doc().id,
       phone: phone,
       name: name,
       email: email,
@@ -90,7 +88,7 @@ const Collect: NextPage = () => {
       address: address,
     };
     try {
-      fire.collection("clients").add(data);
+      fire.getFireStore().collection("clients").add(data);
       setLoading(false);
       setSuccess(true);
     } catch (error: any) {
@@ -99,7 +97,8 @@ const Collect: NextPage = () => {
     }
   }
   useEffect(() => {
-    fb.firestore()
+    fire
+      .getFireStore()
       .collection("clients")
       .onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
@@ -252,7 +251,12 @@ const Collect: NextPage = () => {
                   className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
                   type="button"
                   onClick={() => {
-                    clear();
+                    fire.clear([
+                      {
+                        state: phone,
+                        commit: "",
+                      },
+                    ]);
                   }}
                 >
                   Effacer
