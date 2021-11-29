@@ -24,6 +24,20 @@ export class Firebase {
   getUser() {
     return firebase.auth().currentUser;
   }
+  getUserName() {
+    return this.getUser()?.displayName;
+  }
+  getPhotoUrl() {
+    return this.getUser()?.photoURL;
+  }
+  getEmail() {
+    return this.getUser()?.email;
+  }
+
+  getUserData() {
+    return firebase.firestore().collection("users").doc(this.getUser()?.uid);
+  }
+
   getStorage() {
     return firebase.storage();
   }
@@ -48,6 +62,9 @@ export class Firebase {
   getCollection(collection: string) {
     return firebase.firestore().collection(collection);
   }
+  getUserId() {
+    return this.getUser()?.uid;
+  }
   async signIn(email: string, password: string) {
     const auth = this.getAuth();
     return await auth.signInWithEmailAndPassword(email, password);
@@ -64,5 +81,9 @@ export class Firebase {
     const auth = this.getAuth();
     const provider = new firebase.auth.GoogleAuthProvider();
     await auth.signInWithPopup(provider);
+  }
+  async signOut() {
+    const auth = this.getAuth();
+    await auth.signOut();
   }
 }

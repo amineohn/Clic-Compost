@@ -57,9 +57,9 @@ const Home: NextPage = () => {
       await fire.signIn(email, password);
       setLoading(false);
       setSuccess(true);
-      fire.getCollection("users").doc(fire.getAuth().currentUser?.uid).set({
-        name: fire.getAuth()?.currentUser?.displayName,
-        email: fire.getAuth()?.currentUser?.email,
+      fire.getCollection("users").doc(fire.getUserId()).set({
+        name: fire.getUserName(),
+        email: fire.getEmail(),
       });
 
       router.push("/collect");

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { getAuth } from "firebase/auth";
+import { Firebase } from "../libs/firebase";
 import { useRouter } from "next/router";
 import { Transition } from "@headlessui/react";
 const Navigation = () => {
-  const auth = getAuth();
   const router = useRouter();
+  const fire = new Firebase();
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -27,28 +27,24 @@ const Navigation = () => {
                 <img
                   className="h-8 w-8 rounded-full"
                   src={
-                    (auth.currentUser?.photoURL as string)
-                      ? (auth.currentUser?.photoURL as string)
+                    (fire.getPhotoUrl() as string)
+                      ? (fire.getPhotoUrl() as string)
                       : "https://i.imgur.com/2njXKZu.png"
                   }
                   alt="avatar"
                 />
                 <div className="ml-3">
                   <p className="text-sm font-semibold">
-                    {auth.currentUser?.displayName
-                      ? auth.currentUser?.displayName
-                      : "Anonyme"}
+                    {fire.getUserName() ? fire.getUserName() : "Anonyme"}
                   </p>
                   <p className="text-xs text-gray-500">
-                    {auth.currentUser?.email
-                      ? auth.currentUser?.email
-                      : "anonyme@email.com"}
+                    {fire.getEmail() ? fire.getEmail() : "anonyme@email.com"}
                   </p>
                 </div>
               </div>
             </div>
             <div className="mt-5">
-              {!auth.currentUser ? (
+              {!fire.getUser() ? (
                 <>
                   <a
                     onClick={() => {
@@ -77,7 +73,7 @@ const Navigation = () => {
                 <>
                   <a
                     onClick={() => {
-                      auth.signOut();
+                      fire.signOut();
                       router.push("/");
                       setShowModal(false);
                     }}
