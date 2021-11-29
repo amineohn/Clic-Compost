@@ -64,7 +64,7 @@ export default function MyApp({
   return (
     <>
       <ThemeProvider defaultTheme="light" attribute="class">
-        <div className="flex flex-col h-screen overflow-y-hidden justify-between z-auto">
+        <div className="flex flex-col h-screen overflow-auto lg:overflow-y-hidden justify-between z-auto">
           <Component {...pageProps} />
           <Navigation />
         </div>
