@@ -55,7 +55,6 @@ const Home: NextPage = () => {
       setError("Veuillez saisir tous les champs");
       return;
     }
-
     if (password.length < 6) {
       setLoading(false);
       setError("Le mot de passe doit être au moins de 6 caractères");

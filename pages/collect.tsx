@@ -132,7 +132,7 @@ const Collect: NextPage = () => {
 
   return (
     <>
-      <FadeIn className="grid grid-cols-1 lg:grid-cols-2 justify-center my-36 lg:my-36">
+      <FadeIn className="grid m-auto grid-cols-1 lg:grid-cols-3 justify-center my-36 lg:my-36">
         <div className="flex justify-center">
           <div className="w-full max-w-sm">
             <form
@@ -382,13 +382,14 @@ const Collect: NextPage = () => {
                 </div>
               </div>
             </div>
-
-            <div className="m-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
-              <div className="flex flex-col ">
-                <Elements stripe={stripePromise}>
-                  <Checkout />
-                </Elements>
-              </div>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
+            <div className="flex flex-col">
+              <Elements stripe={stripePromise}>
+                <Checkout />
+              </Elements>
             </div>
           </div>
         </div>
