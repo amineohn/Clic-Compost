@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import fb from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import FadeIn from "react-fade-in";

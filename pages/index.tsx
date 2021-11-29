@@ -1,8 +1,6 @@
 import type { NextPage } from "next";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
-import { GoogleAuthProvider } from "firebase/auth";
-import fb from "firebase/compat/app";
 import { useRouter } from "next/router";
 import Loading from "../components/loading";
 import Link from "next/link";
@@ -15,7 +13,7 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const provider = new GoogleAuthProvider();
+  //const provider = new GoogleAuthProvider();
 
   const fire = new Firebase();
   fire.getAuth().onAuthStateChanged((user) => {
@@ -27,7 +25,7 @@ const Home: NextPage = () => {
   const authenticateWithGoogle = async () => {
     try {
       setLoading(true);
-      await fb.auth().signInWithPopup(provider);
+      await fire.signWithGoogle();
       setLoading(false);
     } catch (error: any) {
       setLoading(false);

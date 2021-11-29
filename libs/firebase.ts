@@ -1,9 +1,10 @@
 import firebase from "firebase/compat/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/storage";
-import "firebase/functions";
-import "firebase/analytics";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
+import "firebase/compat/functions";
+import "firebase/compat/analytics";
+
 export class Firebase {
   getSettings() {
     return {
@@ -61,5 +62,9 @@ export class Firebase {
   async resetPassword(email) {
     const auth = this.getAuth();
     await auth.sendPasswordResetEmail(email);
+  }
+  async signWithGoogle() {
+    const auth = this.getAuth();
+    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 }
