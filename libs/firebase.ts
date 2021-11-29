@@ -51,15 +51,15 @@ export class Firebase {
   getCollection(collection: string) {
     return firebase.firestore().collection(collection);
   }
-  async signIn(email, password) {
+  async signIn(email: string, password: string) {
     const auth = this.getAuth();
     return await auth.signInWithEmailAndPassword(email, password);
   }
-  async signUp(email, password) {
+  async signUp(email: string, password: string) {
     const auth = this.getAuth();
     await auth.createUserWithEmailAndPassword(email, password);
   }
-  async resetPassword(email) {
+  async resetPassword(email: string) {
     const auth = this.getAuth();
     await auth.sendPasswordResetEmail(email);
   }
