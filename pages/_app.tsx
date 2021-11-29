@@ -8,13 +8,14 @@ import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import { useRouter } from "next/router";
 import { Firebase } from "../libs/firebase";
+
 const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
 });
 const fire = new Firebase();
-
 const isAvailable = Capacitor.isPluginAvailable("StatusBar");
 const isAvailable2 = Capacitor.isPluginAvailable("SplashScreen");
+
 export default function MyApp({
   Component,
   pageProps,

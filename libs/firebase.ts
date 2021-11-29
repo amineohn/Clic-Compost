@@ -5,7 +5,7 @@ import "firebase/compat/storage";
 import "firebase/compat/functions";
 import "firebase/compat/analytics";
 import "firebase/compat/performance";
-import "firebase/compat/messaging";
+import "firebase/messaging";
 
 export class Firebase {
   getSettings() {
