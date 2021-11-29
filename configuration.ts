@@ -1,8 +1,5 @@
 export const configuration = {
-  nameApp: "ionic-capacitor-app",
-  toast: {
-    text: "this app is under developpement.",
-  },
+  nameApp: "Clic-Compost",
   server: {
     url: "https://clic-compost-ten.vercel.app/",
   },
