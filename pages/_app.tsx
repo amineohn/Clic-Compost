@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "next-themes";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
@@ -7,6 +7,7 @@ import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import fb from "firebase/compat/app";
+import { useRouter } from "next/router";
 
 const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
@@ -53,7 +54,13 @@ export default function MyApp({
       SplashScreen.hide();
     }
   }
+  const router = useRouter();
 
+  useEffect(() => {
+    if (!fb.auth().currentUser) {
+      router.push("/");
+    }
+  }, []);
   return (
     <>
       <ThemeProvider defaultTheme="light" attribute="class">
