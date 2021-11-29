@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
-import fb from "firebase/compat/app";
 import { useRouter } from "next/router";
 import { Firebase } from "../libs/firebase";
 const Navigation = dynamic(() => import("../components/navigation"), {
@@ -39,7 +38,7 @@ export default function MyApp({
   const router = useRouter();
 
   useEffect(() => {
-    if (!fb.auth().currentUser) {
+    if (!fire.getAuth().currentUser) {
       router.push("/");
     }
   }, []);
