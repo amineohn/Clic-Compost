@@ -51,7 +51,10 @@ const Navigation = () => {
               {!auth.currentUser ? (
                 <>
                   <a
-                    onClick={() => router.push("/")}
+                    onClick={() => {
+                      router.push("/");
+                      setShowModal(false);
+                    }}
                     className="cursor-pointer group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-gray-800 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
                   >
                     <svg
@@ -76,6 +79,7 @@ const Navigation = () => {
                     onClick={() => {
                       auth.signOut();
                       router.push("/");
+                      setShowModal(false);
                     }}
                     className="cursor-pointer mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-gray-800 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
                   >
