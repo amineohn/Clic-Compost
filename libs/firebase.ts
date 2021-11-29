@@ -4,6 +4,8 @@ import "firebase/compat/firestore";
 import "firebase/compat/storage";
 import "firebase/compat/functions";
 import "firebase/compat/analytics";
+import "firebase/compat/performance";
+import "firebase/compat/messaging";
 
 export class Firebase {
   getSettings() {
@@ -19,6 +21,7 @@ export class Firebase {
   }
   constructor() {
     firebase.initializeApp(this.getSettings());
+    console.log("Initialize Firebase \n app(s): %d", firebase.apps.length);
   }
 
   getUser() {
@@ -65,6 +68,10 @@ export class Firebase {
   getUserId() {
     return this.getUser()?.uid;
   }
+  getPerformance() {
+    return firebase.performance();
+  }
+
   async signIn(email: string, password: string) {
     const auth = this.getAuth();
     return await auth.signInWithEmailAndPassword(email, password);

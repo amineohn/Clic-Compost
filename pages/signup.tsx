@@ -25,7 +25,6 @@ const signup = () => {
       setError("Le mot de passe doit être au moins de 6 caractères");
       return;
     }
-    // register({ name, email, password });
     setFormData({
       name: "",
       email: "",
@@ -52,8 +51,7 @@ const signup = () => {
 
     try {
       await fire
-        .getFireStore()
-        .collection("users")
+        .getCollection("users")
         .where("email", "==", email)
         .get()
         .then((doc) => {
