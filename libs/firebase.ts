@@ -21,9 +21,6 @@ export class Firebase {
     firebase.initializeApp(this.getSettings());
   }
 
-  Init() {
-    return firebase.initializeApp(this.getSettings());
-  }
   getUser() {
     return firebase.auth().currentUser;
   }

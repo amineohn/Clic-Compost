@@ -13,7 +13,6 @@ const Navigation = dynamic(() => import("../components/navigation"), {
 });
 const fire = new Firebase();
 
-fire.Init();
 const isAvailable = Capacitor.isPluginAvailable("StatusBar");
 const isAvailable2 = Capacitor.isPluginAvailable("SplashScreen");
 export default function MyApp({
