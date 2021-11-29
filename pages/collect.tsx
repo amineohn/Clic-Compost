@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "../components/loading";
-import { match } from "../utils/regex";
+import { form } from "../utils/regex";
 import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
@@ -43,7 +43,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!phone.match(match.phone)) {
+    if (!phone.match(form.send.phone)) {
       setError("Veuillez entrer un numéro de téléphone valide");
       setLoading(true);
       setTimeout(() => {
@@ -51,7 +51,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!email.match(match.email)) {
+    if (!email.match(form.send.email)) {
       setError("Veuillez entrer un email valide");
       setLoading(true);
       setTimeout(() => {
@@ -59,7 +59,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!collectTime.match(match.collectTime)) {
+    if (!collectTime.match(form.send.collectTime)) {
       setError("Veuillez entrer une heure de collecte valide");
       setLoading(true);
       setTimeout(() => {
@@ -67,7 +67,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!address.match(match.address)) {
+    if (!address.match(form.send.address)) {
       setError("s'il-vous-plaît entrez une adresse valide");
       setLoading(true);
       setTimeout(() => {
