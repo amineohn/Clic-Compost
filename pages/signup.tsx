@@ -276,9 +276,11 @@ const signup = () => {
                 value={password}
                 onChange={(e) => onChange(e)}
               />
-              <p className="text-gray-600 text-xs italic">
-                Le mot de passe doit contenir au moins 6 caractères
-              </p>
+              {password.length < 6 && (
+                <p className="text-gray-600 text-xs italic">
+                  Le mot de passe doit contenir au moins 6 caractères
+                </p>
+              )}
             </div>
 
             <div className="flex items-center justify-between">
