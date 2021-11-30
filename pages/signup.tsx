@@ -20,9 +20,26 @@ const signup = () => {
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  // progress bar animation
+  const [progress, setProgress] = useState(0);
+  const [progressBar, setProgressBar] = useState(false);
+
+  // progress bar animation end
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await fire.signUp(email, password);
+      await fire.getAuth().currentUser?.updateProfile({
+        displayName: name,
+      });
+      setInterval(() => {
+        setError("");
+      }, 3500);
+      setError("Inscription réussie");
+    } catch (error: any) {
+      setError(error.message);
+    }
     if (password.length < 6) {
       setError("Le mot de passe doit être au moins de 6 caractères");
       return;
@@ -36,6 +53,13 @@ const signup = () => {
       setError("L'email doit être valide");
       return;
     }
+    setProgressBar(true);
+    setTimeout(() => {
+      setProgress(100);
+      setProgressBar(false);
+      setSuccess(true);
+    }, 2000);
+
     try {
       await fire.getCollection("users").add({
         name,
@@ -48,19 +72,6 @@ const signup = () => {
     } catch (err) {
       console.error(err);
       setError("Une erreur est survenue");
-      //return;
-    }
-    try {
-      await fire.signUp(email, password);
-      await fire.getAuth().currentUser?.updateProfile({
-        displayName: name,
-      });
-      setInterval(() => {
-        setError("");
-      }, 3500);
-      setError("Inscription réussie");
-    } catch (error: any) {
-      setError(error.message);
     }
     setSuccess(true);
 
@@ -86,12 +97,13 @@ const signup = () => {
       setInterval(() => {
         setError("");
       }, 3500);
+      setProgressBar(true);
+
       setError("Le mot de passe doit être au moins de 6 caractères");
       return;
     }
   };
-  // svg close button grid item
-
+  // progress bar if password is less than 6
   return (
     <>
       <NextSeo
@@ -264,7 +276,11 @@ const signup = () => {
                 value={password}
                 onChange={(e) => onChange(e)}
               />
+              <p className="text-gray-600 text-xs italic">
+                Le mot de passe doit contenir au moins 6 caractères
+              </p>
             </div>
+
             <div className="flex items-center justify-between">
               <button
                 className="py-2 px-4 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"

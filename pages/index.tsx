@@ -20,11 +20,10 @@ const Home: NextPage = () => {
       router.push("/collect");
     }
   });
-  // authenticate user with google
   const authenticateWithGoogle = async () => {
     try {
       setLoading(true);
-      await fire.signWithGoogle();
+      await fire.signWithGoogle("signInWithRedirect");
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
@@ -42,6 +41,7 @@ const Home: NextPage = () => {
     e.preventDefault();
     setLoading(true);
     setSuccess(false);
+
     if (email.length === 0 || password.length === 0) {
       setLoading(false);
       setError("Veuillez saisir tous les champs");
@@ -54,65 +54,14 @@ const Home: NextPage = () => {
     }
 
     try {
-      await fire.signIn(email, password);
-      setLoading(false);
-      setSuccess(true);
-      fire.getCollection("users").doc(fire.getUserId()).set({
-        name: fire.getUserName(),
-        email: fire.getEmail(),
-      });
-
-      router.push("/collect");
+      await fire.signIn(email, password, "users", "/collect");
+      await setLoading(false);
+      await setSuccess(true);
     } catch (error: any) {
       setLoading(false);
-      const errorCode = error.code;
+      const code = error.code;
       let errorMessage = error.message;
-      switch (errorCode) {
-        case "auth/invalid-custom-token":
-          errorMessage =
-            "Le format de jeton personnalisé est incorrect. Veuillez vérifier la documentation.";
-          break;
-        case "auth/custom-token-mismatch":
-          errorMessage =
-            "Le jeton personnalisé correspond à une audience différente.";
-          break;
-        case "auth/invalid-credential":
-          errorMessage =
-            "Les informations d'authentification fournies sont mal formées ou ont expiré.";
-          break;
-        case "auth/operation-not-allowed":
-          errorMessage =
-            "La connexion par mot de passe est désactivée pour ce projet.";
-
-          break;
-        case "auth/user-disabled":
-          errorMessage =
-            "Le compte utilisateur a été désactivé par un administrateur.";
-          break;
-        case "auth/user-token-expired":
-          errorMessage =
-            "Les informations d'identification de l'utilisateur ne sont plus valides. L'utilisateur doit se reconnecter.";
-          break;
-        case "auth/web-storage-unsupported":
-          errorMessage =
-            "Le navigateur de l'utilisateur ne prend pas en charge le stockage Web.";
-          break;
-        case "auth/invalid-email":
-          errorMessage = "L'adresse e-mail n'est pas valide.";
-          break;
-        case "auth/user-not-found":
-          errorMessage =
-            "Il n'y a pas d'enregistrement utilisateur correspondant à cet identifiant.";
-          break;
-        case "auth/wrong-password":
-          errorMessage =
-            "Le mot de passe est invalide ou l'utilisateur n'a pas de mot de passe.";
-          break;
-
-        default:
-          errorMessage = "Une erreur inconnue s'est produite.";
-          break;
-      }
+      fire.getErrors(code, errorMessage);
       setError(errorMessage);
     }
     setLoading(false);
