@@ -29,7 +29,7 @@ const Navigation = () => {
                   src={
                     (fire.getPhotoUrl() as string)
                       ? (fire.getPhotoUrl() as string)
-                      : "https://i.imgur.com/2njXKZu.png"
+                      : "/static/images/blank-profile.png"
                   }
                   alt="avatar"
                 />
