@@ -44,7 +44,6 @@ export class Firebase {
   getUserData() {
     return firebase.firestore().collection("users").doc(this.getUser()?.uid);
   }
-
   getStorage() {
     return firebase.storage();
   }
@@ -155,13 +154,17 @@ export class Firebase {
     switch (sign) {
       case "signIn":
         await auth.signInWithPopup(provider);
+        await firebase.auth().getRedirectResult();
         break;
       case "signInWithRedirect":
         await auth.signInWithRedirect(provider);
+        await firebase.auth().getRedirectResult();
         break;
       case "signInWithRedirectAndLink":
         await auth.signInWithRedirect(provider);
+        await firebase.auth().getRedirectResult();
         break;
+
       default:
         break;
     }
