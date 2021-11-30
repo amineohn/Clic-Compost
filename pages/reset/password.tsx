@@ -38,8 +38,8 @@ const forgetPassword: NextPage = () => {
       setSuccess(true);
     } catch (error: any) {
       setLoading(false);
-      const errorMessage = fire.getErrors(error.code, error.message);
-      setError(errorMessage);
+      const messages = fire.getErrors(error.code, error.message);
+      setError(messages);
     }
   };
   return (

@@ -67,8 +67,8 @@ const Home: NextPage = () => {
     } catch (error: any) {
       setLoading(false);
       setRedirection(false);
-      const errorMessage = fire.getErrors(error.code, error.message);
-      setError(errorMessage);
+      const messages = fire.getErrors(error.code, error.message);
+      setError(messages);
     }
     setRedirection(false);
     setLoading(false);
