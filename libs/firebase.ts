@@ -104,7 +104,6 @@ export class Firebase {
       case "auth/operation-not-allowed":
         errorMessage =
           "La connexion par mot de passe est désactivée pour ce projet.";
-
         break;
       case "auth/user-disabled":
         errorMessage =
@@ -164,7 +163,6 @@ export class Firebase {
       case "auth/invalid-action-code":
         errorMessage = "Le code d'action fourni est invalide ou a expiré.";
         break;
-
       default:
         errorMessage = "Une erreur inconnue s'est produite.";
         break;
@@ -201,6 +199,18 @@ export class Firebase {
   async updateUser(collection: string, documentPath: string, data: any) {
     const user = this.getUser();
     const userData = this.getUserData();
+
+    if (userData) {
+      await this.getCollection(collection).doc(documentPath).update(data);
+    } else {
+      await this.getCollection(collection).doc(documentPath).set(data);
+    }
+    if (user) {
+      await user.updateProfile({
+        displayName: data.name,
+        photoURL: data.photoURL,
+      });
+    }
 
     return await userData.update(data).then(async () => {
       await this.getCollection(collection).doc(documentPath).set({
