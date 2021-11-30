@@ -31,7 +31,7 @@ const Navigation = () => {
                       ? (fire.getPhotoUrl() as string)
                       : "/static/images/blank-profile.png"
                   }
-                  alt="avatar"
+                  alt={fire.getUserName() as string}
                 />
                 <div className="ml-3">
                   <p className="text-sm font-semibold text-green-50">
@@ -90,11 +90,6 @@ const Navigation = () => {
                   </a>
                 </>
               )}
-            </div>
-            <div className="flex mt-5 justify-center">
-              <p className="text-xs text-green-200">
-                Made with <span className="text-red-500">❤</span>
-              </p>
             </div>
           </div>
         </nav>
