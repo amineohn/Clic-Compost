@@ -75,6 +75,18 @@ export class Firebase {
   getPerformance() {
     return firebase.performance();
   }
+  currentPassword(currentPassword) {
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      this.getEmail() as string,
+      currentPassword
+    );
+    return this.getUser()?.reauthenticateWithCredential(credential);
+  }
+  updatePassword(currentPassword, newPassword) {
+    this.currentPassword(currentPassword)?.then(() => {
+      return this.getUser()?.updatePassword(newPassword);
+    });
+  }
   getErrors(code: string, errorMessage: string) {
     switch (code) {
       case "auth/invalid-custom-token":

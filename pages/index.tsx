@@ -302,7 +302,7 @@ const Home: NextPage = () => {
                 </svg>
                 Connexion avec Google
               </button>
-              <Link href="/reset/password">
+              <Link href="/account/password">
                 <a className="inline-block align-baseline text-center font-bold text-sm text-greenDDTV hover:text-green-800 ml-2">
                   Mot de passe oublié?
                 </a>
