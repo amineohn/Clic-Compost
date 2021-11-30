@@ -42,7 +42,7 @@ const forgetPassword: NextPage = () => {
   };
   return (
     <>
-      <FadeIn className="my-72 lg:my-80 flex flex-col items-center justify-center">
+      <FadeIn className="my-60 lg:my-64 flex flex-col items-center justify-center">
         <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
