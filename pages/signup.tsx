@@ -222,6 +222,7 @@ const signup = () => {
               id="name"
               type="text"
               name="name"
+              placeholder="Nom"
               value={name}
               onChange={(e) => onChange(e)}
             />
@@ -238,6 +239,7 @@ const signup = () => {
               id="email"
               type="email"
               name="email"
+              placeholder="Mail"
               value={email}
               onChange={(e) => onChange(e)}
             />
@@ -254,6 +256,7 @@ const signup = () => {
               id="password"
               type="password"
               name="password"
+              placeholder="Mot de passe"
               value={password}
               onChange={(e) => onChange(e)}
             />
