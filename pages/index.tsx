@@ -51,6 +51,7 @@ const Home: NextPage = () => {
       setError("Veuillez saisir tous les champs");
       return;
     }
+
     if (password.length < 6) {
       setLoading(false);
       setRedirection(false);
@@ -59,16 +60,14 @@ const Home: NextPage = () => {
     }
 
     try {
-      await fire.signIn(email, password, "users", "/collect");
+      await fire.signIn(email, password, "users", "/collect", fire.getUserId());
       await setRedirection(true);
       await setLoading(false);
       await setSuccess(true);
     } catch (error: any) {
       setLoading(false);
       setRedirection(false);
-      const code = error.code;
-      let errorMessage = error.message;
-      fire.getErrors(code, errorMessage);
+      const errorMessage = fire.getErrors(error.code, error.message);
       setError(errorMessage);
     }
     setRedirection(false);

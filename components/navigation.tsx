@@ -29,7 +29,7 @@ const Navigation = () => {
                   src={
                     (fire.getPhotoUrl() as string)
                       ? (fire.getPhotoUrl() as string)
-                      : "/static/images/blank-profile.png"
+                      : (fire.getDefaultPhotoUrl() as string)
                   }
                   alt={fire.getUserName() as string}
                 />

@@ -33,12 +33,13 @@ const forgetPassword: NextPage = () => {
       return;
     }
     try {
-      await fire.resetPassword(email);
+      await fire.sendPasswordResetEmail(email);
       setLoading(false);
       setSuccess(true);
     } catch (error: any) {
       setLoading(false);
-      setError(error.message);
+      const errorMessage = fire.getErrors(error.code, error.message);
+      setError(errorMessage);
     }
   };
   return (

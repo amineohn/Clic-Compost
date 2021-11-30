@@ -7,7 +7,6 @@ import "firebase/compat/analytics";
 import "firebase/compat/performance";
 import "firebase/messaging";
 import router from "next/router";
-
 export class Firebase {
   getSettings() {
     return {
@@ -34,13 +33,15 @@ export class Firebase {
   getPhotoUrl() {
     return this.getUser()?.photoURL;
   }
+  getDefaultPhotoUrl() {
+    return "/static/images/blank-profile.png";
+  }
   getEmail() {
     return this.getUser()?.email;
   }
   getTokenId() {
     return this.getAuth().currentUser?.getIdToken();
   }
-
   getUserData() {
     return firebase.firestore().collection("users").doc(this.getUser()?.uid);
   }
@@ -116,6 +117,41 @@ export class Firebase {
         errorMessage =
           "Le mot de passe est invalide ou l'utilisateur n'a pas de mot de passe.";
         break;
+      case "auth/email-already-in-use":
+        errorMessage =
+          "L'adresse e-mail est déjà utilisée par un autre compte.";
+        break;
+      case "auth/weak-password":
+        errorMessage = "Le mot de passe doit contenir au moins 6 caractères.";
+        break;
+      case "auth/requires-recent-login":
+        errorMessage =
+          "L'utilisateur doit se reconnecter avec son compte récent.";
+        break;
+      case "auth/user-mismatch":
+        errorMessage =
+          "L'utilisateur n'est pas autorisé à se connecter avec ce compte.";
+        break;
+      case "auth/invalid-api-key":
+        errorMessage = "La clé API fournie est invalide ou a expiré.";
+        break;
+      case "auth/network-request-failed":
+        errorMessage =
+          "La requête de réseau a échoué. Veuillez vérifier votre connexion Internet.";
+        break;
+      case "auth/popup-blocked":
+        errorMessage =
+          "Le navigateur a bloqué une fenêtre pop-up. Veuillez vérifier que le bloqueur de fenêtres pop-up est désactivé.";
+        break;
+      case "auth/popup-closed-by-user":
+        errorMessage = "La fenêtre pop-up a été fermée par l'utilisateur.";
+        break;
+      case "auth/unauthorized-domain":
+        errorMessage = "L'adresse e-mail n'est pas autorisée pour ce domaine.";
+        break;
+      case "auth/invalid-action-code":
+        errorMessage = "Le code d'action fourni est invalide ou a expiré.";
+        break;
 
       default:
         errorMessage = "Une erreur inconnue s'est produite.";
@@ -127,26 +163,43 @@ export class Firebase {
     email: string,
     password: string,
     collection: string,
-    url: string
+    url: string,
+    documentPath?: string | undefined
   ) {
     const auth = this.getAuth();
     return await auth
       .signInWithEmailAndPassword(email, password)
       .then(async () => {
         await router.push(url);
-        await this.getCollection(collection).doc(this.getUserId()).set({
+        await this.getCollection(collection).doc(documentPath).set({
           name: this.getUserName(),
           email: this.getEmail(),
         });
       });
   }
+
+  async sendEmailVerification() {
+    const user = this.getUser();
+    await user?.sendEmailVerification();
+  }
+  async sendPasswordResetEmail(email: string) {
+    const auth = this.getAuth();
+    await auth.sendPasswordResetEmail(email);
+  }
+  async updateUser(collection: string, documentPath: string, data: any) {
+    const user = this.getUser();
+    const userData = this.getUserData();
+
+    return await userData.update(data).then(async () => {
+      await this.getCollection(collection).doc(documentPath).set({
+        name: this.getUserName(),
+        email: this.getEmail(),
+      });
+    });
+  }
   async signUp(email: string, password: string) {
     const auth = this.getAuth();
     await auth.createUserWithEmailAndPassword(email, password);
-  }
-  async resetPassword(email: string) {
-    const auth = this.getAuth();
-    await auth.sendPasswordResetEmail(email);
   }
   async signWithGoogle(sign) {
     const auth = this.getAuth();
