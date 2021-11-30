@@ -45,7 +45,7 @@ const forgetPassword: NextPage = () => {
   return (
     <>
       <NextSeo
-        title="Clic Compost | Reset Password"
+        title="Clic Compost | Password From Email"
         description=""
         openGraph={{
           url: "https://les-detritivores.co",

@@ -52,7 +52,7 @@ const NewPassword: NextPage = () => {
   return (
     <>
       <NextSeo
-        title="Clic Compost | Reset Password"
+        title="Clic Compost | Change Password"
         description=""
         openGraph={{
           url: "https://les-detritivores.co",
