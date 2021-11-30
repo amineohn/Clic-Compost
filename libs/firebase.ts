@@ -21,7 +21,7 @@ export class Firebase {
   }
   constructor() {
     firebase.initializeApp(this.getSettings());
-    console.log("Initialize Firebase \n app(s): %d", firebase.apps.length);
+    console.log("Initialize Firebase app(s): %d", firebase.apps.length);
   }
 
   getUser() {
@@ -91,11 +91,10 @@ export class Firebase {
     switch (code) {
       case "auth/invalid-custom-token":
         errorMessage =
-          "Le format de jeton personnalisé est incorrect. Veuillez vérifier la documentation.";
+          "Le format du token(custom) est incorrect. Veuillez vérifier la documentation.";
         break;
       case "auth/custom-token-mismatch":
-        errorMessage =
-          "Le jeton personnalisé correspond à une audience différente.";
+        errorMessage = "Le token(custom) correspond à une audience différente.";
         break;
       case "auth/invalid-credential":
         errorMessage =
@@ -187,7 +186,6 @@ export class Firebase {
         });
       });
   }
-
   async sendEmailVerification() {
     const user = this.getUser();
     await user?.sendEmailVerification();
