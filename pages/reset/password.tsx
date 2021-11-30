@@ -90,11 +90,11 @@ const forgetPassword: NextPage = () => {
         </div>
         <div className="w-full max-w-xs space-y-2">
           {error && (
-            <FadeIn className="bg-red-100 border border-red-100 text-red-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
+            <FadeIn className="bg-red-500 border border-red-100 text-white px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
               <div className="inline-flex space-x-2">
                 <div className="">
                   <svg
-                    className="fill-current cursor-pointer text-red-500 hover:text-red-600 transition w-4 h-4 flex justify-items-end"
+                    className="fill-current cursor-pointer text-red-100 hover:text-red-200 transition w-4 h-4 flex justify-items-end"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     onClick={() => setError("")}
@@ -103,18 +103,18 @@ const forgetPassword: NextPage = () => {
                   </svg>
                 </div>
                 <div className="flex">
-                  <p className="text-red-500 text-xs italic">{error}</p>
+                  <p className="text-white text-xs font-medium">{error}</p>
                 </div>
               </div>
             </FadeIn>
           )}
 
           {success && (
-            <FadeIn className="bg-green-100 border border-green-100 text-green-700 px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
+            <FadeIn className="bg-green-500 border border-green-100 text-white px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
               <div className="inline-flex space-x-2">
                 <div className="">
                   <svg
-                    className="fill-current cursor-pointer text-green-500 hover:text-green-600 transition w-4 h-4 flex justify-items-end"
+                    className="fill-current cursor-pointer text-green-100 hover:text-green-200 transition w-4 h-4 flex justify-items-end"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     onClick={() => setSuccess(false)}
@@ -123,7 +123,7 @@ const forgetPassword: NextPage = () => {
                   </svg>
                 </div>
                 <div className="flex">
-                  <p className="text-green-500 text-xs italic">
+                  <p className="text-white text-xs font-medium">
                     Nous vous avons envoyé un e-mail pour réinitialiser votre
                     mot de passe.
                   </p>
