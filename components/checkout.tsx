@@ -39,7 +39,7 @@ const Checkout = () => {
         <CardElement />
         <div className="flex justify-end space-x-2">
           <button
-            className={`bg-gray-900 p-2 rounded-lg text-white font-bold pl-6 pr-6 transition hover:bg-gray-800 ${
+            className={`py-2 px-2 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ${
               error && "bg-red-500 hover:bg-red-600"
             }`}
             type="submit"

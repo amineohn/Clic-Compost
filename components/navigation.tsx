@@ -21,7 +21,7 @@ const Navigation = () => {
           <div className="fixed inset-0">
             <div className="absolute inset-0" />
           </div>
-          <div className="relative bg-gray-900 text-gray-300 p-4 rounded-lg shadow-lg flex flex-col w-64">
+          <div className="relative bg-greenDDTV text-gray-300 p-4 rounded-lg shadow-lg flex flex-col w-64">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <img
@@ -34,10 +34,10 @@ const Navigation = () => {
                   alt="avatar"
                 />
                 <div className="ml-3">
-                  <p className="text-sm font-semibold">
+                  <p className="text-sm font-semibold text-green-50">
                     {fire.getUserName() ? fire.getUserName() : "Anonyme"}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-green-200">
                     {fire.getEmail() ? fire.getEmail() : "anonyme@email.com"}
                   </p>
                 </div>
@@ -51,10 +51,10 @@ const Navigation = () => {
                       router.push("/");
                       setShowModal(false);
                     }}
-                    className="cursor-pointer group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-gray-800 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
+                    className="cursor-pointer group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white !bg-green-900 !bg-opacity-20 focus:outline-none focus:!bg-green-800 transition ease-in-out duration-150"
                   >
                     <svg
-                      className="mr-4 h-6 w-6 text-gray-300 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
+                      className="mr-4 h-6 w-6 !text-green-100 group-hover:!text-green-100 group-focus:!text-green-100 transition ease-in-out duration-150"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -66,7 +66,7 @@ const Navigation = () => {
                         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                       />
                     </svg>
-                    <span>Connexion</span>
+                    <span className="text-green-100">Connexion</span>
                   </a>
                 </>
               ) : (
@@ -77,7 +77,7 @@ const Navigation = () => {
                       router.push("/");
                       setShowModal(false);
                     }}
-                    className="cursor-pointer mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-gray-800 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
+                    className="cursor-pointer group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white !bg-green-900 !bg-opacity-20 focus:outline-none focus:!bg-green-800 transition ease-in-out duration-150"
                   >
                     <svg
                       className="mr-4 h-6 w-6 text-gray-300 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"

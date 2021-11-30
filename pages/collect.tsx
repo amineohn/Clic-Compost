@@ -202,19 +202,16 @@ const Collect: NextPage = () => {
               <div className="mb-6">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="password"
+                  htmlFor="time"
                 >
-                  Créneau de collecte
+                  <input
+                    type="time"
+                    value={collectTime}
+                    autoComplete="off"
+                    onChange={(e) => setCollectTime(e.target.value)}
+                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-1"
+                  />
                 </label>
-                <input
-                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="password"
-                  type="text"
-                  placeholder="Créneau de collecte"
-                  value={collectTime}
-                  autoComplete="off"
-                  onChange={(e) => setCollectTime(e.target.value)}
-                />
               </div>
               <div className="mb-6">
                 <label
@@ -243,9 +240,9 @@ const Collect: NextPage = () => {
                 </datalist>
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between space-x-10">
                 <button
-                  className="bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+                  className="py-2 px-2 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                   type="button"
                   onClick={() => {
                     clear();
@@ -254,9 +251,9 @@ const Collect: NextPage = () => {
                   Effacer
                 </button>
                 <button
-                  className={`bg-greenDDTV hover:bg-green-800 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline ${
+                  className={`py-2 px-2 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ${
                     error &&
-                    "bg-red-500 hover:bg-red-600 font-medium !text-xs ml-0.5 py-3 "
+                    "bg-red-600 hover:bg-red-700 focus:!ring-red-500 focus:!ring-offset-red-200 font-medium !text-xs ml-0.5 py-3 px-2 rounded-lg"
                   }${success && "bg-green-500 hover:bg-green-600"}`}
                   type="submit"
                 >
