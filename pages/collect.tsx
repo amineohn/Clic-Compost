@@ -19,20 +19,10 @@ const Collect: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [data, setData] = useState([{}]);
-  const clear = () => {
-    setPhone("");
-    setName("");
-    setEmail("");
-    setFrequency("");
-    setCollectTime("");
-    setAddress("");
-    setError("");
-    setLoading(false);
-    setSuccess(false);
-  };
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const fire = new Firebase();
-  function handleSubmit(e) {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(false);
     setSuccess(false);
@@ -96,7 +86,19 @@ const Collect: NextPage = () => {
       setError(error.message);
       setSuccess(false);
     }
-  }
+  };
+  const clear = () => {
+    setPhone("");
+    setName("");
+    setEmail("");
+    setFrequency("");
+    setCollectTime("");
+    setAddress("");
+    setError("");
+    setLoading(false);
+    setSuccess(false);
+  };
+
   useEffect(() => {
     fire.getCollection("clients").onSnapshot((snapshot) => {
       snapshot.forEach((doc) => {
