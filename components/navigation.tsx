@@ -54,17 +54,14 @@ const Navigation = () => {
                     className="cursor-pointer group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white !bg-green-900 !bg-opacity-20 focus:outline-none focus:!bg-green-800 transition ease-in-out duration-150"
                   >
                     <svg
-                      className="mr-4 h-6 w-6 !text-green-100 group-hover:!text-green-100 group-focus:!text-green-100 transition ease-in-out duration-150"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      className="mr-4 h-5 w-5 !text-green-100 group-hover:!text-green-100 group-focus:!text-green-100 transition ease-in-out duration-150"
                     >
                       <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                      />
+                        fill="currentColor"
+                        d="M416 448h-84c-6.6 0-12-5.4-12-12v-24c0-6.6 5.4-12 12-12h84c26.5 0 48-21.5 48-48V160c0-26.5-21.5-48-48-48h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zM167.1 83.5l-19.6 19.6c-4.8 4.8-4.7 12.5.2 17.1L260.8 230H12c-6.6 0-12 5.4-12 12v28c0 6.6 5.4 12 12 12h248.8L147.7 391.7c-4.8 4.7-4.9 12.4-.2 17.1l19.6 19.6c4.7 4.7 12.3 4.7 17 0l164.4-164c4.7-4.7 4.7-12.3 0-17l-164.4-164c-4.7-4.6-12.3-4.6-17 .1z"
+                      ></path>
                     </svg>
                     <span className="text-green-100">Connexion</span>
                   </a>
@@ -80,22 +77,24 @@ const Navigation = () => {
                     className="cursor-pointer group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white !bg-green-900 !bg-opacity-20 focus:outline-none focus:!bg-green-800 transition ease-in-out duration-150"
                   >
                     <svg
-                      className="mr-4 h-6 w-6 text-gray-300 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      className="mr-4 h-5 w-5 text-gray-300 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
                     >
                       <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
+                        fill="currentColor"
+                        d="M272 112v51.6h-96c-26.5 0-48 21.5-48 48v88.6c0 26.5 21.5 48 48 48h96v51.6c0 42.6 51.7 64.2 81.9 33.9l144-143.9c18.7-18.7 18.7-49.1 0-67.9l-144-144C323.8 48 272 69.3 272 112zm192 144L320 400v-99.7H176v-88.6h144V112l144 144zM96 64h84c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H96c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h84c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H96c-53 0-96-43-96-96V160c0-53 43-96 96-96z"
+                      ></path>
                     </svg>
                     <span>Déconnexion</span>
                   </a>
                 </>
               )}
+            </div>
+            <div className="flex mt-5 justify-center">
+              <p className="text-xs text-green-200">
+                Made with <span className="text-red-500">❤</span>
+              </p>
             </div>
           </div>
         </nav>

@@ -111,10 +111,15 @@ const forgetPassword: NextPage = () => {
         <div className="w-full max-w-xs space-y-2">
           {error && (
             <FadeIn className="bg-red-500 border border-red-100 text-white px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
-              <div className="inline-flex space-x-2">
-                <div className="">
+              <div className="flex justify-end space-x-2">
+                <div className="inline-flex justify-center space-x-2">
+                  <div className="flex">
+                    <p className="text-white text-xs font-medium">{error}</p>
+                  </div>
+                </div>
+                <div className="w-4 h-4 mt-0.5 bg-red-600 p-1 rounded-full">
                   <svg
-                    className="fill-current cursor-pointer text-red-100 hover:text-red-200 transition w-4 h-4 flex justify-items-end"
+                    className="fill-current cursor-pointer text-red-100 hover:text-red-200 transition w-2 h-2 flex justify-items-end"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     onClick={() => setError("")}
@@ -122,31 +127,30 @@ const forgetPassword: NextPage = () => {
                     <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
                   </svg>
                 </div>
-                <div className="flex">
-                  <p className="text-white text-xs font-medium">{error}</p>
-                </div>
               </div>
             </FadeIn>
           )}
 
           {success && (
             <FadeIn className="bg-green-500 border border-green-100 text-white px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
-              <div className="inline-flex space-x-2">
-                <div className="">
+              <div className="flex justify-end space-x-2">
+                <div className="inline-flex justify-center space-x-2">
+                  <div className="flex">
+                    <p className="text-white text-xs font-medium">
+                      Nous vous avons envoyé un e-mail pour réinitialiser votre
+                      mot de passe.
+                    </p>
+                  </div>
+                </div>
+                <div className="w-4 h-4 mt-0.5 bg-green-600 p-1 rounded-full">
                   <svg
-                    className="fill-current cursor-pointer text-green-100 hover:text-green-200 transition w-4 h-4 flex justify-items-end"
+                    className="fill-current cursor-pointer text-green-100 hover:text-green-200 transition w-2 h-2 flex justify-items-end"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     onClick={() => setSuccess(false)}
                   >
                     <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
                   </svg>
-                </div>
-                <div className="flex">
-                  <p className="text-white text-xs font-medium">
-                    Nous vous avons envoyé un e-mail pour réinitialiser votre
-                    mot de passe.
-                  </p>
                 </div>
               </div>
             </FadeIn>

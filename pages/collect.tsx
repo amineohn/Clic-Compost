@@ -303,7 +303,7 @@ const Collect: NextPage = () => {
             <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
               <div className="flex flex-col">
                 <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:-mb-8 sm:-mt-6 sm:flex sm:justify-start">
-                  <div className="align-middle inline-block min-w-full shadow sm:rounded-lg border-b border-gray-200 dark:border-gray-800">
+                  <div className="align-middle inline-block min-w-full border-b border-gray-200 dark:border-gray-800">
                     <table className="min-w-full">
                       <thead>
                         <tr>
