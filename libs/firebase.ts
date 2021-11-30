@@ -36,6 +36,9 @@ export class Firebase {
   getEmail() {
     return this.getUser()?.email;
   }
+  getTokenId() {
+    return this.getAuth().currentUser?.getIdToken();
+  }
 
   getUserData() {
     return firebase.firestore().collection("users").doc(this.getUser()?.uid);
