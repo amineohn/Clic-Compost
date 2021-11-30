@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { NextSeo } from "next-seo";
 import router from "next/router";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
@@ -42,6 +43,23 @@ const forgetPassword: NextPage = () => {
   };
   return (
     <>
+      <NextSeo
+        title="Clic Compost | Reset Password"
+        description=""
+        openGraph={{
+          url: "https://les-detritivores.co",
+          title: "Clic Compost",
+          description: "",
+          images: [
+            {
+              url: "/static/images/logos.jpg",
+              width: 800,
+              height: 600,
+              alt: "Les Détritivores",
+            },
+          ],
+        }}
+      />
       <FadeIn className="my-60 lg:my-64 flex flex-col items-center justify-center">
         <div className="flex justify-center">
           <svg

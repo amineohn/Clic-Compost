@@ -7,6 +7,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import { Firebase } from "../libs/firebase";
+import { NextSeo } from "next-seo";
 const Collect: NextPage = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -128,6 +129,23 @@ const Collect: NextPage = () => {
 
   return (
     <>
+      <NextSeo
+        title="Clic Compost | Collect"
+        description=""
+        openGraph={{
+          url: "https://les-detritivores.co",
+          title: "Clic Compost",
+          description: "",
+          images: [
+            {
+              url: "/static/images/logos.jpg",
+              width: 800,
+              height: 600,
+              alt: "Les Détritivores",
+            },
+          ],
+        }}
+      />
       <FadeIn className="grid m-auto grid-cols-1 lg:grid-cols-3 justify-center my-36 lg:my-36">
         <div className="flex justify-center">
           <div className="w-full max-w-sm">

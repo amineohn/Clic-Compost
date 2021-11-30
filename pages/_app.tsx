@@ -8,6 +8,7 @@ import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
 import { useRouter } from "next/router";
 import { Firebase } from "../libs/firebase";
+import { NextSeo } from "next-seo";
 
 const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
@@ -44,6 +45,23 @@ export default function MyApp({
   }, []);
   return (
     <>
+      <NextSeo
+        title="Clic Compost | Login"
+        description=""
+        openGraph={{
+          url: "https://les-detritivores.co",
+          title: "Clic Compost",
+          description: "",
+          images: [
+            {
+              url: "/static/images/logos.jpg",
+              width: 800,
+              height: 600,
+              alt: "Les Détritivores",
+            },
+          ],
+        }}
+      />
       <ThemeProvider defaultTheme="light" attribute="class">
         <div className="flex flex-col h-screen overflow-auto lg:overflow-y-hidden justify-between z-auto">
           <Component {...pageProps} />
