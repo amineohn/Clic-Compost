@@ -33,6 +33,21 @@ module.exports = {
         orangeDDTV: "#e94e1a",
         greenDDTV: "#263b29",
       },
+      fontFamily: {
+        default: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Oxygen",
+          "Ubuntu",
+          "Cantarell",
+          "Fira Sans",
+          "Droid Sans",
+          "Helvetica Neue",
+          "sans-serif",
+        ],
+      },
     },
   },
   variants: {

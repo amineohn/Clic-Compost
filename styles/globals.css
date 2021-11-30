@@ -1,10 +1,6 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  transition: all 0.25s ease-in-out;
+  @apply font-default transition ease-in-out antialiased p-0 m-0;
 }
 
 body {
@@ -13,7 +9,7 @@ body {
 
 a {
   color: inherit;
-  text-decoration: none;
+  @apply no-underline;
 }
 a,
 h1,
@@ -22,30 +18,21 @@ p {
   @apply antialiased;
 }
 datalist {
-  position: absolute;
-  max-height: 20em;
-  transition: 1s linear all;
-  @apply sticky border-2 border-opacity-50 border-gray-100 rounded-lg z-50;
+  @apply sticky border-2 border-opacity-50 border-gray-100 rounded-lg z-50 transition-all ease-linear max-h-80;
 }
 datalist:focus {
-  transition: 1s linear all;
-  @apply hidden;
+  @apply hidden transition-all ease-linear;
 }
 datalist option {
-  font-size: 0.8em;
-  padding: 1rem;
-  background-color: #fff;
-  cursor: pointer;
-  transition: 1s linear all;
+  @apply text-xs p-4 bg-white cursor-pointer transition-all ease-linear;
 }
 
 datalist option:hover,
 datalist option:focus {
-  transition: 1s linear all;
-  @apply transition bg-gray-50 rounded-lg outline-none border-none;
+  @apply bg-gray-50 rounded-lg outline-none border-none transition-all ease-linear;
 }
 * {
-  box-sizing: border-box;
+  @apply box-border;
 }
 ::-webkit-scrollbar {
   @apply hidden;
