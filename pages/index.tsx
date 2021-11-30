@@ -12,11 +12,13 @@ const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [redirection, setRedirection] = useState(false);
   const router = useRouter();
 
   const fire = new Firebase();
   fire.getAuth().onAuthStateChanged((user) => {
     if (user) {
+      setRedirection(true);
       router.push("/collect");
     }
   });
@@ -41,35 +43,71 @@ const Home: NextPage = () => {
     e.preventDefault();
     setLoading(true);
     setSuccess(false);
+    setRedirection(false);
 
     if (email.length === 0 || password.length === 0) {
       setLoading(false);
+      setRedirection(false);
       setError("Veuillez saisir tous les champs");
       return;
     }
     if (password.length < 6) {
       setLoading(false);
+      setRedirection(false);
       setError("Le mot de passe doit être au moins de 6 caractères");
       return;
     }
 
     try {
       await fire.signIn(email, password, "users", "/collect");
+      await setRedirection(true);
       await setLoading(false);
       await setSuccess(true);
     } catch (error: any) {
       setLoading(false);
+      setRedirection(false);
       const code = error.code;
       let errorMessage = error.message;
       fire.getErrors(code, errorMessage);
       setError(errorMessage);
     }
+    setRedirection(false);
     setLoading(false);
+    setRedirection(false);
   };
 
   return (
     <>
       <FadeIn className="lg:my-48 my-48">
+        {redirection && (
+          <div className="flex items-center justify-center z-50">
+            <div className="flex justify-center m-auto space-x-2">
+              <svg
+                className="flex justify-center animate-spin h-7 w-7 text-gray-800 mt-1"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              <span className="flex text-center text-lg font-medium m-auto">
+                Redirection...
+              </span>
+            </div>
+          </div>
+        )}
         <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
