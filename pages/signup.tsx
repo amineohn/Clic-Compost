@@ -20,11 +20,6 @@ const signup = () => {
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  // progress bar animation
-  const [progress, setProgress] = useState(0);
-  const [progressBar, setProgressBar] = useState(false);
-
-  // progress bar animation end
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -53,12 +48,6 @@ const signup = () => {
       setError("L'email doit être valide");
       return;
     }
-    setProgressBar(true);
-    setTimeout(() => {
-      setProgress(100);
-      setProgressBar(false);
-      setSuccess(true);
-    }, 2000);
 
     try {
       await fire.getCollection("users").add({
@@ -97,7 +86,6 @@ const signup = () => {
       setInterval(() => {
         setError("");
       }, 3500);
-      setProgressBar(true);
 
       setError("Le mot de passe doit être au moins de 6 caractères");
       return;
