@@ -15,7 +15,6 @@ const NewPassword: NextPage = () => {
   const forgetPassword = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     if (currentPassword === "" || newPassword === "") {
       setError("Veuillez remplir tous les champs");
       setLoading(false);
@@ -24,18 +23,21 @@ const NewPassword: NextPage = () => {
       setError("Votre mot de passe doit contenir au moins 6 caractères");
       setLoading(false);
     }
-    if (currentPassword === newPassword) {
-      setError("Votre nouveau mot de passe doit être différent de l'ancien");
-      setLoading(false);
-    }
     if (
       currentPassword !== "" &&
       newPassword !== "" &&
       currentPassword !== newPassword
     ) {
       try {
+        if (currentPassword === newPassword) {
+          setError(
+            "Votre nouveau mot de passe doit être différent de l'ancien"
+          );
+          setLoading(false);
+        }
         await fire.updatePassword(currentPassword, newPassword);
         setSuccess(true);
+        router.push("/");
         setLoading(false);
       } catch (error: any) {
         setLoading(false);
@@ -73,9 +75,7 @@ const NewPassword: NextPage = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 173.35 111.2"
-            width="150"
-            height="150"
-            className="fill-current text-black"
+            className="fill-current text-black w-36 h-36"
             onClick={() => router.push("/")}
           >
             <path d="M96.16,6.73c-.72-1.82-1.72-4.24-4-4.34-2.68-.12-4.33,2.16-5.11,3.68a21.72,21.72,0,0,0-2,12c.46,2.79,3.71,3.39,4.29,5.08s.07,7-.21,8.3c0,0,1.53-2.31,3.86-1.94,0-2.28-.75-4.47-.19-6.74.41-1.65,2.57-2.57,3.62-4.41,1.88-3.31.82-8.68-.34-11.62M92.72,20.54c1.52-2.06,3.94-4.23,3-7.82,0-.25.16-.3.16-.5l.5-.08c.69,3.73-.71,7.07-3.61,8.4" />
@@ -199,7 +199,7 @@ const NewPassword: NextPage = () => {
                 <input
                   className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="newPassword"
-                  type="newPassword"
+                  type="password"
                   placeholder="Nouveau Mot de passe"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}

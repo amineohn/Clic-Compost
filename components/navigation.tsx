@@ -6,6 +6,7 @@ const Navigation = () => {
   const router = useRouter();
   const fire = new Firebase();
   const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       <Transition
