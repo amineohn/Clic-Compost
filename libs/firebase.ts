@@ -333,6 +333,14 @@ export class Firebase {
         break;
     }
   }
+  async phoneSignIn(
+    phoneNumber: string,
+    verificationCode: firebase.auth.ApplicationVerifier
+  ) {
+    const auth = this.getAuth();
+    await auth.signInWithPhoneNumber(phoneNumber, verificationCode);
+  }
+
   async signOut() {
     const auth = this.getAuth();
     await auth.signOut();
