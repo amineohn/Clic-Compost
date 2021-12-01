@@ -105,6 +105,7 @@ const Collect: NextPage = () => {
       setSuccess(false);
     }
   };
+
   const clear = () => {
     setPhone("");
     setName("");

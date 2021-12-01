@@ -47,11 +47,6 @@ const signup = () => {
       email: "",
       password: "",
     });
-    if (!email.includes("@") || !email.includes(".") || email.length < 5) {
-      setError("L'email doit être valide");
-      return;
-    }
-
     try {
       await fire.getCollection("users").add({
         name,
@@ -82,6 +77,7 @@ const signup = () => {
       }, 3500);
       return;
     }
+
     if (!fire.validatePassword(password)) {
       setError(
         "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
