@@ -20,7 +20,7 @@ const ErrorPage = () => {
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
-                      strokeLineJoin="round"
+                      strokeLinejoin="round"
                     ></path>
                   </svg>
                 </button>
@@ -123,7 +123,7 @@ const ErrorPage = () => {
                 stroke="#263E4B"
                 strokeWidth="1.5"
                 strokeLinecap="round"
-                strokeLineJoin="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 fillRule="evenodd"

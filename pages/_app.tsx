@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import React, { useEffect } from "react";
-import { ThemeProvider } from "next-themes";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { StatusBar, Style } from "@capacitor/status-bar";
@@ -62,12 +61,10 @@ export default function MyApp({
           ],
         }}
       />
-      <ThemeProvider defaultTheme="light" attribute="class">
-        <div className="flex flex-col h-screen overflow-auto lg:overflow-y-hidden justify-between z-auto">
-          <Component {...pageProps} />
-          <Navigation />
-        </div>
-      </ThemeProvider>
+      <div className="flex flex-col h-screen overflow-auto lg:overflow-y-hidden justify-between z-auto">
+        <Component {...pageProps} />
+        <Navigation />
+      </div>
       <script src="https://cdn.jsdelivr.net/npm/datalist-css/dist/datalist-css.min.js" />
     </>
   );

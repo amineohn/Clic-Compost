@@ -4,7 +4,7 @@ body {
 }
 
 body {
-  @apply bg-white dark:bg-black transition-all;
+  @apply bg-white transition-all;
 }
 
 a {

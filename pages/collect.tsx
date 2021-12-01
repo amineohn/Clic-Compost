@@ -8,6 +8,7 @@ import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import { Firebase } from "../libs/firebase";
 import { NextSeo } from "next-seo";
+import router from "next/router";
 const Collect: NextPage = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -82,6 +83,7 @@ const Collect: NextPage = () => {
       fire.getCollection("clients").add(data);
       setLoading(false);
       setSuccess(true);
+      router.reload();
     } catch (error: any) {
       setError(error.message);
       setSuccess(false);
@@ -328,8 +330,8 @@ const Collect: NextPage = () => {
                       </thead>
                       <tbody>
                         {data ? (
-                          data.map((item: any) => (
-                            <tr key={item.id}>
+                          data.map((item: any, index) => (
+                            <tr key={index}>
                               <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
                                 <div className="flex items-center">
                                   <div className="ml-4">
