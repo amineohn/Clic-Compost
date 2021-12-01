@@ -52,6 +52,18 @@ datalist option:focus {
 ::-webkit-scrollbar-corner {
   @apply hidden;
 }
+
+#nprogress .bar {
+  @apply !bg-greenDDTV;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #ffbb00, 0 0 5px #ffbb00;
+}
+
+#nprogress .spinner-icon {
+  @apply !border-t-greenDDTV !border-l-greenDDTV;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

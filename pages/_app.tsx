@@ -8,6 +8,8 @@ import { SplashScreen } from "@capacitor/splash-screen";
 import { useRouter } from "next/router";
 import { Firebase } from "../libs/firebase";
 import { NextSeo } from "next-seo";
+import { Router } from "next/router";
+import NProgress from "nprogress";
 
 const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
@@ -15,6 +17,10 @@ const Navigation = dynamic(() => import("../components/navigation"), {
 const fire = new Firebase();
 const isAvailable = Capacitor.isPluginAvailable("StatusBar");
 const isAvailable2 = Capacitor.isPluginAvailable("SplashScreen");
+
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 export default function MyApp({
   Component,
