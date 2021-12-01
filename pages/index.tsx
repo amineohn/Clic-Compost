@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState("");
   const [redirection, setRedirection] = useState(false);
   const router = useRouter();
 
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess(false);
+    setSuccess("Vous êtes connecté");
     setRedirection(false);
 
     if (email.length === 0 || password.length === 0) {
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
       await fire.signIn(email, password, "users", "/collect", fire.getUserId());
       await setRedirection(true);
       await setLoading(false);
-      await setSuccess(true);
+      await setSuccess("Vous êtes connecté");
     } catch (error: any) {
       setLoading(false);
       setRedirection(false);
@@ -180,16 +180,7 @@ const Home: NextPage = () => {
                   </FadeIn>
                 </>
               )}
-
-              <Transition
-                show={success}
-                enter="transition-opacity duration-75"
-                enter-from="opacity-0"
-                enter-to="opacity-100"
-                leave="transition-opacity duration-150"
-                leave-from="opacity-100"
-                leave-to="opacity-0"
-              >
+              {success && (
                 <FadeIn className="bg-green-500 border border-green-100 text-white px-4 py-3 rounded-lg relative space-y-2 overflow-auto">
                   <div className="flex justify-end space-x-2">
                     <div className="inline-flex justify-center space-x-2">
@@ -204,14 +195,14 @@ const Home: NextPage = () => {
                         className="fill-current cursor-pointer text-green-100 hover:text-green-200 transition w-2 h-2 flex justify-items-end"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
-                        onClick={() => setSuccess(false)}
+                        onClick={() => setSuccess("")}
                       >
                         <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
                       </svg>
                     </div>
                   </div>
                 </FadeIn>
-              </Transition>
+              )}
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
