@@ -62,7 +62,10 @@ const signup = () => {
       console.error(err);
       setError("Une erreur est survenue");
     }
-    setSuccess(true);
+    setInterval(() => {
+      setSuccess(true);
+      router.push("/collect");
+    }, 3500);
 
     if (!name || !email || !password) {
       setInterval(() => {
