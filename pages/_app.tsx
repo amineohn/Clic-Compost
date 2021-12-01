@@ -44,7 +44,7 @@ export default function MyApp({
   const router = useRouter();
 
   useEffect(() => {
-    if (!fire.getAuth().currentUser) {
+    if (!fire.getUser()) {
       router.push("/");
     }
   }, []);

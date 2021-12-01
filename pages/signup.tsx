@@ -30,7 +30,7 @@ const signup = () => {
     e.preventDefault();
     try {
       await fire.signUp(email, password);
-      await fire.getAuth().currentUser?.updateProfile({
+      await fire.getUser()?.updateProfile({
         displayName: name,
       });
       setInterval(() => {
