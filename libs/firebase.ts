@@ -103,6 +103,9 @@ export class Firebase {
   validateAdress(address: string) {
     return form.send.address.test(address);
   }
+  validateName(name: string) {
+    return form.send.name.test(name);
+  }
 
   getData(
     phone: string,

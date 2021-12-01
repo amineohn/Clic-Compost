@@ -20,6 +20,7 @@ const Collect: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [data, setData] = useState([{}]);
+
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const fire = new Firebase();
 

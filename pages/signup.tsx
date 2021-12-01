@@ -31,9 +31,12 @@ const signup = () => {
       setInterval(() => {
         setError("");
       }, 3500);
-      setError("Inscription réussie");
+
+      setSuccess(true);
+      router.push("/collect");
     } catch (error: any) {
-      setError(error.message);
+      const messages = fire.getErrors(error.code, error.message);
+      setError(messages);
     }
     if (password.length < 6) {
       setError("Le mot de passe doit être au moins de 6 caractères");
@@ -55,24 +58,23 @@ const signup = () => {
         email,
         password,
       });
-      setSuccess(true);
-      setError("");
-      return;
     } catch (err) {
       console.error(err);
       setError("Une erreur est survenue");
     }
-    setInterval(() => {
-      setSuccess(true);
-      router.push("/collect");
-    }, 3500);
-
     if (!name || !email || !password) {
       setInterval(() => {
         setError("");
       }, 3500);
       setError("Veuillez saisir tous les champs");
     }
+    if (!fire.validateName(name)) {
+      setInterval(() => {
+        setError("");
+      }, 3500);
+      setError("Le nom doit contenir au moins 2 caractères");
+    }
+
     if (!fire.validateEmail(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
@@ -89,7 +91,6 @@ const signup = () => {
       }, 3500);
       return;
     }
-
     if (success) {
       setSuccess(false);
     }
@@ -105,7 +106,6 @@ const signup = () => {
       return;
     }
   };
-  // progress bar if password is less than 6
   return (
     <>
       <NextSeo
