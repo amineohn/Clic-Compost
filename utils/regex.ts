@@ -8,5 +8,6 @@ export const form = {
     password:
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
     name: /^[a-zA-Z\s]{1,}$/,
+    frequency: /^[0-9]{1,2}$/,
   },
 };

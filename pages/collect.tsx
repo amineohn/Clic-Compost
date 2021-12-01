@@ -45,6 +45,15 @@ const Collect: NextPage = () => {
       return;
     }
 
+    if (!fire.validateFrequency(frequency)) {
+      setError("Veuillez entrer une fréquence valide");
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 150);
+      return;
+    }
+
     if (!fire.validateEmail(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {

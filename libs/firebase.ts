@@ -107,6 +107,10 @@ export class Firebase {
     return form.send.name.test(name);
   }
 
+  validateFrequency(frequency: string) {
+    return form.send.frequency.test(frequency);
+  }
+
   getData(
     phone: string,
     name: string,
