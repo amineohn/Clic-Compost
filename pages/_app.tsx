@@ -1,4 +1,6 @@
 import "../styles/globals.css";
+import "nprogress/nprogress.css";
+
 import React, { useEffect } from "react";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
@@ -10,7 +12,6 @@ import { Firebase } from "../libs/firebase";
 import { NextSeo } from "next-seo";
 import { Router } from "next/router";
 import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 
 const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
