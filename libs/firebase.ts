@@ -162,6 +162,24 @@ export class Firebase {
       case "auth/invalid-action-code":
         errorMessage = "Le code d'action fourni est invalide ou a expiré.";
         break;
+      case "auth/invalid-verification-code":
+        errorMessage = "Le code de vérification fourni est invalide.";
+        break;
+      case "auth/invalid-verification-id":
+        errorMessage = "L'ID de vérification fourni est invalide.";
+        break;
+      case "auth/invalid-phone-number":
+        errorMessage = "Le numéro de téléphone fourni est invalide.";
+        break;
+      case "auth/quota-exceeded":
+        errorMessage =
+          "La limite de quota a été dépassée. Veuillez réessayer ultérieurement.";
+        break;
+      case "auth/user-cancelled":
+        errorMessage =
+          "L'utilisateur a annulé l'opération. L'opération n'a pas été exécutée.";
+        break;
+
       default:
         errorMessage = "Une erreur inconnue s'est produite.";
         break;
