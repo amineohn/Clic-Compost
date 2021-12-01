@@ -85,7 +85,8 @@ const Collect: NextPage = () => {
       setSuccess(true);
       router.reload();
     } catch (error: any) {
-      setError(error.message);
+      const messages = fire.getErrors(error.code, error.message);
+      setError(messages);
       setSuccess(false);
     }
   };
