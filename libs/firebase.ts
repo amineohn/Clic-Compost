@@ -255,6 +255,36 @@ export class Firebase {
     const auth = this.getAuth();
     await auth.sendPasswordResetEmail(email);
   }
+
+  async databaseUpdate(collection: string, documentPath: string, data: any) {
+    const collectionRef = this.getCollection(collection);
+    const documentRef = collectionRef.doc(documentPath);
+    await documentRef.update(data);
+  }
+  async databaseCreate(collection: string, data: any) {
+    const collectionRef = this.getCollection(collection);
+    await collectionRef.add(data);
+  }
+  async databaseDelete(collection: string, documentPath: string) {
+    const collectionRef = this.getCollection(collection);
+
+    const documentRef = collectionRef.doc(documentPath);
+    await documentRef.delete();
+  }
+  async databaseGet(collection: string, documentPath: string) {
+    const collectionRef = this.getCollection(collection);
+    const documentRef = collectionRef.doc(documentPath);
+    return await documentRef.get();
+  }
+  async databaseGetAll(collection: string) {
+    const collectionRef = this.getCollection(collection);
+    return await collectionRef.get();
+  }
+  async databaseGetAllByField(collection: string, field: string, value: any) {
+    const collectionRef = this.getCollection(collection);
+    return await collectionRef.where(field, "==", value).get();
+  }
+
   async updateUser(collection: string, documentPath: string, data: any) {
     const user = this.getUser();
     const userData = this.getUserData();
