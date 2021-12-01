@@ -27,6 +27,13 @@ const NewPassword: NextPage = () => {
       setError("Votre nouveau mot de passe doit être différent de l'ancien");
       setLoading(false);
     }
+    if (!fire.validatePassword(newPassword)) {
+      setError(
+        "Votre nouveau mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
+      );
+      setLoading(false);
+    }
+
     if (
       currentPassword !== "" &&
       newPassword !== "" &&

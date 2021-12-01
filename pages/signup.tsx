@@ -73,12 +73,23 @@ const signup = () => {
       }, 3500);
       setError("Veuillez saisir tous les champs");
     }
-    if (!email.includes("@") || !email.includes(".") || email.length < 5) {
+    if (!fire.validateEmail(email)) {
+      setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
       }, 3500);
-      setError("Veuillez entrer un email valide");
+      return;
     }
+    if (!fire.validatePassword(password)) {
+      setError(
+        "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
+      );
+      setInterval(() => {
+        setError("");
+      }, 3500);
+      return;
+    }
+
     if (success) {
       setSuccess(false);
     }

@@ -22,12 +22,14 @@ const forgetPassword: NextPage = () => {
       setLoading(false);
       return;
     }
-    if (!email.includes("@") || !email.includes(".") || email.length < 5) {
+    if (!fire.validateEmail(email)) {
       setError("Veuillez entrer un email valide");
+      setInterval(() => {
+        setError("");
+      }, 3500);
       setLoading(false);
       return;
     }
-
     if (success) {
       setLoading(false);
       return;

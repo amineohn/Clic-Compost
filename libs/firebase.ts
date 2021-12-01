@@ -7,6 +7,7 @@ import "firebase/compat/analytics";
 import "firebase/compat/performance";
 import "firebase/messaging";
 import router from "next/router";
+import { form } from "../utils/regex";
 export class Firebase {
   getSettings() {
     return {
@@ -86,6 +87,41 @@ export class Firebase {
     this.currentPassword(currentPassword)?.then(() => {
       return this.getUser()?.updatePassword(newPassword);
     });
+  }
+  validateEmail(email: string) {
+    return form.send.email.test(String(email).toLowerCase());
+  }
+  validatePassword(password: string) {
+    return form.send.password.test(password);
+  }
+  validatePhone(phone: string) {
+    return form.send.phone.test(phone);
+  }
+  validateCollectTime(collectTime: string) {
+    return form.send.collectTime.test(collectTime);
+  }
+  validateAdress(address: string) {
+    return form.send.address.test(address);
+  }
+
+  getData(
+    phone: string,
+    name: string,
+    email: string,
+    frequency: string,
+    collectTime: string,
+    address: string,
+    collection: string
+  ) {
+    return {
+      id: this.getCollection(collection).doc().id,
+      phone: phone,
+      name: name,
+      email: email,
+      frequency: frequency,
+      collectTime: collectTime,
+      address: address,
+    };
   }
   getErrors(code: string, errorMessage: string) {
     switch (code) {

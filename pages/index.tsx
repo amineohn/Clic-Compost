@@ -22,6 +22,7 @@ const Home: NextPage = () => {
       router.push("/collect");
     }
   });
+
   const authenticateWithGoogle = async () => {
     try {
       setLoading(true);
@@ -56,6 +57,15 @@ const Home: NextPage = () => {
       setLoading(false);
       setRedirection(false);
       setError("Le mot de passe doit être au moins de 6 caractères");
+      return;
+    }
+
+    if (!fire.validatePassword(password)) {
+      setLoading(false);
+      setRedirection(false);
+      setError(
+        "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial"
+      );
       return;
     }
 

@@ -35,7 +35,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!phone.match(form.send.phone)) {
+    if (!fire.validatePhone(phone)) {
       setError("Veuillez entrer un numéro de téléphone valide");
       setLoading(true);
       setTimeout(() => {
@@ -43,15 +43,16 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!email.match(form.send.email)) {
+
+    if (!fire.validateEmail(email)) {
       setError("Veuillez entrer un email valide");
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 150);
+      setInterval(() => {
+        setError("");
+      }, 3500);
+      setLoading(false);
       return;
     }
-    if (!collectTime.match(form.send.collectTime)) {
+    if (!fire.validateCollectTime(collectTime)) {
       setError("Veuillez entrer une heure de collecte valide");
       setLoading(true);
       setTimeout(() => {
@@ -59,7 +60,8 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!address.match(form.send.address)) {
+
+    if (!fire.validateAdress(address)) {
       setError("s'il-vous-plaît entrez une adresse valide");
       setLoading(true);
       setTimeout(() => {
@@ -70,17 +72,20 @@ const Collect: NextPage = () => {
 
     setError("");
     setSuccess(false);
-    const data = {
-      id: fire.getCollection("clients").doc().id,
-      phone: phone,
-      name: name,
-      email: email,
-      frequency: frequency,
-      collectTime: collectTime,
-      address: address,
-    };
     try {
-      fire.getCollection("clients").add(data);
+      fire
+        .getCollection("clients")
+        .add(
+          fire.getData(
+            phone,
+            name,
+            email,
+            frequency,
+            collectTime,
+            address,
+            "clients"
+          )
+        );
       setLoading(false);
       setSuccess(true);
       router.reload();
