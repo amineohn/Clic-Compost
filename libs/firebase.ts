@@ -89,6 +89,7 @@ export class Firebase {
   getPerformance() {
     return firebase.performance();
   }
+
   onAuthStateChanged(callback: (user: firebase.User | null) => void) {
     const auth = this.getAuth();
     auth.onAuthStateChanged(callback);
