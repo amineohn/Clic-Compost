@@ -42,7 +42,9 @@ const NewPassword: NextPage = () => {
       try {
         await fire.updatePassword(currentPassword, newPassword);
         setSuccess(true);
-        //router.push("/");
+        if (success) {
+          router.push("/");
+        }
         setLoading(false);
       } catch (error: any) {
         setLoading(false);
@@ -81,7 +83,10 @@ const NewPassword: NextPage = () => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 173.35 111.2"
             className={`fill-current text-black w-36 h-36 ${
-              error && (error.length > 0 ? "text-red-500 transition" : "")
+              error &&
+              (error.length > 0
+                ? "text-red-500 animate-bounce transition duration-200"
+                : "")
             } ${success && (success ? "text-green-500 transition" : "")}`}
             onClick={() => router.push("/")}
           >

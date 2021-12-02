@@ -312,6 +312,12 @@ export class Firebase {
     const auth = this.getAuth();
     await auth.createUserWithEmailAndPassword(email, password);
   }
+  async signWithGithub() {
+    const auth = this.getAuth();
+    const provider = new firebase.auth.GithubAuthProvider();
+    return await auth.signInWithPopup(provider);
+  }
+
   async signWithGoogle(sign) {
     const auth = this.getAuth();
     const provider = new firebase.auth.GoogleAuthProvider();
