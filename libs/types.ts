@@ -1,3 +1,4 @@
-export type Example = {
-  name: string;
+export type Errors = {
+  code: string;
+  message: string;
 };

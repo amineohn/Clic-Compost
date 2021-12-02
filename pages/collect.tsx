@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "../components/loading";
-import { form } from "../utils/regex";
 import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
