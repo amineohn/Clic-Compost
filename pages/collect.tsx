@@ -189,7 +189,7 @@ const Collect: NextPage = () => {
           ],
         }}
       />
-      <FadeIn className="grid m-auto grid-cols-1 lg:grid-cols-3 justify-center my-36 lg:my-36">
+      <FadeIn className="grid m-auto grid-cols-1 lg:grid-cols-3 justify-center my-36 lg:my-36 mx-10">
         <div className="flex justify-center">
           <div className="w-full max-w-sm">
             <form
