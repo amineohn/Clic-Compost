@@ -30,7 +30,8 @@ const Home: NextPage = () => {
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
-      setError(error.message);
+      const messages = fire.getErrors(error.code, error.message);
+      setError(messages);
     }
   };
 
