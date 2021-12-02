@@ -49,6 +49,10 @@ export class Firebase {
   isConnected() {
     return this.getAuth().currentUser !== null;
   }
+  onAuthStateChanged(callback: (user: firebase.User | null) => void) {
+    const auth = this.getAuth();
+    auth.onAuthStateChanged(callback);
+  }
   getStorage() {
     return firebase.storage();
   }
