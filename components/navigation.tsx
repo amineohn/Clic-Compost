@@ -180,7 +180,7 @@ const Navigation = () => {
           </div>
         </div>
       </div>
-      <div className="fixed z-50 top-0 inset-x-0 p-6 transition duration-500 ease-in-out transform lg:bg-transparent lg:bg-opacity-100 backdrop-blur-sm bg-opacity-20">
+      <div className="fixed z-50 top-0 inset-x-0 p-6 transition duration-500 ease-in-out transform lg:bg-transparent lg:bg-opacity-100 backdrop-blur-none bg-opacity-20">
         <div className="absolute inset-0 flex">
           <div
             className="w-1/2 h-full"
