@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import type { NextPage } from "next";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import FadeIn from "react-fade-in";
@@ -7,7 +8,7 @@ import { Firebase } from "../libs/firebase";
 import router from "next/router";
 import { NextSeo } from "next-seo";
 
-const signup = () => {
+const signup: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
