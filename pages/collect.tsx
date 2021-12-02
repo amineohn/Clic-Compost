@@ -270,7 +270,7 @@ const Collect: NextPage = () => {
                     value={collectTime}
                     autoComplete="off"
                     onChange={(e) => setCollectTime(e.target.value)}
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-1"
+                    className="shadow appearance-none !bg-white border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-1"
                   />
                 </label>
               </div>
