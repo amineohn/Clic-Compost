@@ -49,10 +49,6 @@ export class Firebase {
   isConnected() {
     return this.getAuth().currentUser !== null;
   }
-  onAuthStateChanged(callback: (user: firebase.User | null) => void) {
-    const auth = this.getAuth();
-    auth.onAuthStateChanged(callback);
-  }
   getStorage() {
     return firebase.storage();
   }
@@ -92,6 +88,10 @@ export class Firebase {
   }
   getPerformance() {
     return firebase.performance();
+  }
+  onAuthStateChanged(callback: (user: firebase.User | null) => void) {
+    const auth = this.getAuth();
+    auth.onAuthStateChanged(callback);
   }
   currentPassword(currentPassword) {
     const credential = firebase.auth.EmailAuthProvider.credential(
