@@ -5,12 +5,15 @@ import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "../../components/loading";
 import { Firebase } from "../../libs/firebase";
+import { Validate } from "../../libs/validate";
 const forgetPassword: NextPage = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const fire = new Firebase();
+  const check = new Validate();
+
   const forgetPassword = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -22,7 +25,7 @@ const forgetPassword: NextPage = () => {
       setLoading(false);
       return;
     }
-    if (!fire.validateEmail(email)) {
+    if (!check.validateEmail(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -40,7 +43,7 @@ const forgetPassword: NextPage = () => {
       setSuccess(true);
     } catch (error: any) {
       setLoading(false);
-      const messages = fire.getErrors(error.code, error.message);
+      const messages = check.getErrors(error.code, error.message);
       setError(messages);
     }
   };

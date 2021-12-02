@@ -5,6 +5,7 @@ import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "../../components/loading";
 import { Firebase } from "../../libs/firebase";
+import { Validate } from "../../libs/validate";
 const NewPassword: NextPage = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -12,6 +13,7 @@ const NewPassword: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const fire = new Firebase();
+  const check = new Validate();
   const forgetPassword = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -27,7 +29,7 @@ const NewPassword: NextPage = () => {
       setError("Votre nouveau mot de passe doit être différent de l'ancien");
       setLoading(false);
     }
-    if (!fire.validatePassword(newPassword)) {
+    if (!check.validatePassword(newPassword)) {
       setError(
         "Votre nouveau mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
       );
@@ -48,7 +50,7 @@ const NewPassword: NextPage = () => {
         setLoading(false);
       } catch (error: any) {
         setLoading(false);
-        const messages = fire.getErrors(error.code, error.message);
+        const messages = check.getErrors(error.code, error.message);
         setError(messages);
       }
     }

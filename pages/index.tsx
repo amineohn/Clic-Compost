@@ -6,6 +6,7 @@ import Loading from "../components/loading";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
 import { Firebase } from "../libs/firebase";
+import { Validate } from "../libs/validate";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +31,8 @@ const Home: NextPage = () => {
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
-      const messages = fire.getErrors(error.code, error.message);
+      const check = new Validate();
+      const messages = check.getErrors(error.code, error.message);
       setError(messages);
     }
   };
@@ -69,7 +71,8 @@ const Home: NextPage = () => {
     } catch (error: any) {
       setLoading(false);
       setRedirection(false);
-      const messages = fire.getErrors(error.code, error.message);
+      const check = new Validate();
+      const messages = check.getErrors(error.code, error.message);
       setError(messages);
     }
     setRedirection(false);

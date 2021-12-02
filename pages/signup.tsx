@@ -7,6 +7,7 @@ import { Transition } from "@headlessui/react";
 import { Firebase } from "../libs/firebase";
 import router from "next/router";
 import { NextSeo } from "next-seo";
+import { Validate } from "../libs/validate";
 
 const signup: NextPage = () => {
   const [error, setError] = useState("");
@@ -17,6 +18,8 @@ const signup: NextPage = () => {
     password: "",
   });
   const fire = new Firebase();
+  const check = new Validate();
+
   const { name, email, password } = formData;
 
   const onChange = (e) =>
@@ -36,7 +39,7 @@ const signup: NextPage = () => {
       setSuccess(true);
       router.push("/collect");
     } catch (error: any) {
-      const messages = fire.getErrors(error.code, error.message);
+      const messages = check.getErrors(error.code, error.message);
       setError(messages);
     }
     if (password.length < 6) {
@@ -64,14 +67,14 @@ const signup: NextPage = () => {
       }, 3500);
       setError("Veuillez saisir tous les champs");
     }
-    if (!fire.validateName(name)) {
+    if (!check.validateName(name)) {
       setInterval(() => {
         setError("");
       }, 3500);
       setError("Le nom doit contenir au moins 2 caractères");
     }
 
-    if (!fire.validateEmail(email)) {
+    if (!check.validateEmail(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -79,7 +82,7 @@ const signup: NextPage = () => {
       return;
     }
 
-    if (!fire.validatePassword(password)) {
+    if (!check.validatePassword(password)) {
       setError(
         "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
       );

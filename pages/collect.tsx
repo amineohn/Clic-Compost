@@ -6,6 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import { Firebase } from "../libs/firebase";
+import { Validate } from "../libs/validate";
 import { NextSeo } from "next-seo";
 import router from "next/router";
 const Collect: NextPage = () => {
@@ -22,6 +23,7 @@ const Collect: NextPage = () => {
 
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const fire = new Firebase();
+  const check = new Validate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +37,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!fire.validatePhone(phone)) {
+    if (!check.validatePhone(phone)) {
       setError("Veuillez entrer un numéro de téléphone valide");
       setLoading(true);
       setTimeout(() => {
@@ -44,7 +46,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!fire.validateFrequency(frequency)) {
+    if (!check.validateFrequency(frequency)) {
       setError("Veuillez entrer une fréquence valide");
       setLoading(true);
       setTimeout(() => {
@@ -53,7 +55,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!fire.validateEmail(email)) {
+    if (!check.validateEmail(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -61,7 +63,7 @@ const Collect: NextPage = () => {
       setLoading(false);
       return;
     }
-    if (!fire.validateCollectTime(collectTime)) {
+    if (!check.validateCollectTime(collectTime)) {
       setError("Veuillez entrer une heure de collecte valide");
       setLoading(true);
       setTimeout(() => {
@@ -70,7 +72,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!fire.validateAdress(address)) {
+    if (!check.validateAdress(address)) {
       setError("s'il-vous-plaît entrez une adresse valide");
       setLoading(true);
       setTimeout(() => {
@@ -99,7 +101,7 @@ const Collect: NextPage = () => {
       setSuccess(true);
       router.reload();
     } catch (error: any) {
-      const messages = fire.getErrors(error.code, error.message);
+      const messages = check.getErrors(error.code, error.message);
       setError(messages);
       setSuccess(false);
     }
