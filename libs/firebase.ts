@@ -41,10 +41,13 @@ export class Firebase {
     return this.getUser()?.email;
   }
   getTokenId() {
-    return this.getAuth().currentUser?.getIdToken();
+    return this.getUser()?.getIdToken();
   }
   getUserData() {
-    return firebase.firestore().collection("users").doc(this.getUser()?.uid);
+    return this.getFireStore().collection("users").doc(this.getUser()?.uid);
+  }
+  isConnected() {
+    return this.getAuth().currentUser !== null;
   }
   getStorage() {
     return firebase.storage();
@@ -61,6 +64,9 @@ export class Firebase {
   getFirebase() {
     return firebase;
   }
+  getDatabase() {
+    return firebase.database();
+  }
   getAnalytics() {
     return firebase.analytics();
   }
@@ -70,6 +76,10 @@ export class Firebase {
   getCollection(collection: string) {
     return firebase.firestore().collection(collection);
   }
+  getReference(ref: string, child: string) {
+    return this.getDatabase().ref(ref).child(child);
+  }
+
   getDocumentPath(collection: string, documentPath: string) {
     return this.getCollection(collection).doc(documentPath);
   }
@@ -91,7 +101,6 @@ export class Firebase {
       return this.getUser()?.updatePassword(newPassword);
     });
   }
-
   getData(
     phone: string,
     name: string,

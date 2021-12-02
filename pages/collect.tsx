@@ -8,6 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Firebase } from "../libs/firebase";
 import { Validate } from "../libs/validate";
 import { NextSeo } from "next-seo";
+import { Item } from "../libs/types";
 import router from "next/router";
 const Collect: NextPage = () => {
   const [phone, setPhone] = useState("");
@@ -19,12 +20,11 @@ const Collect: NextPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [data, setData] = useState([{}]);
+  const [data, setData] = useState([{}] as any);
 
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const fire = new Firebase();
   const check = new Validate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(false);
@@ -84,6 +84,16 @@ const Collect: NextPage = () => {
     setError("");
     setSuccess(false);
     try {
+      if (!fire.isConnected()) {
+        setError("Veuillez vérifier votre connexion internet");
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 150);
+        return;
+      }
+      setLoading(true);
+
       fire
         .getCollection("clients")
         .add(
@@ -99,7 +109,12 @@ const Collect: NextPage = () => {
         );
       setLoading(false);
       setSuccess(true);
-      router.reload();
+      router.push("/thanks");
+      if (success) {
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3500);
+      }
     } catch (error: any) {
       const messages = check.getErrors(error.code, error.message);
       setError(messages);
@@ -120,30 +135,52 @@ const Collect: NextPage = () => {
   };
 
   useEffect(() => {
-    fire.getCollection("clients").onSnapshot((snapshot) => {
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        const id = doc.id;
-        const name = data.name;
-        const address = data.address;
-        const phone = data.phone;
-        const collectTime = data.collectTime;
-        const frequency = data.frequency;
-        const date = data.date;
-        setData((prev) => [
-          ...prev,
-          {
-            id,
-            name,
-            address,
-            phone,
-            collectTime,
-            frequency,
-            date,
-          },
-        ]);
+    fire
+      .getCollection("clients")
+      .orderBy("name")
+      .onSnapshot((snapshot) => {
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          const name = data.name;
+          const address = data.address;
+          const phone = data.phone;
+          const collectTime = data.collectTime;
+          const frequency = data.frequency;
+          const date = data.date;
+          if (doc.data().name === name) {
+            setError("Vous avez déjà utiliser ce nom");
+            setLoading(true);
+            setTimeout(() => {
+              setLoading(false);
+            }, 150);
+          }
+
+          if (doc.data().email === email) {
+            setError("Vous avez déjà utiliser cet email");
+            setLoading(true);
+            setTimeout(() => {
+              setLoading(false);
+            }, 150);
+          }
+          setData((prev) => [
+            ...prev,
+            {
+              id,
+              name,
+              address,
+              phone,
+              collectTime,
+              frequency,
+              date,
+            },
+          ]);
+        });
       });
-    });
+    if (data.length != 0) {
+      setData(data.reverse());
+    }
+
     if (data.length === 0) {
       setLoading(true);
     }
@@ -291,10 +328,7 @@ const Collect: NextPage = () => {
                   Effacer
                 </button>
                 <button
-                  className={`py-2 px-2 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ${
-                    error &&
-                    "bg-red-600 hover:bg-red-700 focus:!ring-red-500 focus:!ring-offset-red-200 font-medium !text-xs ml-0.5 py-3 px-2 rounded-lg"
-                  }${success && "bg-green-500 hover:bg-green-600"}`}
+                  className={`py-2 px-2 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg`}
                   type="submit"
                 >
                   {loading ? (
@@ -302,17 +336,7 @@ const Collect: NextPage = () => {
                       <Loading message="Chargement" />
                     </>
                   ) : (
-                    <>
-                      {error ? (
-                        <FadeIn>{error}</FadeIn>
-                      ) : success ? (
-                        <FadeIn>
-                          <span>Collecte ajouter :)</span>
-                        </FadeIn>
-                      ) : (
-                        "Ajouter"
-                      )}
-                    </>
+                    "Ajouter"
                   )}
                 </button>
               </div>
@@ -322,12 +346,12 @@ const Collect: NextPage = () => {
 
         <div className="flex items-center justify-center">
           <div className="w-full max-w-3xl">
-            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 h-96 overflow-auto">
               <div className="flex flex-col">
                 <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:-mb-8 sm:-mt-6 sm:flex sm:justify-start">
                   <div className="align-middle inline-block min-w-full border-b border-gray-200 dark:border-gray-800">
                     <table className="min-w-full">
-                      <thead>
+                      <thead className="!overflow-hidden !sticky">
                         <tr>
                           <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                             Nom du site
@@ -348,42 +372,44 @@ const Collect: NextPage = () => {
                       </thead>
                       <tbody>
                         {data ? (
-                          data.map((item: any, index) => (
-                            <tr key={index}>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                <div className="flex items-center">
-                                  <div className="ml-4">
-                                    <div className="text-sm leading-5 font-medium text-gray-900">
-                                      {item.name}
-                                    </div>
-                                    <div className="text-sm leading-5 text-gray-500">
-                                      {item.address}
+                          data.map((item: Item) => {
+                            return (
+                              <tr key={fire.getCollection("clients").doc().id}>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                  <div className="flex items-center">
+                                    <div className="ml-4">
+                                      <div className="text-sm leading-5 font-medium text-gray-900">
+                                        {item.name}
+                                      </div>
+                                      <div className="text-sm leading-5 text-gray-500">
+                                        {item.address}
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                <div className="text-sm leading-5 text-gray-900">
-                                  {item.address}
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                <div className="text-sm leading-5 text-gray-900">
-                                  {item.phone}
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                <div className="text-sm leading-5 text-gray-900">
-                                  {item.collectTime}
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                <div className="text-sm leading-5 text-gray-900">
-                                  {item.frequency}
-                                </div>
-                              </td>
-                            </tr>
-                          ))
+                                </td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                  <div className="text-sm leading-5 text-gray-900">
+                                    {item.address}
+                                  </div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                  <div className="text-sm leading-5 text-gray-900">
+                                    {item.phone}
+                                  </div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                  <div className="text-sm leading-5 text-gray-900">
+                                    {item.collectTime}
+                                  </div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                  <div className="text-sm leading-5 text-gray-900">
+                                    {item.frequency}
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })
                         ) : (
                           <div className="flex space-x-1 justify-center p-4 m-auto">
                             <svg
@@ -427,34 +453,96 @@ const Collect: NextPage = () => {
             </div>
           </div>
         </div>
-        {data.length !== 0 && (
-          <>
-            <FadeIn>
-              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-5">
-                <div className="flex items-center justify-center w-12 bg-greenDDTV">
+        <div className="flex flex-col">
+          {error && (
+            <>
+              <FadeIn className="mb-2">
+                <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+                  <div className="flex items-center justify-center w-12 bg-red-500 flex-col">
+                    <svg
+                      className="w-6 h-6 text-white fill-current"
+                      viewBox="0 0 40 40"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z" />
+                    </svg>
+                    <span
+                      onClick={() => clear()}
+                      className="text-white text-xs cursor-pointer font-medium"
+                    >
+                      Vider
+                    </span>
+                  </div>
+
+                  <div className="px-4 py-2 pb-5 -mx-3">
+                    <div className="mx-3">
+                      <span className="font-semibold text-red-500 dark:text-red-400">
+                        Erreur
+                      </span>
+                      <p className="text-sm text-gray-600 dark:text-gray-200">
+                        {error}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            </>
+          )}
+          {success && (
+            <FadeIn className="mb-2">
+              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <div className="flex items-center justify-center w-12 bg-green-500">
                   <svg
                     className="w-6 h-6 text-white fill-current"
                     viewBox="0 0 40 40"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z" />
+                    <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
                   </svg>
                 </div>
 
                 <div className="px-4 py-2 -mx-3">
                   <div className="mx-3">
-                    <span className="font-semibold text-greenDDTV dark:text-greenDDTV">
-                      Attention
+                    <span className="font-semibold text-green-500 dark:text-green-400">
+                      Succès
                     </span>
                     <p className="text-sm text-gray-600 dark:text-gray-200">
-                      Aucune collecte n'as été crée.
+                      Votre demande à bien été effectuée.
                     </p>
                   </div>
                 </div>
               </div>
             </FadeIn>
-          </>
-        )}
+          )}
+          {data.length !== 0 && (
+            <>
+              <FadeIn>
+                <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-5">
+                  <div className="flex items-center justify-center w-12 bg-greenDDTV">
+                    <svg
+                      className="w-6 h-6 text-white fill-current"
+                      viewBox="0 0 40 40"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z" />
+                    </svg>
+                  </div>
+
+                  <div className="px-4 py-2 -mx-3">
+                    <div className="mx-3">
+                      <span className="font-semibold text-greenDDTV dark:text-greenDDTV">
+                        Attention
+                      </span>
+                      <p className="text-sm text-gray-600 dark:text-gray-200">
+                        Aucune collecte n'as été crée.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            </>
+          )}
+        </div>
       </FadeIn>
     </>
   );
