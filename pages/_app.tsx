@@ -42,6 +42,7 @@ export default function MyApp({
       SplashScreen.hide();
     }
   }
+
   const router = useRouter();
 
   useEffect(() => {

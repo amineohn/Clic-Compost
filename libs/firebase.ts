@@ -83,7 +83,7 @@ export class Firebase {
   getDocumentPath(collection: string, documentPath: string) {
     return this.getCollection(collection).doc(documentPath);
   }
-  getUserId() {
+  getId() {
     return this.getUser()?.uid;
   }
   getPerformance() {
