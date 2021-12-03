@@ -17,7 +17,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   const fire = new Firebase();
-  fire.onAuthStateChanged((user) => {
+  fire.stateChanged((user) => {
     if (user) {
       setRedirection(true);
       router.push("/collect");

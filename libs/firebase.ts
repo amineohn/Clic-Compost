@@ -90,7 +90,7 @@ export class Firebase {
     return firebase.performance();
   }
 
-  onAuthStateChanged(callback: (user: firebase.User | null) => void) {
+  stateChanged(callback: (user: firebase.User | null) => void) {
     const auth = this.auth();
     auth.onAuthStateChanged(callback);
   }
@@ -143,40 +143,40 @@ export class Firebase {
         });
       });
   }
-  async sendEmailVerification() {
+  async emailVerification() {
     const user = this.user();
     await user?.sendEmailVerification();
   }
-  async sendPasswordResetEmail(email: string) {
+  async passwordResetEmail(email: string) {
     const auth = this.auth();
     await auth.sendPasswordResetEmail(email);
   }
 
-  async databaseUpdate(collection: string, documentPath: string, data: any) {
+  async update(collection: string, documentPath: string, data: any) {
     const collectionRef = this.collection(collection);
     const documentRef = collectionRef.doc(documentPath);
     await documentRef.update(data);
   }
-  async databaseCreate(collection: string, data: any) {
+  async create(collection: string, data: any) {
     const collectionRef = this.collection(collection);
     await collectionRef.add(data);
   }
-  async databaseDelete(collection: string, documentPath: string) {
+  async delete(collection: string, documentPath: string) {
     const collectionRef = this.collection(collection);
 
     const documentRef = collectionRef.doc(documentPath);
     await documentRef.delete();
   }
-  async databaseGet(collection: string, documentPath: string) {
+  async get(collection: string, documentPath: string) {
     const collectionRef = this.collection(collection);
     const documentRef = collectionRef.doc(documentPath);
     return await documentRef.get();
   }
-  async databaseGetAll(collection: string) {
+  async getAll(collection: string) {
     const collectionRef = this.collection(collection);
     return await collectionRef.get();
   }
-  async databaseGetAllByField(collection: string, field: string, value: any) {
+  async getAllByField(collection: string, field: string, value: any) {
     const collectionRef = this.collection(collection);
     return await collectionRef.where(field, "==", value).get();
   }

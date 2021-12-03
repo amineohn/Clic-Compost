@@ -38,7 +38,7 @@ const forgetPassword: NextPage = () => {
       return;
     }
     try {
-      await fire.sendPasswordResetEmail(email);
+      await fire.passwordResetEmail(email);
       setLoading(false);
       setSuccess(true);
     } catch (error: any) {
