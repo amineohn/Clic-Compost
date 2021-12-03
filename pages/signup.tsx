@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import type { NextPage } from "next";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -25,7 +25,7 @@ const signup: NextPage = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       await fire.signUp(email, password);

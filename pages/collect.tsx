@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "../components/loading";
 import { Elements } from "@stripe/react-stripe-js";
@@ -25,7 +25,7 @@ const Collect: NextPage = () => {
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const fire = new Firebase();
   const check = new Validate();
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setLoading(false);
     setSuccess(false);
