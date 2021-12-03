@@ -179,15 +179,17 @@ export class Firebase {
     documentPath?: string | undefined
   ) {
     const auth = this.auth();
-    return await auth
-      .signInWithEmailAndPassword(email, password)
-      .then(async () => {
-        await router.push(url);
-        await this.collection(collection).doc(documentPath).set({
-          name: this.userName(),
-          email: this.email(),
-        });
+    return await this.sign(email, password).then(async () => {
+      await router.push(url);
+      await this.collection(collection).doc(documentPath).set({
+        name: this.userName(),
+        email: this.email(),
       });
+    });
+  }
+  async sign(email: string, password: string) {
+    const auth = this.auth();
+    return await auth.signInWithEmailAndPassword(email, password);
   }
 
   async emailVerification() {
