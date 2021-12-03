@@ -39,7 +39,7 @@ const signup: NextPage = () => {
       setSuccess(true);
       router.push("/collect");
     } catch (error: any) {
-      const messages = check.getErrors(error.code, error.message);
+      const messages = check.errors(error.code, error.message);
       setError(messages);
     }
     if (password.length < 6) {
@@ -67,14 +67,14 @@ const signup: NextPage = () => {
       }, 3500);
       setError("Veuillez saisir tous les champs");
     }
-    if (!check.validateName(name)) {
+    if (!check.name(name)) {
       setInterval(() => {
         setError("");
       }, 3500);
       setError("Le nom doit contenir au moins 2 caractères");
     }
 
-    if (!check.validateEmail(email)) {
+    if (!check.email(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -82,7 +82,7 @@ const signup: NextPage = () => {
       return;
     }
 
-    if (!check.validatePassword(password)) {
+    if (!check.password(password)) {
       setError(
         "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
       );

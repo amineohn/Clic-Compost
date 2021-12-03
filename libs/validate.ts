@@ -1,28 +1,28 @@
 import { form } from "../utils/regex";
 export class Validate {
   constructor() {}
-  validateEmail(email: string) {
+  email(email: string) {
     return form.send.email.test(String(email).toLowerCase());
   }
-  validatePassword(password: string) {
+  password(password: string) {
     return form.send.password.test(password);
   }
-  validatePhone(phone: string) {
+  phone(phone: string) {
     return form.send.phone.test(phone);
   }
-  validateCollectTime(collectTime: string) {
+  collectTime(collectTime: string) {
     return form.send.collectTime.test(collectTime);
   }
-  validateAdress(address: string) {
+  adress(address: string) {
     return form.send.address.test(address);
   }
-  validateName(name: string) {
+  name(name: string) {
     return form.send.name.test(name);
   }
-  validateFrequency(frequency: string) {
+  frequency(frequency: string) {
     return form.send.frequency.test(frequency);
   }
-  getErrors(code: string, errorMessage: string) {
+  errors(code: string, errorMessage: string) {
     switch (code) {
       case "auth/invalid-custom-token":
         errorMessage =

@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const [success, setSuccess] = useState(false);
   const [redirection, setRedirection] = useState(false);
   const router = useRouter();
+  const check = new Validate();
 
   const fire = new Firebase();
   fire.stateChanged((user) => {
@@ -30,8 +31,7 @@ const Home: NextPage = () => {
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
-      const check = new Validate();
-      const messages = check.getErrors(error.code, error.message);
+      const messages = check.errors(error.code, error.message);
       setError(messages);
     }
   };
@@ -69,8 +69,7 @@ const Home: NextPage = () => {
     } catch (error: any) {
       setLoading(false);
       setRedirection(false);
-      const check = new Validate();
-      const messages = check.getErrors(error.code, error.message);
+      const messages = check.errors(error.code, error.message);
       setError(messages);
     }
     setRedirection(false);

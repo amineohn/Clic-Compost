@@ -37,7 +37,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!check.validatePhone(phone)) {
+    if (!check.phone(phone)) {
       setError("Veuillez entrer un numéro de téléphone valide");
       setLoading(true);
       setTimeout(() => {
@@ -46,7 +46,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!check.validateFrequency(frequency)) {
+    if (!check.frequency(frequency)) {
       setError("Veuillez entrer une fréquence valide");
       setLoading(true);
       setTimeout(() => {
@@ -55,7 +55,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!check.validateEmail(email)) {
+    if (!check.email(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -63,7 +63,7 @@ const Collect: NextPage = () => {
       setLoading(false);
       return;
     }
-    if (!check.validateCollectTime(collectTime)) {
+    if (!check.collectTime(collectTime)) {
       setError("Veuillez entrer une heure de collecte valide");
       setLoading(true);
       setTimeout(() => {
@@ -72,7 +72,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!check.validateAdress(address)) {
+    if (!check.adress(address)) {
       setError("s'il-vous-plaît entrez une adresse valide");
       setLoading(true);
       setTimeout(() => {
@@ -116,7 +116,7 @@ const Collect: NextPage = () => {
         }, 3500);
       }
     } catch (error: any) {
-      const messages = check.getErrors(error.code, error.message);
+      const messages = check.errors(error.code, error.message);
       setError(messages);
       setSuccess(false);
     }

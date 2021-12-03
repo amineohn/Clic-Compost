@@ -29,7 +29,7 @@ const NewPassword: NextPage = () => {
       setError("Votre nouveau mot de passe doit être différent de l'ancien");
       setLoading(false);
     }
-    if (!check.validatePassword(newPassword)) {
+    if (!check.password(newPassword)) {
       setError(
         "Votre nouveau mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
       );
@@ -50,7 +50,7 @@ const NewPassword: NextPage = () => {
         setLoading(false);
       } catch (error: any) {
         setLoading(false);
-        const messages = check.getErrors(error.code, error.message);
+        const messages = check.errors(error.code, error.message);
         setError(messages);
       }
     }

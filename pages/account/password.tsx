@@ -25,7 +25,7 @@ const forgetPassword: NextPage = () => {
       setLoading(false);
       return;
     }
-    if (!check.validateEmail(email)) {
+    if (!check.email(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -43,7 +43,7 @@ const forgetPassword: NextPage = () => {
       setSuccess(true);
     } catch (error: any) {
       setLoading(false);
-      const messages = check.getErrors(error.code, error.message);
+      const messages = check.errors(error.code, error.message);
       setError(messages);
     }
   };
