@@ -8,6 +8,7 @@ import "firebase/compat/functions";
 import "firebase/compat/analytics";
 import "firebase/compat/performance";
 import "firebase/messaging";
+
 export class Firebase {
   settings() {
     return {
@@ -27,6 +28,10 @@ export class Firebase {
 
   user() {
     return firebase.auth().currentUser;
+  }
+
+  isUser() {
+    return this.user() ? true : false;
   }
 
   userName() {
@@ -295,7 +300,9 @@ export class Firebase {
         break;
     }
   }
-
+  interceptor(url: string, callback: (error: any) => void) {
+    this.functions().httpsCallable(url).call(callback);
+  }
   async phoneSignIn(
     phoneNumber: string,
     verificationCode: firebase.auth.ApplicationVerifier
