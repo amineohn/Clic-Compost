@@ -8,7 +8,7 @@ import "firebase/compat/performance";
 import "firebase/messaging";
 import router from "next/router";
 export class Firebase {
-  getSettings() {
+  settings() {
     return {
       apiKey: "AIzaSyAeuEJ6aYJRE1JHzRJgabAAF95MzAGmPic",
       authDomain: "clic-compostnew.firebaseapp.com",
@@ -20,34 +20,34 @@ export class Firebase {
     };
   }
   constructor() {
-    firebase.initializeApp(this.getSettings());
+    firebase.initializeApp(this.settings());
     console.log(`Initialize Firebase ${firebase.apps.length} app`);
   }
 
-  getUser() {
+  user() {
     return firebase.auth().currentUser;
   }
 
-  getUserName() {
-    return this.getUser()?.displayName;
+  userName() {
+    return this.user()?.displayName;
   }
-  getPhotoUrl() {
-    return this.getUser()?.photoURL;
+  photoUrl() {
+    return this.user()?.photoURL;
   }
-  getDefaultPhotoUrl() {
+  defaultPhotoUrl() {
     return "/static/images/blank-profile.png";
   }
-  getEmail() {
-    return this.getUser()?.email;
+  email() {
+    return this.user()?.email;
   }
-  getTokenId() {
-    return this.getUser()?.getIdToken();
+  tokenId() {
+    return this.user()?.getIdToken();
   }
-  getUserData() {
-    return this.getFireStore().collection("users").doc(this.getUser()?.uid);
+  userData() {
+    return this.getFireStore().collection("users").doc(this.user()?.uid);
   }
   isConnected() {
-    return this.getAuth().currentUser !== null;
+    return this.auth().currentUser !== null;
   }
   getStorage() {
     return firebase.storage();
@@ -55,58 +55,58 @@ export class Firebase {
   getFireStore() {
     return firebase.firestore();
   }
-  getAuth() {
+  auth() {
     return firebase.auth();
   }
-  getMessaging() {
+  messaging() {
     return firebase.messaging();
   }
-  getFirebase() {
+  firebase() {
     return firebase;
   }
-  getDatabase() {
+  database() {
     return firebase.database();
   }
-  getAnalytics() {
+  analytics() {
     return firebase.analytics();
   }
-  getFunctions() {
+  functions() {
     return firebase.functions();
   }
-  getCollection(collection: string) {
+  collection(collection: string) {
     return firebase.firestore().collection(collection);
   }
-  getReference(ref: string, child: string) {
-    return this.getDatabase().ref(ref).child(child);
+  reference(ref: string, child: string) {
+    return this.database().ref(ref).child(child);
   }
 
-  getDocumentPath(collection: string, documentPath: string) {
-    return this.getCollection(collection).doc(documentPath);
+  documentPath(collection: string, documentPath: string) {
+    return this.collection(collection).doc(documentPath);
   }
-  getId() {
-    return this.getUser()?.uid;
+  id() {
+    return this.user()?.uid;
   }
-  getPerformance() {
+  performance() {
     return firebase.performance();
   }
 
   onAuthStateChanged(callback: (user: firebase.User | null) => void) {
-    const auth = this.getAuth();
+    const auth = this.auth();
     auth.onAuthStateChanged(callback);
   }
   currentPassword(currentPassword) {
     const credential = firebase.auth.EmailAuthProvider.credential(
-      this.getEmail() as string,
+      this.email() as string,
       currentPassword
     );
-    return this.getUser()?.reauthenticateWithCredential(credential);
+    return this.user()?.reauthenticateWithCredential(credential);
   }
   updatePassword(currentPassword, newPassword) {
     this.currentPassword(currentPassword)?.then(() => {
-      return this.getUser()?.updatePassword(newPassword);
+      return this.user()?.updatePassword(newPassword);
     });
   }
-  getData(
+  data(
     phone: string,
     name: string,
     email: string,
@@ -116,7 +116,7 @@ export class Firebase {
     collection: string
   ) {
     return {
-      id: this.getCollection(collection).doc().id,
+      id: this.collection(collection).doc().id,
       phone: phone,
       name: name,
       email: email,
@@ -132,63 +132,63 @@ export class Firebase {
     url: string,
     documentPath?: string | undefined
   ) {
-    const auth = this.getAuth();
+    const auth = this.auth();
     return await auth
       .signInWithEmailAndPassword(email, password)
       .then(async () => {
         await router.push(url);
-        await this.getCollection(collection).doc(documentPath).set({
-          name: this.getUserName(),
-          email: this.getEmail(),
+        await this.collection(collection).doc(documentPath).set({
+          name: this.userName(),
+          email: this.email(),
         });
       });
   }
   async sendEmailVerification() {
-    const user = this.getUser();
+    const user = this.user();
     await user?.sendEmailVerification();
   }
   async sendPasswordResetEmail(email: string) {
-    const auth = this.getAuth();
+    const auth = this.auth();
     await auth.sendPasswordResetEmail(email);
   }
 
   async databaseUpdate(collection: string, documentPath: string, data: any) {
-    const collectionRef = this.getCollection(collection);
+    const collectionRef = this.collection(collection);
     const documentRef = collectionRef.doc(documentPath);
     await documentRef.update(data);
   }
   async databaseCreate(collection: string, data: any) {
-    const collectionRef = this.getCollection(collection);
+    const collectionRef = this.collection(collection);
     await collectionRef.add(data);
   }
   async databaseDelete(collection: string, documentPath: string) {
-    const collectionRef = this.getCollection(collection);
+    const collectionRef = this.collection(collection);
 
     const documentRef = collectionRef.doc(documentPath);
     await documentRef.delete();
   }
   async databaseGet(collection: string, documentPath: string) {
-    const collectionRef = this.getCollection(collection);
+    const collectionRef = this.collection(collection);
     const documentRef = collectionRef.doc(documentPath);
     return await documentRef.get();
   }
   async databaseGetAll(collection: string) {
-    const collectionRef = this.getCollection(collection);
+    const collectionRef = this.collection(collection);
     return await collectionRef.get();
   }
   async databaseGetAllByField(collection: string, field: string, value: any) {
-    const collectionRef = this.getCollection(collection);
+    const collectionRef = this.collection(collection);
     return await collectionRef.where(field, "==", value).get();
   }
 
   async updateUser(collection: string, documentPath: string, data: any) {
-    const user = this.getUser();
-    const userData = this.getUserData();
+    const user = this.user();
+    const userData = this.userData();
 
     if (userData) {
-      await this.getCollection(collection).doc(documentPath).update(data);
+      await this.collection(collection).doc(documentPath).update(data);
     } else {
-      await this.getCollection(collection).doc(documentPath).set(data);
+      await this.collection(collection).doc(documentPath).set(data);
     }
     if (user) {
       await user.updateProfile({
@@ -198,24 +198,24 @@ export class Firebase {
     }
 
     return await userData.update(data).then(async () => {
-      await this.getCollection(collection).doc(documentPath).set({
-        name: this.getUserName(),
-        email: this.getEmail(),
+      await this.collection(collection).doc(documentPath).set({
+        name: this.userName(),
+        email: this.email(),
       });
     });
   }
   async signUp(email: string, password: string) {
-    const auth = this.getAuth();
+    const auth = this.auth();
     await auth.createUserWithEmailAndPassword(email, password);
   }
   async signWithGithub() {
-    const auth = this.getAuth();
+    const auth = this.auth();
     const provider = new firebase.auth.GithubAuthProvider();
     return await auth.signInWithPopup(provider);
   }
 
   async signWithGoogle(sign) {
-    const auth = this.getAuth();
+    const auth = this.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
     switch (sign) {
       case "signIn":
@@ -239,12 +239,12 @@ export class Firebase {
     phoneNumber: string,
     verificationCode: firebase.auth.ApplicationVerifier
   ) {
-    const auth = this.getAuth();
+    const auth = this.auth();
     await auth.signInWithPhoneNumber(phoneNumber, verificationCode);
   }
 
   async signOut() {
-    const auth = this.getAuth();
+    const auth = this.auth();
     await auth.signOut();
   }
 }

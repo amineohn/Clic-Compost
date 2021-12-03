@@ -95,9 +95,9 @@ const Collect: NextPage = () => {
       setLoading(true);
 
       fire
-        .getCollection("clients")
+        .collection("clients")
         .add(
-          fire.getData(
+          fire.data(
             phone,
             name,
             email,
@@ -135,7 +135,7 @@ const Collect: NextPage = () => {
 
   useEffect(() => {
     fire
-      .getCollection("clients")
+      .collection("clients")
       .orderBy("name")
       .onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
@@ -358,7 +358,7 @@ const Collect: NextPage = () => {
                         {data ? (
                           data.map((item: Item) => {
                             return (
-                              <tr key={fire.getCollection("clients").doc().id}>
+                              <tr key={fire.collection("clients").doc().id}>
                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
                                   <div className="flex items-center">
                                     <div className="ml-4">

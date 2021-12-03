@@ -23,7 +23,6 @@ const Home: NextPage = () => {
       router.push("/collect");
     }
   });
-
   const authenticateWithGoogle = async () => {
     try {
       setLoading(true);
@@ -36,7 +35,6 @@ const Home: NextPage = () => {
       setError(messages);
     }
   };
-
   const setEmailChange = (e: FormEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
   };
@@ -64,7 +62,7 @@ const Home: NextPage = () => {
     }
 
     try {
-      await fire.signIn(email, password, "users", "/collect", fire.getId());
+      await fire.signIn(email, password, "users", "/collect", fire.id());
       await setRedirection(true);
       await setLoading(false);
       await setSuccess(true);

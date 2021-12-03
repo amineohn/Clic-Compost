@@ -29,7 +29,7 @@ const signup: NextPage = () => {
     e.preventDefault();
     try {
       await fire.signUp(email, password);
-      await fire.getUser()?.updateProfile({
+      await fire.user()?.updateProfile({
         displayName: name,
       });
       setInterval(() => {
@@ -52,7 +52,7 @@ const signup: NextPage = () => {
       password: "",
     });
     try {
-      await fire.getCollection("users").add({
+      await fire.collection("users").add({
         name,
         email,
         password,
