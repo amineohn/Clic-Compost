@@ -170,6 +170,37 @@ const Collect: NextPage = () => {
     }
   }, []);
 
+  // separate the data from the database into a new array of objects for user to see
+  const thisData = data.map((item: Item) => (
+    <tr key={fire.collectionId("clients")}>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+        <div className="flex items-center">
+          <div className="ml-4">
+            <div className="text-sm leading-5 font-medium text-gray-900">
+              {item.name}
+            </div>
+            <div className="text-sm leading-5 text-gray-500">
+              {item.address}
+            </div>
+          </div>
+        </div>
+      </td>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+        <div className="text-sm leading-5 text-gray-900">{item.address}</div>
+      </td>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+        <div className="text-sm leading-5 text-gray-900">{item.phone}</div>
+      </td>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+        <div className="text-sm leading-5 text-gray-900">
+          {item.collectTime}
+        </div>
+      </td>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+        <div className="text-sm leading-5 text-gray-900">{item.frequency}</div>
+      </td>
+    </tr>
+  ));
   return (
     <>
       <NextSeo
@@ -356,44 +387,7 @@ const Collect: NextPage = () => {
                       </thead>
                       <tbody>
                         {data ? (
-                          data.map((item: Item) => {
-                            return (
-                              <tr key={fire.collection("clients").doc().id}>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                  <div className="flex items-center">
-                                    <div className="ml-4">
-                                      <div className="text-sm leading-5 font-medium text-gray-900">
-                                        {item.name}
-                                      </div>
-                                      <div className="text-sm leading-5 text-gray-500">
-                                        {item.address}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                  <div className="text-sm leading-5 text-gray-900">
-                                    {item.address}
-                                  </div>
-                                </td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                  <div className="text-sm leading-5 text-gray-900">
-                                    {item.phone}
-                                  </div>
-                                </td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                  <div className="text-sm leading-5 text-gray-900">
-                                    {item.collectTime}
-                                  </div>
-                                </td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-                                  <div className="text-sm leading-5 text-gray-900">
-                                    {item.frequency}
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })
+                          thisData
                         ) : (
                           <div className="flex space-x-1 justify-center p-4 m-auto">
                             <svg

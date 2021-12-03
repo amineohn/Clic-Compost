@@ -31,69 +31,97 @@ export class Firebase {
   userName() {
     return this.user()?.displayName;
   }
+
   photoUrl() {
     return this.user()?.photoURL;
   }
+
   defaultPhotoUrl() {
     return "/static/images/blank-profile.png";
   }
+
   email() {
     return this.user()?.email;
   }
+
   tokenId() {
     return this.user()?.getIdToken();
   }
+
   userData() {
     return this.getFireStore().collection("users").doc(this.user()?.uid);
   }
+
   isConnected() {
     return this.auth().currentUser !== null;
   }
+
   getStorage() {
     return firebase.storage();
   }
+
   getFireStore() {
     return firebase.firestore();
   }
+
   auth() {
     return firebase.auth();
   }
+
   messaging() {
     return firebase.messaging();
   }
+
   firebase() {
     return firebase;
   }
+
   database() {
     return firebase.database();
   }
+
   analytics() {
     return firebase.analytics();
   }
+
   functions() {
     return firebase.functions();
   }
+
   collection(collection: string) {
     return firebase.firestore().collection(collection);
   }
+  collectionId(collection: string) {
+    return this.collection(collection).doc().id;
+  }
+
   reference(ref: string, child: string) {
     return this.database().ref(ref).child(child);
   }
-
+  emptyString(str: string) {
+    return str === "";
+  }
   documentPath(collection: string, documentPath: string) {
     return this.collection(collection).doc(documentPath);
   }
+
   id() {
     return this.user()?.uid;
   }
+
   performance() {
     return firebase.performance();
+  }
+
+  import(url: string) {
+    return this.functions().httpsCallable(url);
   }
 
   stateChanged(callback: (user: firebase.User | null) => void) {
     const auth = this.auth();
     auth.onAuthStateChanged(callback);
   }
+
   currentPassword(currentPassword) {
     const credential = firebase.auth.EmailAuthProvider.credential(
       this.email() as string,
@@ -101,11 +129,27 @@ export class Firebase {
     );
     return this.user()?.reauthenticateWithCredential(credential);
   }
+
   updatePassword(currentPassword, newPassword) {
     this.currentPassword(currentPassword)?.then(() => {
       return this.user()?.updatePassword(newPassword);
     });
   }
+
+  async snapshot(collection: string, documentPath: string) {
+    return await this.collection(collection)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.id === documentPath) {
+            return doc.data();
+          }
+        });
+      })
+      .then((data) => data)
+      .catch((error) => console.log("Error getting documents: ", error));
+  }
+
   data(
     phone: string,
     name: string,
@@ -125,6 +169,7 @@ export class Firebase {
       address: address,
     };
   }
+
   async signIn(
     email: string,
     password: string,
@@ -143,10 +188,12 @@ export class Firebase {
         });
       });
   }
+
   async emailVerification() {
     const user = this.user();
     await user?.sendEmailVerification();
   }
+
   async passwordResetEmail(email: string) {
     const auth = this.auth();
     await auth.sendPasswordResetEmail(email);
@@ -157,25 +204,30 @@ export class Firebase {
     const documentRef = collectionRef.doc(documentPath);
     await documentRef.update(data);
   }
+
   async create(collection: string, data: any) {
     const collectionRef = this.collection(collection);
     await collectionRef.add(data);
   }
+
   async delete(collection: string, documentPath: string) {
     const collectionRef = this.collection(collection);
 
     const documentRef = collectionRef.doc(documentPath);
     await documentRef.delete();
   }
+
   async get(collection: string, documentPath: string) {
     const collectionRef = this.collection(collection);
     const documentRef = collectionRef.doc(documentPath);
     return await documentRef.get();
   }
+
   async getAll(collection: string) {
     const collectionRef = this.collection(collection);
     return await collectionRef.get();
   }
+
   async getAllByField(collection: string, field: string, value: any) {
     const collectionRef = this.collection(collection);
     return await collectionRef.where(field, "==", value).get();
@@ -204,30 +256,36 @@ export class Firebase {
       });
     });
   }
+
   async signUp(email: string, password: string) {
     const auth = this.auth();
     await auth.createUserWithEmailAndPassword(email, password);
   }
+
   async signWithGithub() {
     const auth = this.auth();
     const provider = new firebase.auth.GithubAuthProvider();
     return await auth.signInWithPopup(provider);
   }
 
-  async signWithGoogle(sign) {
+  async signWith(sign) {
     const auth = this.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
     switch (sign) {
-      case "signIn":
+      case "withPopup":
         await auth.signInWithPopup(provider);
         await firebase.auth().getRedirectResult();
         break;
-      case "signInWithRedirect":
+      case "redirect":
         await auth.signInWithRedirect(provider);
         await firebase.auth().getRedirectResult();
         break;
-      case "signInWithRedirectAndLink":
+      case "redirectAndLink":
         await auth.signInWithRedirect(provider);
+        await firebase.auth().getRedirectResult();
+        break;
+      case "withGithub":
+        await this.signWithGithub();
         await firebase.auth().getRedirectResult();
         break;
 
@@ -235,6 +293,7 @@ export class Firebase {
         break;
     }
   }
+
   async phoneSignIn(
     phoneNumber: string,
     verificationCode: firebase.auth.ApplicationVerifier

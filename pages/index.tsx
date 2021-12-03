@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   const authenticateWithGoogle = async () => {
     try {
       setLoading(true);
-      await fire.signWithGoogle("signInWithRedirect");
+      await fire.signWith("redirectAndLink");
       setLoading(false);
     } catch (error: any) {
       setLoading(false);
