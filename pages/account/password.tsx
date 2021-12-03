@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
-import router from "next/router";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "../../components/loading";
@@ -12,6 +11,7 @@ const forgetPassword: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+
   const fire = new Firebase();
   const check = new Validate();
 

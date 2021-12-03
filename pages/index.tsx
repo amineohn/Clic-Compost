@@ -15,9 +15,9 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [redirection, setRedirection] = useState(false);
+
   const router = useRouter();
   const check = new Validate();
-
   const fire = new Firebase();
   fire.stateChanged((user) => {
     if (user) {

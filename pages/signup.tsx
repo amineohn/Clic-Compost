@@ -18,10 +18,10 @@ const signup: NextPage = () => {
     email: "",
     password: "",
   });
+  const { name, email, password } = formData;
+
   const fire = new Firebase();
   const check = new Validate();
-
-  const { name, email, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });

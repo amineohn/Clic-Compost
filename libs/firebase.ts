@@ -128,7 +128,7 @@ export class Firebase {
     auth.onAuthStateChanged(callback);
   }
 
-  currentPassword(currentPassword) {
+  currentPassword(currentPassword: string) {
     const credential = firebase.auth.EmailAuthProvider.credential(
       this.email() as string,
       currentPassword
@@ -136,7 +136,7 @@ export class Firebase {
     return this.user()?.reauthenticateWithCredential(credential);
   }
 
-  updatePassword(currentPassword, newPassword) {
+  updatePassword(currentPassword: string, newPassword: string) {
     this.currentPassword(currentPassword)?.then(() => {
       return this.user()?.updatePassword(newPassword);
     });
@@ -275,7 +275,7 @@ export class Firebase {
     return await auth.signInWithPopup(provider);
   }
 
-  async signWith(sign) {
+  async signWith(sign: string) {
     const auth = this.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
     switch (sign) {

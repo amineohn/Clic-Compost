@@ -13,8 +13,10 @@ const NewPassword: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+
   const fire = new Firebase();
   const check = new Validate();
+
   const forgetPassword = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
