@@ -178,7 +178,6 @@ export class Firebase {
     url: string,
     documentPath?: string | undefined
   ) {
-    const auth = this.auth();
     return await this.sign(email, password).then(async () => {
       await router.push(url);
       await this.collection(collection).doc(documentPath).set({
