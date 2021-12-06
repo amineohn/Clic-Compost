@@ -15,7 +15,7 @@ const NewPassword: NextPage = () => {
   const [success, setSuccess] = useState(false);
 
   const fire = new Firebase();
-  const check = new Validate();
+  const up = new Validate();
 
   const forgetPassword = async (e: FormEvent) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const NewPassword: NextPage = () => {
       setError("Votre nouveau mot de passe doit être différent de l'ancien");
       setLoading(false);
     }
-    if (!check.password(newPassword)) {
+    if (!up.password(newPassword)) {
       setError(
         "Votre nouveau mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
       );
@@ -53,7 +53,7 @@ const NewPassword: NextPage = () => {
         setLoading(false);
       } catch (error: any) {
         setLoading(false);
-        const messages = check.errors(error.code, error.message);
+        const messages = up.errors(error.code, error.message);
         setError(messages);
       }
     }

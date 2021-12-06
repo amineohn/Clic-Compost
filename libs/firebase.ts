@@ -235,6 +235,47 @@ export class Firebase {
     return await collectionRef.get();
   }
 
+  async getAllData(collection: string, data: []) {
+    const collectionRef = this.collection(collection);
+    return await collectionRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data() as never);
+      });
+      return data;
+    });
+  }
+
+  async getAllDataWithId(collection: string, data: []) {
+    const collectionRef = this.collection(collection);
+    return await collectionRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        data.push({ id: doc.id, ...doc.data() } as never);
+      });
+      return data;
+    });
+  }
+
+  async getAllDataWithIdAndName(collection: string, data: []) {
+    const collectionRef = this.collection(collection);
+    return await collectionRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        data.push({
+          id: doc.id,
+          name: doc.data().name,
+          ...doc.data(),
+        } as never);
+      });
+      return data;
+    });
+  }
+  async fetch(collection: string, documentPath: string) {
+    const collectionRef = this.collection(collection);
+    const documentRef = collectionRef.doc(documentPath);
+    return await documentRef.get().then((doc) => {
+      return doc.data();
+    });
+  }
+
   async getAllByField(collection: string, field: string, value: any) {
     const collectionRef = this.collection(collection);
     return await collectionRef.where(field, "==", value).get();

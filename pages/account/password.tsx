@@ -13,7 +13,7 @@ const forgetPassword: NextPage = () => {
   const [success, setSuccess] = useState(false);
 
   const fire = new Firebase();
-  const check = new Validate();
+  const up = new Validate();
 
   const forgetPassword = async (e: FormEvent) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const forgetPassword: NextPage = () => {
       setLoading(false);
       return;
     }
-    if (!check.email(email)) {
+    if (!up.email(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -44,7 +44,7 @@ const forgetPassword: NextPage = () => {
       setSuccess(true);
     } catch (error: any) {
       setLoading(false);
-      const messages = check.errors(error.code, error.message);
+      const messages = up.errors(error.code, error.message);
       setError(messages);
     }
   };

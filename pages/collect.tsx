@@ -1,15 +1,17 @@
 import type { NextPage } from "next";
 import React, { FormEvent, useEffect, useState } from "react";
+import { NextSeo } from "next-seo";
+import router from "next/router";
 import FadeIn from "react-fade-in";
-import Loading from "../components/loading";
-import { Elements } from "@stripe/react-stripe-js";
-import Checkout from "../components/checkout";
 import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+import Loading from "../components/loading";
+import Checkout from "../components/checkout";
+
 import { Firebase } from "../libs/firebase";
 import { Validate } from "../libs/validate";
-import { NextSeo } from "next-seo";
 import { Item } from "../libs/types";
-import router from "next/router";
 const Collect: NextPage = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -25,7 +27,7 @@ const Collect: NextPage = () => {
 
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const fire = new Firebase();
-  const check = new Validate();
+  const up = new Validate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -39,7 +41,7 @@ const Collect: NextPage = () => {
       }, 150);
       return;
     }
-    if (!check.phone(phone)) {
+    if (!up.phone(phone)) {
       setError("Veuillez entrer un numéro de téléphone valide");
       setLoading(true);
       setTimeout(() => {
@@ -48,7 +50,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!check.frequency(frequency)) {
+    if (!up.frequency(frequency)) {
       setError("Veuillez entrer une fréquence valide");
       setLoading(true);
       setTimeout(() => {
@@ -57,7 +59,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!check.email(email)) {
+    if (!up.email(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -65,7 +67,7 @@ const Collect: NextPage = () => {
       setLoading(false);
       return;
     }
-    if (!check.collectTime(collectTime)) {
+    if (!up.collectTime(collectTime)) {
       setError("Veuillez entrer une heure de collecte valide");
       setLoading(true);
       setTimeout(() => {
@@ -74,7 +76,7 @@ const Collect: NextPage = () => {
       return;
     }
 
-    if (!check.adress(address)) {
+    if (!up.adress(address)) {
       setError("s'il-vous-plaît entrez une adresse valide");
       setLoading(true);
       setTimeout(() => {
@@ -118,7 +120,7 @@ const Collect: NextPage = () => {
         }, 3500);
       }
     } catch (error: any) {
-      const messages = check.errors(error.code, error.message);
+      const messages = up.errors(error.code, error.message);
       setError(messages);
       setSuccess(false);
     }
@@ -428,7 +430,7 @@ const Collect: NextPage = () => {
           <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
             <div className="flex flex-col">
               <Elements stripe={stripePromise}>
-                <Checkout />
+                <upout />
               </Elements>
             </div>
           </div>

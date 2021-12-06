@@ -21,7 +21,7 @@ const signup: NextPage = () => {
   const { name, email, password } = formData;
 
   const fire = new Firebase();
-  const check = new Validate();
+  const up = new Validate();
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,7 +40,7 @@ const signup: NextPage = () => {
       setSuccess(true);
       router.push("/collect");
     } catch (error: any) {
-      const messages = check.errors(error.code, error.message);
+      const messages = up.errors(error.code, error.message);
       setError(messages);
     }
     if (password.length < 6) {
@@ -68,14 +68,14 @@ const signup: NextPage = () => {
       }, 3500);
       setError("Veuillez saisir tous les champs");
     }
-    if (!check.name(name)) {
+    if (!up.name(name)) {
       setInterval(() => {
         setError("");
       }, 3500);
       setError("Le nom doit contenir au moins 2 caractères");
     }
 
-    if (!check.email(email)) {
+    if (!up.email(email)) {
       setError("Veuillez entrer un email valide");
       setInterval(() => {
         setError("");
@@ -83,7 +83,7 @@ const signup: NextPage = () => {
       return;
     }
 
-    if (!check.password(password)) {
+    if (!up.password(password)) {
       setError(
         "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
       );
