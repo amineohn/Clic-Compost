@@ -64,9 +64,9 @@ const Home: NextPage = () => {
 
     try {
       await fire.signIn(email, password, "users", "/collect", fire.id());
-      await setRedirection(true);
-      await setLoading(false);
-      await setSuccess(true);
+      setRedirection(true);
+      setLoading(false);
+      setSuccess(true);
     } catch (error: any) {
       setLoading(false);
       setRedirection(false);
