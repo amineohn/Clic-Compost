@@ -430,7 +430,7 @@ const Collect: NextPage = () => {
           <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
             <div className="flex flex-col">
               <Elements stripe={stripePromise}>
-                <upout />
+                <Checkout />
               </Elements>
             </div>
           </div>
