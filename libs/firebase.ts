@@ -29,7 +29,9 @@ export class Firebase {
   user() {
     return firebase.auth().currentUser;
   }
-
+  getCurrentUser() {
+    return this.user();
+  }
   isUser() {
     return this.user() ? true : false;
   }
@@ -276,12 +278,29 @@ export class Firebase {
     });
   }
 
+  async fetchAll(collection: string) {
+    const collectionRef = this.collection(collection);
+    return await collectionRef.get().then((querySnapshot) => {
+      return querySnapshot.docs.map((doc) => {
+        return doc.data();
+      });
+    });
+  }
+
   async getAllByField(collection: string, field: string, value: any) {
     const collectionRef = this.collection(collection);
     return await collectionRef.where(field, "==", value).get();
   }
+  async updateUser(name: string, email: string, password: string) {
+    const user = this.user();
+    await user?.updateProfile({
+      displayName: name,
+    });
+    await user?.updateEmail(email);
+    await user?.updatePassword(password);
+  }
 
-  async updateUser(collection: string, documentPath: string, data: any) {
+  async updateUser2(collection: string, documentPath: string, data: any) {
     const user = this.user();
     const userData = this.userData();
 

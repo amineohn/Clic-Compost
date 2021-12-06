@@ -1,6 +1,6 @@
 html,
 body {
-  @apply font-default transition ease-in-out antialiased p-0 m-0;
+  @apply font-default transition-all duration-200 ease-in-out antialiased p-0 m-0;
 }
 
 body {

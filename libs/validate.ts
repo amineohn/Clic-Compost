@@ -22,6 +22,13 @@ export class Validate {
   frequency(frequency: string) {
     return form.send.frequency.test(frequency);
   }
+  error_form(code: string, message: string) {
+    return {
+      code: code,
+      message: message,
+    };
+  }
+
   errors(code: string, message: string) {
     switch (code) {
       case "auth/invalid-custom-token":
