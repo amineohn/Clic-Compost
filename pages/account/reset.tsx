@@ -7,9 +7,9 @@ import Loading from "../../components/loading";
 import { Logo } from "../../components/logo";
 import { Firebase } from "../../libs/firebase";
 import { Validate } from "../../libs/validate";
-const NewPassword: NextPage = () => {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+const Reset: NextPage = () => {
+  const [current, setCurrent] = useState("");
+  const [newest, setNewest] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -17,35 +17,31 @@ const NewPassword: NextPage = () => {
   const fire = new Firebase();
   const up = new Validate();
 
-  const forgetPassword = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    if (currentPassword === "" || newPassword === "") {
+    if (current === "" || newest === "") {
       setError("Veuillez remplir tous les champs");
       setLoading(false);
     }
-    if (currentPassword.length < 6 || newPassword.length < 6) {
+    if (current.length < 6 || newest.length < 6) {
       setError("Votre mot de passe doit contenir au moins 6 caractères");
       setLoading(false);
     }
-    if (currentPassword === newPassword) {
+    if (current === newest) {
       setError("Votre nouveau mot de passe doit être différent de l'ancien");
       setLoading(false);
     }
-    if (!up.password(newPassword)) {
+    if (!up.password(newest)) {
       setError(
         "Votre nouveau mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
       );
       setLoading(false);
     }
 
-    if (
-      currentPassword !== "" &&
-      newPassword !== "" &&
-      currentPassword !== newPassword
-    ) {
+    if (current !== "" && newest !== "" && current !== newest) {
       try {
-        await fire.updatePassword(currentPassword, newPassword);
+        await fire.updatePassword(current, newest);
         setSuccess(true);
         if (success) {
           router.push("/");
@@ -150,7 +146,7 @@ const NewPassword: NextPage = () => {
                 Entrez votre nouveau mot de passe
               </p>
             </div>
-            <form onSubmit={forgetPassword}>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -163,24 +159,24 @@ const NewPassword: NextPage = () => {
                   id="password"
                   type="password"
                   placeholder="Mot de passe"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  value={current}
+                  onChange={(e) => setCurrent(e.target.value)}
                 />
               </div>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="newPassword"
+                  htmlFor="newest"
                 >
                   Nouveau Mot de passe
                 </label>
                 <input
                   className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="newPassword"
+                  id="newest"
                   type="password"
                   placeholder="Nouveau Mot de passe"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  value={newest}
+                  onChange={(e) => setNewest(e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -199,4 +195,4 @@ const NewPassword: NextPage = () => {
   );
 };
 
-export default NewPassword;
+export default Reset;

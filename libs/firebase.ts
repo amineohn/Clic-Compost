@@ -270,6 +270,28 @@ export class Firebase {
       return data;
     });
   }
+  async withId(collection: string, documentPath: string) {
+    const collectionRef = this.collection(collection);
+    const documentRef = collectionRef.doc(documentPath);
+    return await documentRef.get().then((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+  }
+  where(
+    collection: string,
+    field: string,
+    operator: firebase.firestore.WhereFilterOp,
+    value: string
+  ) {
+    return this.collection(collection).where(field, operator, value);
+  }
+  async orderBy(
+    collection: string,
+    field: string,
+    direction: firebase.firestore.OrderByDirection
+  ) {
+    return this.collection(collection).orderBy(field, direction);
+  }
   async fetch(collection: string, documentPath: string) {
     const collectionRef = this.collection(collection);
     const documentRef = collectionRef.doc(documentPath);
