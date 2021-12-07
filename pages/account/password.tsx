@@ -15,7 +15,7 @@ const forgetPassword: NextPage = () => {
   const fire = new Firebase();
   const up = new Validate();
 
-  const forgetPassword = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     if (!email) {
@@ -148,7 +148,7 @@ const forgetPassword: NextPage = () => {
                 Entrez votre adresse email pour réinitialiser votre mot de passe
               </p>
             </div>
-            <form onSubmit={forgetPassword}>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"

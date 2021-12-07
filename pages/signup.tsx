@@ -10,7 +10,7 @@ import { NextSeo } from "next-seo";
 import { Validate } from "../libs/validate";
 import { Logo } from "../components/logo";
 
-const signup: NextPage = () => {
+const SignUp: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -277,4 +277,4 @@ const signup: NextPage = () => {
     </>
   );
 };
-export default signup;
+export default SignUp;
