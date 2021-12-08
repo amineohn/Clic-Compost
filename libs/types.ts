@@ -11,15 +11,16 @@ export type Item = {
   frequency: string;
 };
 
-export type Permissions = {
-  [key: string]: boolean;
+export interface Permissions {
+  key: any;
+  id?: Number;
   isLoggedIn: boolean;
   isAdmin: boolean;
   isUser: boolean;
   isGuest: boolean;
-};
+}
 
-export enum set {
+export enum setPermission {
   Admin = "Admin",
   User = "User",
   Guest = "Guest",

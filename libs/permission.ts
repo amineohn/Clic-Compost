@@ -1,4 +1,4 @@
-import { Permissions, set } from "./types";
+import { Permissions, setPermission } from "./types";
 import { Firebase } from "./firebase";
 import router from "next/router";
 export class Permission {
@@ -15,13 +15,13 @@ export class Permission {
       const userData = await userRef.once("value");
       const userPermission: Permissions = userData.val();
       if (userPermission.isAdmin) {
-        this.permission.set(set.Admin, userPermission);
+        this.permission.set(setPermission.Admin, userPermission);
       }
       if (userPermission.isUser) {
-        this.permission.set(set.User, userPermission);
+        this.permission.set(setPermission.User, userPermission);
       }
       if (userPermission.isGuest) {
-        this.permission.set(set.Guest, userPermission);
+        this.permission.set(setPermission.Guest, userPermission);
       }
       if (
         userPermission.isAdmin &&
@@ -51,7 +51,7 @@ export class Permission {
         this.permission = {
           isAdmin: false,
           isUser: false,
-          isGuest: true,
+          isGuest: false,
         };
       }
     } else {
@@ -71,6 +71,10 @@ export class Permission {
     return this.permission.get(key);
   }
 
+  public permissionList(): string[] {
+    return Array.from(this.permission.keys());
+  }
+
   public has(key: string): boolean {
     return this.permission.has(key);
   }
@@ -80,5 +84,11 @@ export class Permission {
   }
   public all(): Map<string, Permissions> {
     return this.permission;
+  }
+  public clear(): void {
+    this.permission.clear();
+  }
+  public size(): number {
+    return this.permission.size;
   }
 }
