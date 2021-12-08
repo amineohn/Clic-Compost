@@ -135,7 +135,7 @@ const SignUp: NextPage = () => {
           ],
         }}
       />
-      <FadeIn className="lg:my-60 my-60 flex flex-col items-center justify-center">
+      <FadeIn className="flex flex-col items-center justify-center my-20">
         <div className="flex justify-center">
           <Logo error={error} success={success} />
         </div>

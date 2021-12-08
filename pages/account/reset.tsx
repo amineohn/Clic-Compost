@@ -78,7 +78,7 @@ const Reset: NextPage = () => {
           ],
         }}
       />
-      <FadeIn className="my-60 lg:my-64 flex flex-col items-center justify-center">
+      <FadeIn className="my-20">
         <div className="flex justify-center">
           <Logo error={error} success={success} />
         </div>

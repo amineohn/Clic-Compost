@@ -15,7 +15,6 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [redirection, setRedirection] = useState(false);
-
   const router = useRouter();
   const up = new Validate();
   const fire = new Firebase();
@@ -83,9 +82,10 @@ const Home: NextPage = () => {
     setError("");
     setSuccess(false);
   };
+
   return (
     <>
-      <FadeIn className="lg:my-48 my-48">
+      <FadeIn className="my-20">
         {redirection && (
           <div className="flex items-center justify-center z-50">
             <div className="flex justify-center m-auto space-x-2">

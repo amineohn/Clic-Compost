@@ -8,6 +8,7 @@ import "firebase/compat/functions";
 import "firebase/compat/analytics";
 import "firebase/compat/performance";
 import "firebase/messaging";
+import { Permission } from "./permission";
 
 export class Firebase {
   settings() {
@@ -26,41 +27,38 @@ export class Firebase {
     console.log(`Initialize Firebase ${firebase.apps.length} app`);
   }
 
-  user() {
+  user(): firebase.User | null {
     return firebase.auth().currentUser;
   }
   getCurrentUser() {
     return this.user();
   }
-  isUser() {
-    return this.user() ? true : false;
-  }
 
-  userName() {
+  userName(): string | null | undefined {
     return this.user()?.displayName;
   }
 
-  photoUrl() {
+  photoUrl(): string | null | undefined {
     return this.user()?.photoURL;
   }
 
-  defaultPhotoUrl() {
+  defaultPhotoUrl(): string {
     return "/static/images/blank-profile.png";
   }
 
-  email() {
-    return this.user()?.email;
+  email(): string {
+    return this.user()?.email as string;
   }
 
-  tokenId() {
-    return this.user()?.getIdToken();
+  tokenId(force: boolean): Promise<string> | undefined {
+    return this.user()?.getIdToken(force);
   }
 
   userData() {
     return this.getFireStore().collection("users").doc(this.user()?.uid);
   }
 
-  isConnected() {
+  isConnected(): boolean {
     return this.auth().currentUser !== null;
   }
 
@@ -109,11 +107,15 @@ export class Firebase {
   emptyString(str: string) {
     return str === "";
   }
+  has(key: string): boolean {
+    const permission = new Permission();
+    return permission.has(key);
+  }
   documentPath(collection: string, documentPath: string) {
     return this.collection(collection).doc(documentPath);
   }
 
-  id() {
+  id(): string | undefined {
     return this.user()?.uid;
   }
 
@@ -138,9 +140,9 @@ export class Firebase {
     return this.user()?.reauthenticateWithCredential(credential);
   }
 
-  updatePassword(currentPassword: string, newPassword: string) {
-    this.currentPassword(currentPassword)?.then(() => {
-      return this.user()?.updatePassword(newPassword);
+  async updatePassword(currentPassword: string, newPassword: string) {
+    await this.currentPassword(currentPassword)?.then(async () => {
+      return await this.user()?.updatePassword(newPassword);
     });
   }
 
@@ -148,9 +150,9 @@ export class Firebase {
     return await this.collection(collection)
       .get()
       .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach(async (doc) => {
           if (doc.id === documentPath) {
-            return doc.data();
+            return await doc.data();
           }
         });
       })
@@ -322,30 +324,6 @@ export class Firebase {
     await user?.updatePassword(password);
   }
 
-  async updateUser2(collection: string, documentPath: string, data: any) {
-    const user = this.user();
-    const userData = this.userData();
-
-    if (userData) {
-      await this.collection(collection).doc(documentPath).update(data);
-    } else {
-      await this.collection(collection).doc(documentPath).set(data);
-    }
-    if (user) {
-      await user.updateProfile({
-        displayName: data.name,
-        photoURL: data.photoURL,
-      });
-    }
-
-    return await userData.update(data).then(async () => {
-      await this.collection(collection).doc(documentPath).set({
-        name: this.userName(),
-        email: this.email(),
-      });
-    });
-  }
-
   async signUp(email: string, password: string) {
     const auth = this.auth();
     await auth.createUserWithEmailAndPassword(email, password);
@@ -382,8 +360,8 @@ export class Firebase {
         break;
     }
   }
-  interceptor(url: string, callback: (error: any) => void) {
-    this.functions().httpsCallable(url).call(callback);
+  async interceptor(url: string, callback: (error: any) => void) {
+    return await this.functions().httpsCallable(url).call(callback);
   }
   async phoneSignIn(
     phoneNumber: string,

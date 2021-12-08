@@ -10,3 +10,17 @@ export type Item = {
   collectTime: string;
   frequency: string;
 };
+
+export type Permissions = {
+  [key: string]: boolean;
+  isLoggedIn: boolean;
+  isAdmin: boolean;
+  isUser: boolean;
+  isGuest: boolean;
+};
+
+export enum set {
+  Admin = "Admin",
+  User = "User",
+  Guest = "Guest",
+}

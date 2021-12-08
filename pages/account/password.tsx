@@ -73,7 +73,7 @@ const forgetPassword: NextPage = () => {
           ],
         }}
       />
-      <FadeIn className="my-60 lg:my-64 flex flex-col items-center justify-center">
+      <FadeIn className="flex flex-col items-center justify-center">
         <div className="flex justify-center">
           <Logo error={error} success={success} />
         </div>

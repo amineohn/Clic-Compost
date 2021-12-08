@@ -69,7 +69,7 @@ export default function MyApp({
           ],
         }}
       />
-      <div className="flex flex-col h-screen overflow-auto lg:overflow-y-hidden justify-between z-auto">
+      <div className="min-h-screen  grid place-items-center overflow-auto lg:overflow-y-hidden z-auto">
         <Component {...pageProps} />
         <Navigation />
       </div>
