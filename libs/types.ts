@@ -12,7 +12,10 @@ export type Item = {
 };
 
 export interface Permissions {
-  key: any;
+  all: {
+    [key: string]: any;
+  };
+  key: [];
   id?: Number;
   isLoggedIn: boolean;
   isAdmin: boolean;

@@ -8,6 +8,7 @@ import { Transition } from "@headlessui/react";
 import { Firebase } from "../libs/firebase";
 import { Validate } from "../libs/validate";
 import { Logo } from "../components/logo";
+import { Permission } from "../libs/permission";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [redirection, setRedirection] = useState(false);
+  const permission = new Permission();
   const router = useRouter();
   const up = new Validate();
   const fire = new Firebase();
@@ -82,7 +84,6 @@ const Home: NextPage = () => {
     setError("");
     setSuccess(false);
   };
-
   return (
     <>
       <FadeIn className="my-20">
