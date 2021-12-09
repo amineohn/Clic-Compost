@@ -21,7 +21,6 @@ const Collect: NextPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
   const [data, setData] = useState([{}] as any);
 
   const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
@@ -155,8 +154,7 @@ const Collect: NextPage = () => {
     }
   }, []);
 
-  // separate the data from the database into a new array of objects for user to see
-  const thisData = data.map((item: Item) => (
+  const map = data.map((item: Item) => (
     <tr key={fire.collectionId("clients")}>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center">
@@ -373,7 +371,7 @@ const Collect: NextPage = () => {
                         </thead>
                         <tbody>
                           {data ? (
-                            thisData
+                            map
                           ) : (
                             <div className="flex space-x-1 justify-center p-4 m-auto">
                               <svg

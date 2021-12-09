@@ -15,7 +15,7 @@ export interface Permissions {
   all: {
     [key: string]: any;
   };
-  key: [];
+  key: string;
   id?: Number;
   isLoggedIn: boolean;
   isAdmin: boolean;
@@ -23,7 +23,7 @@ export interface Permissions {
   isGuest: boolean;
 }
 
-export enum setPermission {
+export enum Rights {
   Admin = "Admin",
   User = "User",
   Guest = "Guest",
