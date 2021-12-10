@@ -76,32 +76,32 @@ export class Permission {
     }
   }
 
-  private add(key: string, permission: Permissions): void {
+  public add(key: string, permission: Permissions): void {
     this.permission.set(key, permission);
   }
 
-  private get(key: string): Permissions | undefined {
+  public get(key: string): Permissions | undefined {
     return this.permission.get(key);
   }
 
-  private permissionList(): string[] {
+  public permissionList(): string[] {
     return Array.from(this.permission.keys());
   }
 
-  private has(key: string): boolean {
+  public has(key: string): boolean {
     return this.permission.has(key);
   }
 
-  private delete(key: string): void {
+  public delete(key: string): void {
     this.permission.delete(key);
   }
-  private all(): Map<string, Permissions> {
+  public all(): Map<string, Permissions> {
     return this.permission;
   }
-  private clear(): void {
+  public clear(): void {
     this.permission.clear();
   }
-  private size(): number {
+  public size(): number {
     return this.permission.size;
   }
 }
