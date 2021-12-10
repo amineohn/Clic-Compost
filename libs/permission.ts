@@ -4,26 +4,117 @@ import router from "next/router";
 export class Permission {
   public permission: Map<string, Permissions>;
   constructor() {
-    this.permission = new Map<string, Permissions>();
-    this.init();
+    this.permission = new Map<string, Permissions>(); // TODO: add type
+    this.init(); // initialize Permission Class.
+    this.get = this.get.bind(this); // bind this to get
+    this.add = this.add.bind(this); // bind this to add
+    this.has = this.has.bind(this); // bind this to has
+    this.delete = this.delete.bind(this); // bind this to delete
+    this.all = this.all.bind(this); // bind this to all
+    this.clear = this.clear.bind(this); // bind this to clear
+    this.size = this.size.bind(this); // bind this to size
+    this.all = this.all.bind(this); // get all permissions in map
+    this.set = this.set.bind(this); // set permission in map
   }
-  // check user permission if user exist in permission
+
   public async init(): Promise<void> {
     const fire = new Firebase();
-    const user = await fire.auth().currentUser;
+    if (this.size() === 0) {
+      await fire
+        .collection("rights")
+        .where("admin", "==", true)
+        .orderBy("id")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.add(doc.id, {
+              all: doc.data(),
+              key: doc.id,
+              id: doc.data().id,
+              isLoggedIn: false,
+              isAdmin: true,
+              isUser: false,
+              isGuest: false,
+            });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      await fire
+        .collection("rights")
+        .where("user", "==", true)
+        .orderBy("id")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.add(doc.id, {
+              all: doc.data(),
+              key: doc.id,
+              id: doc.data().id,
+              isLoggedIn: false,
+              isAdmin: false,
+              isUser: true,
+              isGuest: false,
+            });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      await fire
+        .collection("rights")
+        .where("guest", "==", true)
+        .orderBy("id")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.add(doc.id, {
+              all: doc.data(),
+              key: doc.id,
+              id: doc.data().id,
+              isLoggedIn: false,
+              isAdmin: false,
+              isUser: false,
+              isGuest: true,
+            });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    const user = await fire.user();
     if (user) {
-      const { uid } = user;
-      const userRef = fire.database().ref(`users/${uid}`);
+      const userRef = fire.database().ref(`users/${fire.id()}`);
+      userRef.on("value", (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          this.permission.forEach((value, key) => {
+            if (value.all.id === data.id) {
+              this.permission.set(key, {
+                all: value.all,
+                key: value.key,
+                id: value.id,
+                isLoggedIn: true,
+                isAdmin: value.isAdmin,
+                isUser: value.isUser,
+                isGuest: value.isGuest,
+              });
+            }
+          });
+        }
+      });
       const userData = await userRef.once("value");
       const userPermission: Permissions = userData.val();
       if (userPermission.isAdmin) {
-        this.permission.set(Rights.Admin, userPermission);
+        this.set(Rights.Admin, userPermission);
       }
       if (userPermission.isUser) {
-        this.permission.set(Rights.User, userPermission);
+        this.set(Rights.User, userPermission);
       }
       if (userPermission.isGuest) {
-        this.permission.set(Rights.Guest, userPermission);
+        this.set(Rights.Guest, userPermission);
       }
       if (
         userPermission.isAdmin &&
@@ -51,11 +142,11 @@ export class Permission {
       }
 
       if (userPermission) {
-        this.permission.set(uid, userPermission);
+        this.set(fire.id() as string, userPermission);
       } else {
-        this.permission.set(uid, {
+        this.set(fire.id() as string, {
           all: {},
-          key: [],
+          key: "",
           id: 0,
           isLoggedIn: false,
           isAdmin: false,
@@ -64,9 +155,9 @@ export class Permission {
         });
       }
     } else {
-      this.permission.set("guest", {
+      this.set(Rights.Guest, {
         all: {},
-        key: ,
+        key: "",
         id: 0,
         isLoggedIn: false,
         isAdmin: false,
@@ -76,32 +167,79 @@ export class Permission {
     }
   }
 
-  private add(key: string, permission: Permissions): void {
+  public set(key: string, permission: Permissions): void {
     this.permission.set(key, permission);
   }
 
-  private get(key: string): Permissions | undefined {
+  public add(key: string, permission: Permissions): void {
+    this.permission.set(key, permission);
+  }
+
+  public get(key: string): Permissions | undefined {
     return this.permission.get(key);
   }
 
-  private permissionList(): string[] {
+  public permissionList(): string[] {
     return Array.from(this.permission.keys());
   }
 
-  private has(key: string): boolean {
-    return this.permission.has(key);
+  public has(key: string): boolean {
+    const fire = new Firebase();
+    switch (key) {
+      case Rights.Admin:
+        fire
+          .collection("rights")
+          .where("admin", "==", true)
+          .orderBy("id")
+          .get()
+          .catch((err) => {
+            console.log(err);
+          });
+        return this.isAdmin();
+      case Rights.User:
+        fire
+          .collection("rights")
+          .where("user", "==", true)
+          .orderBy("id")
+          .get()
+          .catch((err) => {
+            console.log(err);
+          });
+        return this.isUser();
+      case Rights.Guest:
+        fire
+          .collection("rights")
+          .where("guest", "==", true)
+          .orderBy("id")
+          .get()
+          .catch((err) => {
+            console.log(err);
+          });
+        return this.isGuest();
+      default:
+        return false;
+    }
   }
 
-  private delete(key: string): void {
+  public delete(key: string): void {
     this.permission.delete(key);
   }
-  private all(): Map<string, Permissions> {
+  public all(): Map<string, Permissions> {
     return this.permission;
   }
-  private clear(): void {
+  public clear(): void {
     this.permission.clear();
   }
-  private size(): number {
+  public size(): number {
     return this.permission.size;
+  }
+  public isAdmin(): boolean {
+    return this.permission.get(Rights.Admin)?.isAdmin as boolean;
+  }
+  public isUser(): boolean {
+    return this.permission.get(Rights.User)?.isUser as boolean;
+  }
+  public isGuest(): boolean {
+    return this.permission.get(Rights.Guest)?.isGuest as boolean;
   }
 }
