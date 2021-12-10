@@ -9,6 +9,7 @@ import { Firebase } from "../libs/firebase";
 import { Validate } from "../libs/validate";
 import { Logo } from "../components/logo";
 import { Permission } from "../libs/permission";
+import { Rights } from "../libs/types";
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
   const up = new Validate();
   const fire = new Firebase();
   fire.stateChanged((user) => {
-    if (user) {
+    if (user || permission.has(Rights.User) || permission.has(Rights.Admin)) {
       setRedirection(true);
       router.push("/collect");
     }
@@ -55,7 +56,6 @@ const Home: NextPage = () => {
       setError("Veuillez saisir tous les champs");
       return;
     }
-
     if (password.length < 6) {
       setLoading(false);
       setRedirection(false);

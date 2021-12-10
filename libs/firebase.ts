@@ -7,6 +7,7 @@ import "firebase/compat/storage";
 import "firebase/compat/functions";
 import "firebase/compat/analytics";
 import "firebase/compat/performance";
+import "firebase/compat/database";
 import "firebase/messaging";
 import { Permission } from "./permission";
 
@@ -179,7 +180,6 @@ export class Firebase {
       address: address,
     };
   }
-
   async signIn(
     email: string,
     password: string,

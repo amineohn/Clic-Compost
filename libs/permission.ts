@@ -1,4 +1,4 @@
-import { Permissions, setPermission } from "./types";
+import { Permissions, Rights } from "./types";
 import { Firebase } from "./firebase";
 import router from "next/router";
 export class Permission {
@@ -17,13 +17,13 @@ export class Permission {
       const userData = await userRef.once("value");
       const userPermission: Permissions = userData.val();
       if (userPermission.isAdmin) {
-        this.permission.set(setPermission.Admin, userPermission);
+        this.permission.set(Rights.Admin, userPermission);
       }
       if (userPermission.isUser) {
-        this.permission.set(setPermission.User, userPermission);
+        this.permission.set(Rights.User, userPermission);
       }
       if (userPermission.isGuest) {
-        this.permission.set(setPermission.Guest, userPermission);
+        this.permission.set(Rights.Guest, userPermission);
       }
       if (
         userPermission.isAdmin &&
@@ -66,7 +66,7 @@ export class Permission {
     } else {
       this.permission.set("guest", {
         all: {},
-        key: [],
+        key: ,
         id: 0,
         isLoggedIn: false,
         isAdmin: false,
@@ -76,32 +76,32 @@ export class Permission {
     }
   }
 
-  public add(key: string, permission: Permissions): void {
+  private add(key: string, permission: Permissions): void {
     this.permission.set(key, permission);
   }
 
-  public get(key: string): Permissions | undefined {
+  private get(key: string): Permissions | undefined {
     return this.permission.get(key);
   }
 
-  public permissionList(): string[] {
+  private permissionList(): string[] {
     return Array.from(this.permission.keys());
   }
 
-  public has(key: string): boolean {
+  private has(key: string): boolean {
     return this.permission.has(key);
   }
 
-  public delete(key: string): void {
+  private delete(key: string): void {
     this.permission.delete(key);
   }
-  public all(): Map<string, Permissions> {
+  private all(): Map<string, Permissions> {
     return this.permission;
   }
-  public clear(): void {
+  private clear(): void {
     this.permission.clear();
   }
-  public size(): number {
+  private size(): number {
     return this.permission.size;
   }
 }
