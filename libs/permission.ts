@@ -5,23 +5,23 @@ export class Permission {
   public permission: Map<string, Permissions>;
   constructor() {
     const fire = new Firebase();
-    this.permission = new Map<string, Permissions>(); // TODO: add type
-    this.init(); // initialize Permission Class.
-    this.get = this.get.bind(this); // bind this to get
-    this.add = this.add.bind(this); // bind this to add
-    this.has = this.has.bind(this); // bind this to has
-    this.delete = this.delete.bind(this); // bind this to delete
-    this.all = this.all.bind(this); // bind this to all
-    this.clear = this.clear.bind(this); // bind this to clear
-    this.size = this.size.bind(this); // bind this to size
-    this.all = this.all.bind(this); // get all permissions in map
-    this.set = this.set.bind(this); // set permission in map
-    this.isAdmin = this.isAdmin.bind(this); // check if user is admin
-    this.isUser = this.isUser.bind(this); // check if user is user
-    this.isGuest = this.isGuest.bind(this); // check if user is guest
-    const exist = fire.exist("rights");
-    if (exist) {
-      this.insertValues(); // insert values to firebase
+    this.permission = new Map<string, Permissions>();
+    this.init();
+    this.get = this.get.bind(this);
+    this.add = this.add.bind(this);
+    this.has = this.has.bind(this);
+    this.delete = this.delete.bind(this);
+    this.all = this.all.bind(this);
+    this.clear = this.clear.bind(this);
+    this.size = this.size.bind(this);
+    this.all = this.all.bind(this);
+    this.set = this.set.bind(this);
+    this.isAdmin = this.isAdmin.bind(this);
+    this.isUser = this.isUser.bind(this);
+    this.isGuest = this.isGuest.bind(this);
+    this.permissionList = this.permissionList.bind(this);
+    if (fire.exist("rights")) {
+      this.insertValues();
     }
   }
   public async insertValues(): Promise<void> {
