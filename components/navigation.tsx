@@ -244,8 +244,8 @@ const Navigation = () => {
                   <div className="inline-flex">
                     <a
                       href="https://www.linkedin.com/company/les-détritivores/"
-                      rel="noopener"
                       target="_blank"
+                      rel="noopener"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -260,8 +260,8 @@ const Navigation = () => {
                     </a>
                     <a
                       href="https://www.facebook.com/lesdetritivores/"
-                      rel="noopener"
                       target="_blank"
+                      rel="noopener"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -276,8 +276,8 @@ const Navigation = () => {
                     </a>
                     <a
                       href="https://twitter.com/lesdetritivores"
-                      rel="noopener"
                       target="_blank"
+                      rel="noopener"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -6,7 +6,7 @@ import Loading from "../../components/loading";
 import { Logo } from "../../components/logo";
 import { Firebase } from "../../libs/firebase";
 import { Validate } from "../../libs/validate";
-const forgetPassword: NextPage = () => {
+const ForgetPassword: NextPage = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -181,4 +181,4 @@ const forgetPassword: NextPage = () => {
   );
 };
 
-export default forgetPassword;
+export default ForgetPassword;
