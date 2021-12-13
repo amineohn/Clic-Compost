@@ -132,6 +132,14 @@ export class Firebase {
     const auth = this.auth();
     auth.onAuthStateChanged(callback);
   }
+  exist(collection: string): boolean {
+    this.collection(collection)
+      .get()
+      .then((querySnapshot) => {
+        return querySnapshot.empty;
+      });
+    return true;
+  }
 
   currentPassword(currentPassword: string) {
     const credential = firebase.auth.EmailAuthProvider.credential(
@@ -146,7 +154,9 @@ export class Firebase {
       return await this.user()?.updatePassword(newPassword);
     });
   }
-
+  async getLogs() {
+    return await this.analytics().logEvent("getLogs");
+  }
   async snapshot(collection: string, documentPath: string) {
     return await this.collection(collection)
       .get()
@@ -208,6 +218,15 @@ export class Firebase {
   async passwordResetEmail(email: string) {
     const auth = this.auth();
     await auth.sendPasswordResetEmail(email);
+  }
+  async saveColor(color: Array<string>) {
+    this.collection("colors").doc(this.user()?.uid).set({
+      color: color,
+    });
+  }
+  async logOut() {
+    const auth = this.auth();
+    await auth.signOut();
   }
 
   async update(collection: string, documentPath: string, data: any) {

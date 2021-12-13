@@ -28,7 +28,6 @@ export class Validate {
       message: message,
     };
   }
-
   errors(code: string, message: string) {
     switch (code) {
       case "auth/invalid-custom-token":

@@ -4,6 +4,7 @@ import router from "next/router";
 export class Permission {
   public permission: Map<string, Permissions>;
   constructor() {
+    const fire = new Firebase();
     this.permission = new Map<string, Permissions>(); // TODO: add type
     this.init(); // initialize Permission Class.
     this.get = this.get.bind(this); // bind this to get
@@ -15,6 +16,48 @@ export class Permission {
     this.size = this.size.bind(this); // bind this to size
     this.all = this.all.bind(this); // get all permissions in map
     this.set = this.set.bind(this); // set permission in map
+    this.isAdmin = this.isAdmin.bind(this); // check if user is admin
+    this.isUser = this.isUser.bind(this); // check if user is user
+    this.isGuest = this.isGuest.bind(this); // check if user is guest
+    const exist = fire.exist("rights");
+    if (exist) {
+      this.insertValues(); // insert values to firebase
+    }
+  }
+  public async insertValues(): Promise<void> {
+    const fire = new Firebase();
+    const rights = [
+      {
+        id: 1,
+        name: Rights.Admin,
+        isAdmin: true,
+        isUser: true,
+        isGuest: true,
+      },
+      {
+        id: 2,
+        name: Rights.User,
+        isAdmin: false,
+        isUser: true,
+        isGuest: true,
+      },
+      {
+        id: 3,
+        name: Rights.Guest,
+        isAdmin: false,
+        isUser: false,
+        isGuest: true,
+      },
+    ];
+    for (const right of rights) {
+      await fire
+        .collection("rights")
+        .doc(right.name)
+        .set(right)
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   public async init(): Promise<void> {
@@ -22,7 +65,6 @@ export class Permission {
     if (this.size() === 0) {
       await fire
         .collection("rights")
-        .where("admin", "==", true)
         .orderBy("id")
         .get()
         .then((querySnapshot) => {
@@ -43,7 +85,6 @@ export class Permission {
         });
       await fire
         .collection("rights")
-        .where("user", "==", true)
         .orderBy("id")
         .get()
         .then((querySnapshot) => {
@@ -64,7 +105,6 @@ export class Permission {
         });
       await fire
         .collection("rights")
-        .where("guest", "==", true)
         .orderBy("id")
         .get()
         .then((querySnapshot) => {
@@ -189,7 +229,6 @@ export class Permission {
       case Rights.Admin:
         fire
           .collection("rights")
-          .where("admin", "==", true)
           .orderBy("id")
           .get()
           .catch((err) => {
@@ -199,7 +238,6 @@ export class Permission {
       case Rights.User:
         fire
           .collection("rights")
-          .where("user", "==", true)
           .orderBy("id")
           .get()
           .catch((err) => {
@@ -209,7 +247,6 @@ export class Permission {
       case Rights.Guest:
         fire
           .collection("rights")
-          .where("guest", "==", true)
           .orderBy("id")
           .get()
           .catch((err) => {

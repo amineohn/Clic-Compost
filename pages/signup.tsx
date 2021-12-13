@@ -9,6 +9,7 @@ import router from "next/router";
 import { NextSeo } from "next-seo";
 import { Validate } from "../libs/validate";
 import { Logo } from "../components/logo";
+import { Rights } from "../libs/types";
 
 const SignUp: NextPage = () => {
   const [error, setError] = useState("");
@@ -57,6 +58,7 @@ const SignUp: NextPage = () => {
         name,
         email,
         password,
+        Right: Rights.User,
       });
     } catch (err) {
       console.error(err);

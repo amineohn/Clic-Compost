@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "../../components/loading";
+import Navigation from "../../components/navigation";
 import { Firebase } from "../../libs/firebase";
 import { Validate } from "../../libs/validate";
 const Update = () => {
@@ -70,6 +71,7 @@ const Update = () => {
           ],
         }}
       />
+      <Navigation />
       <FadeIn className="container-2xl">
         <div className="flex flex-col items-center justify-center h-screen mx-5">
           {error && (

@@ -12,6 +12,8 @@ import { Firebase } from "../libs/firebase";
 import { NextSeo } from "next-seo";
 import { Router } from "next/router";
 import NProgress from "nprogress";
+import { Permission } from "../libs/permission";
+import { Rights } from "../libs/types";
 
 const Navigation = dynamic(() => import("../components/navigation"), {
   ssr: false,
@@ -44,12 +46,12 @@ export default function MyApp({
   }
 
   const router = useRouter();
-
-  useEffect(() => {
-    if (!fire.user()) {
+  const permission = new Permission();
+  /*useEffect(() => {
+    if (!fire.user() || permission.has(Rights.Admin)) {
       router.push("/");
     }
-  }, []);
+  }, []);*/
   return (
     <>
       <NextSeo
@@ -71,7 +73,14 @@ export default function MyApp({
       />
       <div className="min-h-screen  grid place-items-center overflow-auto lg:overflow-y-hidden z-auto">
         <Component {...pageProps} />
-        <Navigation />
+        {router.pathname === `/dashboard/` ||
+          router.pathname === "/" ||
+          router.pathname === "/dashboard/settings" ||
+          router.pathname === "/signup" ||
+          router.pathname === "/account/password" ||
+          router.pathname === "/reset" ||
+          router.pathname === "/update" ||
+          (router.pathname === "/collect" && <Navigation />)}
       </div>
       <script src="https://cdn.jsdelivr.net/npm/datalist-css/dist/datalist-css.min.js" />
     </>

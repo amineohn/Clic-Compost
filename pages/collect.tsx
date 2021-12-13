@@ -140,7 +140,7 @@ const Collect: NextPage = () => {
       .orderBy("name")
       .onSnapshot((snapshot) => {
         const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
+          id: doc.id ? doc.id : "no one exist? :/",
           ...doc.data(),
         }));
         setData(data);
@@ -370,32 +370,14 @@ const Collect: NextPage = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {data ? (
+                          {fire.collectionId("clients") ? (
                             map
                           ) : (
-                            <div className="flex space-x-1 justify-center p-4 m-auto">
-                              <svg
-                                className="animate-spin h-4 w-4 text-gray-900 mt-1"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                              >
-                                <circle
-                                  className="opacity-25"
-                                  cx="12"
-                                  cy="12"
-                                  r="10"
-                                  stroke="currentColor"
-                                  strokeWidth="4"
-                                />
-                                <path
-                                  className="opacity-75"
-                                  fill="currentColor"
-                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                />
-                              </svg>
-                              <span>Chargement des datas..</span>
-                            </div>
+                            <tr>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                                Aucun client
+                              </td>
+                            </tr>
                           )}
                         </tbody>
                       </table>
@@ -406,7 +388,7 @@ const Collect: NextPage = () => {
             </div>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center max-h-32">
             <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
               <div className="flex flex-col">
                 <Elements stripe={stripePromise}>
@@ -504,31 +486,6 @@ const Collect: NextPage = () => {
                 </FadeIn>
               </>
             )}
-            <FadeIn>
-              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-5">
-                <div className="flex items-center justify-center w-12 bg-orange-500">
-                  <svg
-                    className="w-6 h-6 text-white fill-current"
-                    viewBox="0 0 40 40"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z" />
-                  </svg>
-                </div>
-
-                <div className="px-4 py-2 -mx-3">
-                  <div className="mx-3">
-                    <span className="font-semibold text-orange-500">
-                      Avertissement
-                    </span>
-                    <p className="text-sm text-gray-600 dark:text-gray-200">
-                      Cette version de Clic Compost est en cours de
-                      développement.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
           </div>
         </div>
       </FadeIn>
