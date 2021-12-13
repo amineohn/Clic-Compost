@@ -245,7 +245,7 @@ const Navigation = () => {
                     <a
                       href="https://www.linkedin.com/company/les-détritivores/"
                       target="_blank"
-                      rel="noopener"
+                      rel="noreferrer"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -277,7 +277,7 @@ const Navigation = () => {
                     <a
                       href="https://twitter.com/lesdetritivores"
                       target="_blank"
-                      rel="noopener"
+                      rel="noreferrer"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
