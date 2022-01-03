@@ -54,9 +54,7 @@ export class Permission {
         .collection("rights")
         .doc(right.name)
         .set(right)
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     }
   }
 
@@ -100,9 +98,7 @@ export class Permission {
             });
           });
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
       await fire
         .collection("rights")
         .orderBy("id")
@@ -120,9 +116,7 @@ export class Permission {
             });
           });
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     }
     const user = await fire.user();
     if (user) {
