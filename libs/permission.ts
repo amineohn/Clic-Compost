@@ -7,9 +7,9 @@ export class Permission {
     const fire = new Firebase();
     this.permission = new Map<string, Permissions>();
     this.init();
-    if (fire.exist("rights")) {
-      this.insertValues();
-    }
+    /*if (fire.exist("rights")) {
+    this.insertValues();
+    } */
   }
   public async insertValues(): Promise<void> {
     const fire = new Firebase();
@@ -17,23 +17,23 @@ export class Permission {
       {
         id: 1,
         name: Rights.Admin,
-        isAdmin: true,
-        isUser: true,
-        isGuest: true,
+        isAdmin: Rights.Admin,
+        isUser: Rights.User,
+        isGuest: Rights.Guest,
       },
       {
         id: 2,
         name: Rights.User,
-        isAdmin: false,
-        isUser: true,
-        isGuest: true,
+        isAdmin: Rights.Admin,
+        isUser: Rights.User,
+        isGuest: Rights.Guest,
       },
       {
         id: 3,
         name: Rights.Guest,
-        isAdmin: false,
-        isUser: false,
-        isGuest: true,
+        isAdmin: Rights.Admin,
+        isUser: Rights.User,
+        isGuest: Rights.Guest,
       },
     ];
     for (const right of rights) {
