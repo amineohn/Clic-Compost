@@ -3,8 +3,8 @@ import { Firebase } from "./firebase";
 import router from "next/router";
 export class Permission {
   public permission: Map<string, Permissions>;
+  public fire = new Firebase();
   constructor() {
-    const fire = new Firebase();
     this.permission = new Map<string, Permissions>();
     this.init();
     /*if (fire.exist("rights")) {
@@ -12,7 +12,6 @@ export class Permission {
     } */
   }
   public async insertValues(): Promise<void> {
-    const fire = new Firebase();
     const rights = [
       {
         id: 1,
@@ -37,7 +36,7 @@ export class Permission {
       },
     ];
     for (const right of rights) {
-      await fire
+      await this.fire
         .collection("rights")
         .doc(right.name)
         .set(right)
@@ -47,7 +46,6 @@ export class Permission {
 
   public async init(): Promise<void> {
     const fire = new Firebase();
-
     await fire
       .collection("rights")
       .orderBy("id")
