@@ -16,6 +16,8 @@ const Update = () => {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
     if (!name || !email || !password) {
       setError("Veillez remplir tous les champs");
       setLoading(false);
