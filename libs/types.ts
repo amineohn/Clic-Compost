@@ -18,13 +18,13 @@ export interface Permissions {
   key: string;
   id?: Number;
   isLoggedIn: boolean;
-  isAdmin: boolean;
-  isUser: boolean;
-  isGuest: boolean;
+  isAdmin: string;
+  isUser: string;
+  isGuest: string;
 }
 
 export enum Rights {
-  Admin = "Admin",
-  User = "User",
-  Guest = "Guest",
+  Admin = "0",
+  User = "1",
+  Guest = "2",
 }

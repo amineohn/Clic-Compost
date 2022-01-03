@@ -47,64 +47,64 @@ export class Permission {
 
   public async init(): Promise<void> {
     const fire = new Firebase();
-    if (this.size() === 0) {
-      await fire
-        .collection("rights")
-        .orderBy("id")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            this.add(doc.id, {
-              all: doc.data(),
-              key: doc.id,
-              id: doc.data().id,
-              isLoggedIn: false,
-              isAdmin: true,
-              isUser: false,
-              isGuest: false,
-            });
+
+    await fire
+      .collection("rights")
+      .orderBy("id")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.add(doc.id, {
+            all: doc.data(),
+            key: doc.id,
+            id: doc.data().id,
+            isLoggedIn: false,
+            isAdmin: Rights.Admin,
+            isUser: Rights.User,
+            isGuest: Rights.Guest,
           });
-        })
-        .catch((err) => {
-          console.log(err);
         });
-      await fire
-        .collection("rights")
-        .orderBy("id")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            this.add(doc.id, {
-              all: doc.data(),
-              key: doc.id,
-              id: doc.data().id,
-              isLoggedIn: false,
-              isAdmin: false,
-              isUser: true,
-              isGuest: false,
-            });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    await fire
+      .collection("rights")
+      .orderBy("id")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.add(doc.id, {
+            all: doc.data(),
+            key: doc.id,
+            id: doc.data().id,
+            isLoggedIn: false,
+            isAdmin: Rights.Admin,
+            isUser: Rights.User,
+            isGuest: Rights.Guest,
           });
-        })
-        .catch((err) => console.log(err));
-      await fire
-        .collection("rights")
-        .orderBy("id")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            this.add(doc.id, {
-              all: doc.data(),
-              key: doc.id,
-              id: doc.data().id,
-              isLoggedIn: false,
-              isAdmin: false,
-              isUser: false,
-              isGuest: true,
-            });
+        });
+      })
+      .catch((err) => console.log(err));
+    await fire
+      .collection("rights")
+      .orderBy("id")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.add(doc.id, {
+            all: doc.data(),
+            key: doc.id,
+            id: doc.data().id,
+            isLoggedIn: false,
+            isAdmin: Rights.Admin,
+            isUser: Rights.User,
+            isGuest: Rights.Guest,
           });
-        })
-        .catch((err) => console.log(err));
-    }
+        });
+      })
+      .catch((err) => console.log(err));
+
     const user = await fire.user();
     if (user) {
       const userRef = fire.database().ref(`users/${fire.id()}`);
@@ -170,9 +170,9 @@ export class Permission {
           key: "",
           id: 0,
           isLoggedIn: false,
-          isAdmin: false,
-          isUser: false,
-          isGuest: false,
+          isAdmin: Rights.Admin,
+          isUser: Rights.User,
+          isGuest: Rights.Guest,
         });
       }
     } else {
@@ -181,9 +181,9 @@ export class Permission {
         key: "",
         id: 0,
         isLoggedIn: false,
-        isAdmin: false,
-        isUser: false,
-        isGuest: true,
+        isAdmin: Rights.Admin,
+        isUser: Rights.User,
+        isGuest: Rights.Guest,
       });
     }
   }
@@ -252,12 +252,12 @@ export class Permission {
     return this.permission.size;
   }
   public isAdmin(): boolean {
-    return this.permission.get(Rights.Admin)?.isAdmin as boolean;
+    return (this.permission.get(Rights.Admin)?.isAdmin as string) === "4"; // test negative value
   }
   public isUser(): boolean {
-    return this.permission.get(Rights.User)?.isUser as boolean;
+    return (this.permission.get(Rights.User)?.isUser as string) === "4"; // test negative value
   }
   public isGuest(): boolean {
-    return this.permission.get(Rights.Guest)?.isGuest as boolean;
+    return (this.permission.get(Rights.Guest)?.isGuest as string) === "4"; // test negative value
   }
 }
