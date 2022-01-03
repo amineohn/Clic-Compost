@@ -250,12 +250,15 @@ export class Permission {
     return this.permission.size;
   }
   public isAdmin(): boolean {
-    return (this.permission.get(Rights.Admin)?.isAdmin as string) === "4"; // test negative value
+    return (this.permission.get(Rights.Admin)?.isAdmin as string) === "0";
   }
   public isUser(): boolean {
-    return (this.permission.get(Rights.User)?.isUser as string) === "4"; // test negative value
+    return (this.permission.get(Rights.User)?.isUser as string) === "1";
   }
   public isGuest(): boolean {
-    return (this.permission.get(Rights.Guest)?.isGuest as string) === "4"; // test negative value
+    return (this.permission.get(Rights.Guest)?.isGuest as string) === "2";
+  }
+  public isLoggedIn(): boolean {
+    return this.permission.get(Rights.Guest)?.isLoggedIn === true;
   }
 }

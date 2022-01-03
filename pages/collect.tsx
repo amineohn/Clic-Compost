@@ -75,7 +75,7 @@ const Collect: NextPage = () => {
     }
 
     if (!up.adress(address)) {
-      setError("s'il-vous-plaît entrez une adresse valide");
+      setError("S'il-vous-plaît entrez une adresse valide");
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
@@ -95,7 +95,6 @@ const Collect: NextPage = () => {
         return;
       }
       setLoading(true);
-
       fire
         .collection("clients")
         .add(

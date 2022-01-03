@@ -13,7 +13,7 @@ export type Item = {
 
 export interface Permissions {
   all: {
-    [key: string]: any;
+    [key: string]: string;
   };
   key: string;
   id?: Number;
