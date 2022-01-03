@@ -156,31 +156,33 @@ const Collect: NextPage = () => {
 
   const map = data.map((item: Item) => (
     <tr key={fire.collectionId("clients")}>
-      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-neutral-200 dark:border-neutral-800">
         <div className="flex items-center">
           <div className="ml-4">
-            <div className="text-sm leading-5 font-medium text-gray-900">
+            <div className="text-sm leading-5 font-medium text-neutral-900">
               {item.name}
             </div>
-            <div className="text-sm leading-5 text-gray-500">
+            <div className="text-sm leading-5 text-neutral-500">
               {item.address}
             </div>
           </div>
         </div>
       </td>
-      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-        <div className="text-sm leading-5 text-gray-900">{item.address}</div>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-neutral-200 dark:border-neutral-800">
+        <div className="text-sm leading-5 text-neutral-900">{item.address}</div>
       </td>
-      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-        <div className="text-sm leading-5 text-gray-900">{item.phone}</div>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-neutral-200 dark:border-neutral-800">
+        <div className="text-sm leading-5 text-neutral-900">{item.phone}</div>
       </td>
-      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-        <div className="text-sm leading-5 text-gray-900">
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-neutral-200 dark:border-neutral-800">
+        <div className="text-sm leading-5 text-neutral-900">
           {item.collectTime}
         </div>
       </td>
-      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
-        <div className="text-sm leading-5 text-gray-900">{item.frequency}</div>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-neutral-200 dark:border-neutral-800">
+        <div className="text-sm leading-5 text-neutral-900">
+          {item.frequency}
+        </div>
       </td>
     </tr>
   ));
@@ -213,13 +215,13 @@ const Collect: NextPage = () => {
               >
                 <div className="mb-4">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-neutral-700 text-sm font-bold mb-2"
                     htmlFor="username"
                   >
                     Nom du site
                   </label>
                   <input
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="username"
                     type="text"
                     placeholder="Nom du site"
@@ -229,13 +231,13 @@ const Collect: NextPage = () => {
                 </div>
                 <div className="mb-6">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-neutral-700 text-sm font-bold mb-2"
                     htmlFor="password"
                   >
                     Adresse
                   </label>
                   <input
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="password"
                     type="text"
                     placeholder="Adresse"
@@ -245,13 +247,13 @@ const Collect: NextPage = () => {
                 </div>
                 <div className="mb-6">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-neutral-700 text-sm font-bold mb-2"
                     htmlFor="password"
                   >
                     Téléphone
                   </label>
                   <input
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="password"
                     type="text"
                     placeholder="Téléphone"
@@ -261,13 +263,13 @@ const Collect: NextPage = () => {
                 </div>
                 <div className="mb-6">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-neutral-700 text-sm font-bold mb-2"
                     htmlFor="password"
                   >
                     Email
                   </label>
                   <input
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="password"
                     type="text"
                     placeholder="Email"
@@ -277,7 +279,7 @@ const Collect: NextPage = () => {
                 </div>
                 <div className="mb-6">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-neutral-700 text-sm font-bold mb-2"
                     htmlFor="time"
                   >
                     <input
@@ -285,19 +287,19 @@ const Collect: NextPage = () => {
                       value={collectTime}
                       autoComplete="off"
                       onChange={(e) => setCollectTime(e.target.value)}
-                      className="shadow appearance-none !bg-white border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-1"
+                      className="shadow appearance-none !bg-white border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline flex-1"
                     />
                   </label>
                 </div>
                 <div className="mb-6">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-neutral-700 text-sm font-bold mb-2"
                     htmlFor="password"
                   >
                     Fréquence
                   </label>
                   <input
-                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="password"
                     type="text"
                     placeholder="Fréquence"
@@ -345,26 +347,26 @@ const Collect: NextPage = () => {
 
           <div className="flex items-center justify-center">
             <div className="w-full max-w-3xl">
-              <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 h-96 overflow-auto">
+              <div className="bg-white dark:bg-neutral-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 h-96 overflow-auto">
                 <div className="flex flex-col">
                   <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:-mb-8 sm:-mt-6 sm:flex sm:justify-start">
-                    <div className="align-middle inline-block min-w-full border-b border-gray-200 dark:border-gray-800">
+                    <div className="align-middle inline-block min-w-full border-b border-neutral-200 dark:border-neutral-800">
                       <table className="min-w-full">
                         <thead className="!overflow-hidden !sticky">
                           <tr>
-                            <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 border-b border-neutral-200 bg-neutral-50 text-left text-xs leading-4 font-medium text-neutral-500 uppercase tracking-wider">
                               Nom du site
                             </th>
-                            <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 border-b border-neutral-200 bg-neutral-50 text-left text-xs leading-4 font-medium text-neutral-500 uppercase tracking-wider">
                               Adresse
                             </th>
-                            <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 border-b border-neutral-200 bg-neutral-50 text-left text-xs leading-4 font-medium text-neutral-500 uppercase tracking-wider">
                               Téléphone
                             </th>
-                            <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 border-b border-neutral-200 bg-neutral-50 text-left text-xs leading-4 font-medium text-neutral-500 uppercase tracking-wider">
                               Créneau
                             </th>
-                            <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-6 py-3 border-b border-neutral-200 bg-neutral-50 text-left text-xs leading-4 font-medium text-neutral-500 uppercase tracking-wider">
                               Fréquence
                             </th>
                           </tr>
@@ -374,7 +376,7 @@ const Collect: NextPage = () => {
                             map
                           ) : (
                             <tr>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-800">
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-neutral-200 dark:border-neutral-800">
                                 Aucun client
                               </td>
                             </tr>
@@ -389,7 +391,7 @@ const Collect: NextPage = () => {
           </div>
 
           <div className="flex justify-center max-h-32">
-            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
+            <div className="bg-white dark:bg-neutral-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 lg:w-96 w-72">
               <div className="flex flex-col">
                 <Elements stripe={stripePromise}>
                   <Checkout />
@@ -401,7 +403,7 @@ const Collect: NextPage = () => {
             {error && (
               <>
                 <FadeIn className="mb-2">
-                  <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+                  <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
                     <div className="flex items-center justify-center w-12 bg-red-500 flex-col">
                       <svg
                         className="w-6 h-6 text-white fill-current"
@@ -423,7 +425,7 @@ const Collect: NextPage = () => {
                         <span className="font-semibold text-red-500 dark:text-red-400">
                           Erreur
                         </span>
-                        <p className="text-sm text-gray-600 dark:text-gray-200">
+                        <p className="text-sm text-neutral-600 dark:text-neutral-200">
                           {error}
                         </p>
                       </div>
@@ -434,7 +436,7 @@ const Collect: NextPage = () => {
             )}
             {success && (
               <FadeIn className="mb-2">
-                <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
                   <div className="flex items-center justify-center w-12 bg-green-500">
                     <svg
                       className="w-6 h-6 text-white fill-current"
@@ -450,7 +452,7 @@ const Collect: NextPage = () => {
                       <span className="font-semibold text-green-500 dark:text-green-400">
                         Succès
                       </span>
-                      <p className="text-sm text-gray-600 dark:text-gray-200">
+                      <p className="text-sm text-neutral-600 dark:text-neutral-200">
                         Votre demande à bien été effectuée.
                       </p>
                     </div>
@@ -461,7 +463,7 @@ const Collect: NextPage = () => {
             {data.length < 0 && (
               <>
                 <FadeIn>
-                  <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-5">
+                  <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800 my-5">
                     <div className="flex items-center justify-center w-12 bg-greenDDTV">
                       <svg
                         className="w-6 h-6 text-white fill-current"
@@ -477,7 +479,7 @@ const Collect: NextPage = () => {
                         <span className="font-semibold text-greenDDTV dark:text-greenDDTV">
                           Attention
                         </span>
-                        <p className="text-sm text-gray-600 dark:text-gray-200">
+                        <p className="text-sm text-neutral-600 dark:text-neutral-200">
                           Aucune collecte n'as été crée.
                         </p>
                       </div>

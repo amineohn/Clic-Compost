@@ -9,10 +9,10 @@ const Confirmation: NextPage = () => {
         <div className="flex flex-col items-center justify-center h-screen">
           <div className="rounded-lg px-8 pt-6 pb-8 mb-4 space-y-2">
             <div className="flex flex-col items-center justify-center">
-              <h1 className="text-center text-2xl font-bold text-gray-800">
+              <h1 className="text-center text-2xl font-bold text-neutral-800">
                 Merci de votre confiance !
               </h1>
-              <p className="text-center text-gray-600">
+              <p className="text-center text-neutral-600">
                 Votre demande à bien été prise en compte, nous vous contacterons
                 dans les plus brefs délais.
               </p>

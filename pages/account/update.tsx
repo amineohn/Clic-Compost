@@ -76,7 +76,7 @@ const Update = () => {
         <div className="flex flex-col items-center justify-center h-screen mx-5">
           {error && (
             <FadeIn className="mb-2">
-              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
                 <div className="flex items-center justify-center w-12 bg-red-500 flex-col">
                   <svg
                     className="w-6 h-6 text-white fill-current"
@@ -92,7 +92,7 @@ const Update = () => {
                     <span className="font-semibold text-red-500 dark:text-red-400">
                       Erreur
                     </span>
-                    <p className="text-sm text-gray-600 dark:text-gray-200">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-200">
                       {error}
                     </p>
                   </div>
@@ -103,7 +103,7 @@ const Update = () => {
 
           {success && (
             <FadeIn className="mb-2">
-              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
                 <div className="flex items-center justify-center w-12 bg-green-500">
                   <svg
                     className="w-6 h-6 text-white fill-current"
@@ -119,7 +119,7 @@ const Update = () => {
                     <span className="font-semibold text-green-500 dark:text-green-400">
                       Succès
                     </span>
-                    <p className="text-sm text-gray-600 dark:text-gray-200">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-200">
                       {success}
                     </p>
                   </div>
@@ -137,13 +137,13 @@ const Update = () => {
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 ">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-neutral-700 text-xs font-bold mb-2"
                   htmlFor="grid-first-name"
                 >
                   Nom
                 </label>
                 <input
-                  className="transition appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
+                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
                   id="grid-first-name"
                   type="text"
                   placeholder="John Doe"
@@ -161,13 +161,13 @@ const Update = () => {
               </div>
               <div className="w-full md:w-1/2 px-3">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-neutral-700 text-xs font-bold mb-2"
                   htmlFor="grid-last-name"
                 >
                   Email
                 </label>
                 <input
-                  className="transition appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-100 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
+                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
                   id="grid-last-name"
                   type="text"
                   placeholder="anyway@youwant.com"
@@ -187,13 +187,13 @@ const Update = () => {
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-neutral-700 text-xs font-bold mb-2"
                   htmlFor="grid-password"
                 >
                   Password
                 </label>
                 <input
-                  className="transition appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
+                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
                   id="grid-password"
                   type="password"
                   placeholder="*********"

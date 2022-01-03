@@ -7,19 +7,6 @@ export class Permission {
     const fire = new Firebase();
     this.permission = new Map<string, Permissions>();
     this.init();
-    this.get = this.get.bind(this);
-    this.add = this.add.bind(this);
-    this.has = this.has.bind(this);
-    this.delete = this.delete.bind(this);
-    this.all = this.all.bind(this);
-    this.clear = this.clear.bind(this);
-    this.size = this.size.bind(this);
-    this.all = this.all.bind(this);
-    this.set = this.set.bind(this);
-    this.isAdmin = this.isAdmin.bind(this);
-    this.isUser = this.isUser.bind(this);
-    this.isGuest = this.isGuest.bind(this);
-    this.permissionList = this.permissionList.bind(this);
     if (fire.exist("rights")) {
       this.insertValues();
     }

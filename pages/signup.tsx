@@ -144,7 +144,7 @@ const SignUp: NextPage = () => {
         <div className="w-full max-w-xs">
           {error && (
             <FadeIn className="mb-2">
-              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
                 <div className="flex items-center justify-center w-12 bg-red-500 flex-col">
                   <svg
                     className="w-6 h-6 text-white fill-current"
@@ -166,7 +166,7 @@ const SignUp: NextPage = () => {
                     <span className="font-semibold text-red-500 dark:text-red-400">
                       Erreur
                     </span>
-                    <p className="text-sm text-gray-600 dark:text-gray-200">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-200">
                       {error}
                     </p>
                   </div>
@@ -209,13 +209,13 @@ const SignUp: NextPage = () => {
 
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-neutral-700 text-sm font-bold mb-2"
                 htmlFor="name"
               >
                 Nom
               </label>
               <input
-                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="text"
                 name="name"
@@ -226,13 +226,13 @@ const SignUp: NextPage = () => {
             </div>
             <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-neutral-700 text-sm font-bold mb-2"
                 htmlFor="email"
               >
                 Mail
               </label>
               <input
-                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
                 name="email"
@@ -243,13 +243,13 @@ const SignUp: NextPage = () => {
             </div>
             <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-neutral-700 text-sm font-bold mb-2"
                 htmlFor="password"
               >
                 Mot de passe
               </label>
               <input
-                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
                 name="password"
@@ -258,7 +258,7 @@ const SignUp: NextPage = () => {
                 onChange={(e) => onChange(e)}
               />
               {password.length < 6 && (
-                <p className="text-gray-600 text-xs italic">
+                <p className="text-neutral-600 text-xs italic">
                   Le mot de passe doit contenir au moins 6 caractères
                 </p>
               )}

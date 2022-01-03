@@ -61,7 +61,7 @@ const Checkout = () => {
         </div>
         {error && (
           <FadeIn className="mb-2">
-            <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
               <div className="flex items-center justify-center w-12 bg-red-500 flex-col">
                 <svg
                   className="w-6 h-6 text-white fill-current"
@@ -77,7 +77,7 @@ const Checkout = () => {
                   <span className="font-semibold text-red-500 dark:text-red-400">
                     Erreur
                   </span>
-                  <p className="text-sm text-gray-600 dark:text-gray-200">
+                  <p className="text-sm text-neutral-600 dark:text-neutral-200">
                     <a onClick={() => setError(null)}>{error}</a>
                   </p>
                 </div>

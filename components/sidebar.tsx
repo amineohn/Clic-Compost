@@ -5,9 +5,9 @@ import Loading from "./loading";
 
 const Sidebar = () => {
   const fire = new Firebase();
-  const [color, setColor] = useState("bg-gray-50");
+  const [color, setColor] = useState("bg-neutral-50");
   const [button, setButton] = useState("bg-greenDDTV");
-  const [text, setText] = useState("text-gray-900");
+  const [text, setText] = useState("text-neutral-900");
   const [buttonHover, setButtonHover] = useState("bg-green-900");
   return (
     <aside className="w-80 h-screen bg-gray shadow-md w-fulll hidden sm:block">
@@ -85,13 +85,14 @@ const Sidebar = () => {
           <div className="space-x-2">
             <button
               onClick={() => {
-                setColor("bg-gray-900");
+                setColor("bg-neutral-900");
                 setButton("!bg-orange-500");
                 setText("text-white");
                 setButtonHover("!bg-orange-700");
                 // save?
+                // do you think is a good idea??? srsly..
                 fire.saveColor([
-                  "bg-gray-900",
+                  "bg-neutral-900",
                   "!bg-orange-500",
                   "text-white",
                   "!bg-orange-700",
@@ -103,7 +104,7 @@ const Sidebar = () => {
             </button>
             <button
               onClick={() => {
-                setColor("bg-gray-50");
+                setColor("bg-neutral-50");
                 setButton("!bg-greenDDTV");
                 setText("text-black");
                 setButtonHover("!bg-green-800");

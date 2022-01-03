@@ -80,7 +80,7 @@ const ForgetPassword: NextPage = () => {
         <div className="w-full max-w-xs space-y-2">
           {error && (
             <FadeIn className="mb-2">
-              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
                 <div className="flex items-center justify-center w-12 bg-red-500 flex-col">
                   <svg
                     className="w-6 h-6 text-white fill-current"
@@ -102,7 +102,7 @@ const ForgetPassword: NextPage = () => {
                     <span className="font-semibold text-red-500 dark:text-red-400">
                       Erreur
                     </span>
-                    <p className="text-sm text-gray-600 dark:text-gray-200">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-200">
                       {error}
                     </p>
                   </div>
@@ -113,7 +113,7 @@ const ForgetPassword: NextPage = () => {
 
           {success && (
             <FadeIn className="mb-2">
-              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+              <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800">
                 <div className="flex items-center justify-center w-12 bg-green-500">
                   <svg
                     className="w-6 h-6 text-white fill-current"
@@ -129,7 +129,7 @@ const ForgetPassword: NextPage = () => {
                     <span className="font-semibold text-green-500 dark:text-green-400">
                       Succès
                     </span>
-                    <p className="text-sm text-gray-600 dark:text-gray-200">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-200">
                       Nous vous avons envoyé un e-mail pour réinitialiser votre
                       mot de passe.
                     </p>
@@ -144,20 +144,20 @@ const ForgetPassword: NextPage = () => {
               <h1 className="text-center text-2xl font-bold">
                 Mot de passe oublié
               </h1>
-              <p className="text-center text-gray-700 text-xs">
+              <p className="text-center text-neutral-700 text-xs">
                 Entrez votre adresse email pour réinitialiser votre mot de passe
               </p>
             </div>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-neutral-700 text-sm font-bold mb-2"
                   htmlFor="email"
                 >
                   Email
                 </label>
                 <input
-                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
                   type="email"
                   placeholder="Email"
