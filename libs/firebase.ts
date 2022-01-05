@@ -10,6 +10,7 @@ import "firebase/compat/analytics";
 import "firebase/compat/performance";
 import "firebase/compat/database";
 import "firebase/messaging";
+import { configuration } from "../configuration";
 
 export class Firebase {
   settings() {
@@ -25,7 +26,9 @@ export class Firebase {
   }
   constructor() {
     firebase.initializeApp(this.settings());
-    console.log(`Initialize Firebase ${firebase.apps.length} app`);
+    configuration.logging.enabled
+      ? console.log(`Initialize Firebase ${firebase.apps.length} app`)
+      : null;
   }
 
   user(): firebase.User | null {
@@ -168,7 +171,11 @@ export class Firebase {
         });
       })
       .then((data) => data)
-      .catch((error) => console.log("Error getting documents: ", error));
+      .catch((error) =>
+        configuration.logging.enabled
+          ? console.log("Error getting documents: ", error)
+          : null
+      );
   }
 
   data(

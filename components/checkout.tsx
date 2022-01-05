@@ -2,6 +2,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
+import { configuration } from "../configuration";
 import Loading from "./loading";
 
 const Checkout = () => {
@@ -25,12 +26,14 @@ const Checkout = () => {
       card: elements.getElement(CardElement) as StripeCardElement,
     });
     if (error) {
-      console.log("[error]", error);
+      configuration.logging.enabled ? console.log("[error]", error) : null;
       setError(error.message as any);
       setLoading(false);
     }
     if (paymentMethod) {
-      console.log("[paymentMethod]", paymentMethod);
+      configuration.logging.enabled
+        ? console.log("[paymentMethod]", paymentMethod)
+        : null;
       setLoading(false);
     }
     setLoading(false);

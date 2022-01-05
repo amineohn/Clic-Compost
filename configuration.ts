@@ -3,4 +3,7 @@ export const configuration = {
   server: {
     url: "https://clic-compost-ten.vercel.app/",
   },
+  logging: {
+    enabled: true,
+  },
 };
