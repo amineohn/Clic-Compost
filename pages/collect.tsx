@@ -319,7 +319,7 @@ const Collect: NextPage = () => {
 
                 <div className="flex items-center justify-between space-x-10">
                   <button
-                    className="py-2 px-2 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                    className="py-2 px-2 flex justify-center items-center bg-greenDTTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                     type="button"
                     onClick={() => {
                       clear();
@@ -328,7 +328,7 @@ const Collect: NextPage = () => {
                     Effacer
                   </button>
                   <button
-                    className={`py-2 px-2 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg`}
+                    className={`py-2 px-2 flex justify-center items-center bg-greenDTTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg`}
                     type="submit"
                   >
                     {loading ? (
@@ -463,7 +463,7 @@ const Collect: NextPage = () => {
               <>
                 <FadeIn>
                   <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-neutral-800 my-5">
-                    <div className="flex items-center justify-center w-12 bg-greenDDTV">
+                    <div className="flex items-center justify-center w-12 bg-greenDTTV">
                       <svg
                         className="w-6 h-6 text-white fill-current"
                         viewBox="0 0 40 40"
@@ -475,7 +475,7 @@ const Collect: NextPage = () => {
 
                     <div className="px-4 py-2 -mx-3">
                       <div className="mx-3">
-                        <span className="font-semibold text-greenDDTV dark:text-greenDDTV">
+                        <span className="font-semibold text-greenDTTV dark:text-greenDTTV">
                           Attention
                         </span>
                         <p className="text-sm text-neutral-600 dark:text-neutral-200">

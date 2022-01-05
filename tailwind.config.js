@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        orangeDDTV: "#e94e1a",
-        greenDDTV: "#263b29",
+        orangeDTTV: "#e94e1a",
+        greenDTTV: "#263b29",
       },
       fontFamily: {
         default: [

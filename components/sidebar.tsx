@@ -6,7 +6,7 @@ import Loading from "./loading";
 const Sidebar = () => {
   const fire = new Firebase();
   const [color, setColor] = useState("bg-neutral-50");
-  const [button, setButton] = useState("bg-greenDDTV");
+  const [button, setButton] = useState("bg-greenDTTV");
   const [text, setText] = useState("text-neutral-900");
   const [buttonHover, setButtonHover] = useState("bg-green-900");
   return (
@@ -105,7 +105,7 @@ const Sidebar = () => {
             <button
               onClick={() => {
                 setColor("bg-neutral-50");
-                setButton("!bg-greenDDTV");
+                setButton("!bg-greenDTTV");
                 setText("text-black");
                 setButtonHover("!bg-green-800");
               }}

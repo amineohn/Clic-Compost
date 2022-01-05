@@ -203,9 +203,9 @@ const Home: NextPage = () => {
               <div className="flex items-center justify-between space-x-2">
                 <button
                   className={
-                    `py-2 px-5 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg` +
+                    `py-2 px-5 flex justify-center items-center bg-greenDTTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg` +
                     (loading
-                      ? "py-2 px-4 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg animate-pulse cursor-not-allowed"
+                      ? "py-2 px-4 flex justify-center items-center bg-greenDTTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg animate-pulse cursor-not-allowed"
                       : "")
                   }
                   type="submit"
@@ -221,9 +221,9 @@ const Home: NextPage = () => {
                 </button>
                 <button
                   className={
-                    `py-2 px-4 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg` +
+                    `py-2 px-4 flex justify-center items-center bg-greenDTTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg` +
                     (loading
-                      ? "py-2 px-4 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg animate-pulse cursor-not-allowed"
+                      ? "py-2 px-4 flex justify-center items-center bg-greenDTTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg animate-pulse cursor-not-allowed"
                       : "")
                   }
                   type="button"
@@ -259,7 +259,7 @@ const Home: NextPage = () => {
                 Connexion avec Google
               </button>
               <Link href="/account/password">
-                <a className="inline-block align-baseline text-center font-bold text-sm text-greenDDTV hover:text-green-800 ml-2">
+                <a className="inline-block align-baseline text-center font-bold text-sm text-greenDTTV hover:text-green-800 ml-2">
                   Mot de passe oublié?
                 </a>
               </Link>

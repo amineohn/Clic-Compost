@@ -54,7 +54,7 @@ datalist option:focus {
 }
 
 #nprogress .bar {
-  @apply !bg-greenDDTV;
+  @apply !bg-greenDTTV;
 }
 
 #nprogress .peg {
@@ -62,7 +62,7 @@ datalist option:focus {
 }
 
 #nprogress .spinner-icon {
-  @apply !border-t-greenDDTV !border-l-greenDDTV;
+  @apply !border-t-greenDTTV !border-l-greenDTTV;
 }
 @tailwind base;
 @tailwind components;

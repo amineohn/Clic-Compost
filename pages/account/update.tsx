@@ -145,7 +145,7 @@ const Update = () => {
                   Nom
                 </label>
                 <input
-                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
+                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDTTV"
                   id="grid-first-name"
                   type="text"
                   placeholder="John Doe"
@@ -156,7 +156,7 @@ const Update = () => {
                 <button
                   type="button"
                   onClick={() => setName("")}
-                  className="text-greenDDTV text-xs font-medium hover:text-green-800 transition-all duration-200 ease-in-out"
+                  className="text-greenDTTV text-xs font-medium hover:text-green-800 transition-all duration-200 ease-in-out"
                 >
                   Supprimer le nom
                 </button>
@@ -169,7 +169,7 @@ const Update = () => {
                   Email
                 </label>
                 <input
-                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
+                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-greenDTTV"
                   id="grid-last-name"
                   type="text"
                   placeholder="anyway@youwant.com"
@@ -180,7 +180,7 @@ const Update = () => {
                 <button
                   type="button"
                   onClick={() => setEmail("")}
-                  className="text-greenDDTV text-xs font-medium hover:text-green-800 transition-all duration-200 ease-in-out mt-2"
+                  className="text-greenDTTV text-xs font-medium hover:text-green-800 transition-all duration-200 ease-in-out mt-2"
                 >
                   Supprimer l'email
                 </button>
@@ -195,7 +195,7 @@ const Update = () => {
                   Password
                 </label>
                 <input
-                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDDTV"
+                  className="transition appearance-none block w-full bg-neutral-200 text-neutral-700 border border-neutral-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-greenDTTV"
                   id="grid-password"
                   type="password"
                   placeholder="*********"
@@ -206,7 +206,7 @@ const Update = () => {
                 <button
                   type="button"
                   onClick={() => setPassword("")}
-                  className="text-greenDDTV text-xs font-medium hover:text-green-800 transition-all duration-200 ease-in-out"
+                  className="text-greenDTTV text-xs font-medium hover:text-green-800 transition-all duration-200 ease-in-out"
                 >
                   Supprimer le mot de passe
                 </button>
@@ -215,7 +215,7 @@ const Update = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="max-w-xs py-2 px-4 flex justify-center items-center bg-greenDDTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                className="max-w-xs py-2 px-4 flex justify-center items-center bg-greenDTTV hover:bg-green-800 focus:ring-green-800 focus:ring-offset-green-100 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
               >
                 Mettre à jour
               </button>
