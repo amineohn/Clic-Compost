@@ -5,9 +5,11 @@ import { useRouter } from "next/router";
 import Loading from "../components/loading";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
+
+import { Logo } from "../components/logo";
+
 import { Firebase } from "../libs/firebase";
 import { Validate } from "../libs/validate";
-import { Logo } from "../components/logo";
 import { Permission } from "../libs/permission";
 import { Rights } from "../libs/types";
 const Home: NextPage = () => {

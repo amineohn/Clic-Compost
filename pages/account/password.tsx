@@ -2,10 +2,13 @@ import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
+
 import Loading from "../../components/loading";
 import { Logo } from "../../components/logo";
+
 import { Firebase } from "../../libs/firebase";
 import { Validate } from "../../libs/validate";
+
 const ForgetPassword: NextPage = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);

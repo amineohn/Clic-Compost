@@ -1,14 +1,14 @@
 import React, { FormEvent, useState } from "react";
 import type { NextPage } from "next";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
 import FadeIn from "react-fade-in";
 import { Transition } from "@headlessui/react";
-import { Firebase } from "../libs/firebase";
 import router from "next/router";
 import { NextSeo } from "next-seo";
-import { Validate } from "../libs/validate";
+
 import { Logo } from "../components/logo";
+
+import { Firebase } from "../libs/firebase";
+import { Validate } from "../libs/validate";
 import { Rights } from "../libs/types";
 
 const SignUp: NextPage = () => {

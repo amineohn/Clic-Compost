@@ -1,8 +1,10 @@
 import { NextSeo } from "next-seo";
 import React, { useState } from "react";
 import FadeIn from "react-fade-in";
+
 import Loading from "../../components/loading";
 import Navigation from "../../components/navigation";
+
 import { Firebase } from "../../libs/firebase";
 import { Validate } from "../../libs/validate";
 const Update = () => {

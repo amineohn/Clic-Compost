@@ -1,8 +1,10 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 import FadeIn from "react-fade-in";
+
 import Navigation from "../../components/navigation";
 import Sidebar from "../../components/sidebar";
+
 import { Firebase } from "../../libs/firebase";
 const Home = () => {
   const fire = new Firebase();

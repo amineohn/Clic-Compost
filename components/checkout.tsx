@@ -2,8 +2,10 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
-import { configuration } from "../configuration";
+
 import Loading from "./loading";
+
+import { configuration } from "../configuration";
 
 const Checkout = () => {
   const [error, setError] = useState(null);

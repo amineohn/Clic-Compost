@@ -3,9 +3,11 @@ import { NextSeo } from "next-seo";
 import router from "next/router";
 import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
+
 import Loading from "../../components/loading";
 import { Logo } from "../../components/logo";
 import Navigation from "../../components/navigation";
+
 import { Firebase } from "../../libs/firebase";
 import { Validate } from "../../libs/validate";
 const Reset: NextPage = () => {

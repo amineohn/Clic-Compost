@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Firebase } from "../libs/firebase";
 import { useRouter } from "next/router";
 import { Transition } from "@headlessui/react";
+
+import { Firebase } from "../libs/firebase";
 import { Permission } from "../libs/permission";
 import { Rights } from "../libs/types";
 const Navigation = () => {
