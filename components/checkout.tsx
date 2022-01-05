@@ -6,11 +6,10 @@ import { configuration } from "../configuration";
 import Loading from "./loading";
 
 const Checkout = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
