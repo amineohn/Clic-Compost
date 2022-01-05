@@ -1,5 +1,6 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import React, { useState } from "react";
+import { StripeCardElement } from "@stripe/stripe-js";
+import React, { FormEvent, useState } from "react";
 import FadeIn from "react-fade-in";
 import Loading from "./loading";
 
@@ -9,7 +10,7 @@ const Checkout = () => {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     if (elements == null) {
@@ -19,13 +20,13 @@ const Checkout = () => {
       return;
     }
     setLoading(true);
-    const { error, paymentMethod }: any = await stripe?.createPaymentMethod({
+    const { error, paymentMethod } = await stripe?.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement) as any,
+      card: elements.getElement(CardElement) as StripeCardElement,
     });
     if (error) {
       console.log("[error]", error);
-      setError(error.message);
+      setError(error.message as any);
       setLoading(false);
     }
     if (paymentMethod) {
