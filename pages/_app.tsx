@@ -52,6 +52,7 @@ export default function MyApp({
       router.push("/");
     }
   }, []);*/
+  permission.init();
   return (
     <>
       <NextSeo

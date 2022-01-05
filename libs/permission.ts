@@ -8,30 +8,21 @@ export class Permission {
     this.permission = new Map<string, Permissions>();
     this.init();
     /*if (fire.exist("rights")) {
-    this.insertValues();
+      this.insertValues();
     } */
   }
   public async insertValues(): Promise<void> {
     const rights = [
       {
-        id: 1,
-        name: Rights.Admin,
+        name: "Administrateur",
         isAdmin: Rights.Admin,
-        isUser: Rights.User,
-        isGuest: Rights.Guest,
       },
       {
-        id: 2,
-        name: Rights.User,
-        isAdmin: Rights.Admin,
+        name: "Utilisateur",
         isUser: Rights.User,
-        isGuest: Rights.Guest,
       },
       {
-        id: 3,
-        name: Rights.Guest,
-        isAdmin: Rights.Admin,
-        isUser: Rights.User,
+        name: "Invité",
         isGuest: Rights.Guest,
       },
     ];
@@ -48,7 +39,7 @@ export class Permission {
     const fire = new Firebase();
     await fire
       .collection("rights")
-      .orderBy("id")
+      .orderBy("name")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -68,7 +59,7 @@ export class Permission {
       });
     await fire
       .collection("rights")
-      .orderBy("id")
+      .orderBy("name")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -84,9 +75,10 @@ export class Permission {
         });
       })
       .catch((err) => console.log(err));
+
     await fire
       .collection("rights")
-      .orderBy("id")
+      .orderBy("name")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {

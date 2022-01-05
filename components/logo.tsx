@@ -5,10 +5,7 @@ export const Logo = ({ error, success }) => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 173.35 111.2"
     className={`fill-current text-black w-36 h-36 ${
-      error &&
-      (error.length > 0
-        ? "!text-red-500 animate-bounce transition duration-200"
-        : "")
+      error && (error.length > 0 ? "!text-red-500 transition duration-200" : "")
     } ${success && (success ? "!text-green-500 transition" : "")}`}
     onClick={() => router.push("/")}
   >
